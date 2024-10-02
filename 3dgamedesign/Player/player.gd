@@ -2,8 +2,7 @@ class_name Player extends CharacterBody3D
 
 @export var MOUSE_SENSITIVITY: float = 1.5
 @export var CAMERA_CONTROLLER: Camera3D
-@export var HAND_CONTROLLER: Node3D
-@export var RAY_CAST: RayCast3D
+@export var SWORD: Marker3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 
 var mouse_captured: bool = false
@@ -50,7 +49,16 @@ func _physics_process(delta):
 func update_sword():
 	var mouse_position = get_viewport().get_mouse_position()
 	
-	pass
+	
+	#var target_plane_mouse = Plane(Vector3(0, 1, 0), position.y)
+	#var ray_length = 1000
+	#var mouse_position = get_viewport().get_mouse_position()
+	#var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
+	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
+	#var cursor_position_on_plane = target_plane_mouse.intersects_ray(ray_origin, ray_end)
+	#
+	#if cursor_position_on_plane != null:
+		#SWORD.look_at(cursor_position_on_plane, Vector3.UP, 0)
 	
 func update_jumping(delta, jumping, jump_height) -> void:
 	if is_on_floor(): 

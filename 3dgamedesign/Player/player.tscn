@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=25 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_2f8j2"]
 [ext_resource type="Theme" uid="uid://mnu83cyhpnin" path="res://UI/Themes/debug.tres" id="2_iit15"]
@@ -18,11 +18,15 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_njwql"]
 material = ExtResource("2_yvb2v")
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_db16x"]
+radius = 0.125
+height = 0.25
+
 [sub_resource type="BoxMesh" id="BoxMesh_a4ssa"]
-size = Vector3(0.1, 0.1, 2)
+size = Vector3(0.1, 0.1, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqp6o"]
-size = Vector3(0.1, 0.1, 0)
+size = Vector3(0.1, 0.1, 2)
 
 [sub_resource type="Animation" id="Animation_xllyj"]
 length = 0.001
@@ -405,11 +409,10 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_psnx1"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "HAND_CONTROLLER", "RAY_CAST", "ANIMATION_PLAYER")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "SWORD", "ANIMATION_PLAYER")]
 script = ExtResource("1_2f8j2")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
-HAND_CONTROLLER = NodePath("HandController")
-RAY_CAST = NodePath("RayCast3D")
+SWORD = NodePath("")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 
 [node name="CShape" type="CollisionShape3D" parent="."]
@@ -428,22 +431,23 @@ fov = 80.0
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
 update_mode = 1
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0.5, 1, 0)
-target_position = Vector3(0, 1, 0)
+[node name="Arm" type="Node3D" parent="CameraController/Camera"]
 
-[node name="HandController" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraController/Camera/Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475286, -0.709022, -0.163726)
+mesh = SubResource("CapsuleMesh_db16x")
 
-[node name="PlaceholderMesh" type="MeshInstance3D" parent="HandController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+[node name="Sword" type="Node3D" parent="CameraController/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, -0.25)
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="CameraController/Camera/Sword"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 mesh = SubResource("BoxMesh_a4ssa")
 skeleton = NodePath("")
 
-[node name="Hitbox" type="Area3D" parent="HandController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+[node name="Hitbox" type="Area3D" parent="CameraController/Camera/Sword/PlaceholderMesh"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HandController/Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraController/Camera/Sword/PlaceholderMesh/Hitbox"]
 shape = SubResource("BoxShape3D_fqp6o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

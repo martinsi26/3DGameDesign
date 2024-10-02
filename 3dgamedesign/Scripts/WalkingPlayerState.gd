@@ -26,6 +26,9 @@ func update(delta):
 	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
 		transition.emit("JumpingPlayerState")
 		
+	if Input.is_action_just_pressed("lock"):
+		transition.emit("BattlePlayerState")
+		
 	if PLAYER.velocity.length() == 0.0:
 		transition.emit("IdlePlayerState")
 	

@@ -12,5 +12,10 @@ func update(delta):
 	PLAYER.update_input(SPEED, ACCELERATION, delta)
 	PLAYER.update_velocity()
 	PLAYER.update_sword()
+	
+	if Input.is_action_just_pressed("lock"):
+		transition.emit("IdlePlayerState")
 
+func exit() -> void:
+	PLAYER.capture_mouse()
 

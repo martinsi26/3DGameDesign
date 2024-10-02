@@ -25,6 +25,9 @@ func update(delta):
 		
 	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
 		transition.emit("JumpingPlayerState")
+		
+	if Input.is_action_just_pressed("lock"):
+		transition.emit("BattlePlayerState")
 
 func set_animation_speed(speed):
 	var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)
