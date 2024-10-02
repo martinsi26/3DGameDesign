@@ -2,6 +2,8 @@ class_name Player extends CharacterBody3D
 
 @export var MOUSE_SENSITIVITY: float = 1.5
 @export var CAMERA_CONTROLLER: Camera3D
+@export var HAND_CONTROLLER: Node3D
+@export var RAY_CAST: RayCast3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 
 var mouse_captured: bool = false
@@ -44,6 +46,11 @@ func _ready():
 
 func _physics_process(delta):
 	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
+	
+func update_sword():
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	pass
 	
 func update_jumping(delta, jumping, jump_height) -> void:
 	if is_on_floor(): 
