@@ -488,7 +488,6 @@ script = ExtResource("9_dmq2t")
 
 [node name="SlidingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_tf67f")
-SPEED = 3.0
 
 [node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_uiv40")

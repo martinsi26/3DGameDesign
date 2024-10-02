@@ -1,16 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://2r2xorepwlip"]
+[gd_scene load_steps=9 format=3 uid="uid://2r2xorepwlip"]
 
 [ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Player/player.tscn" id="1_ndiqr"]
 [ext_resource type="Texture2D" uid="uid://b01vv6qc3japu" path="res://Assets/DarkPrototypeTexture.png" id="2_7sl6d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yxtyg"]
 
-[sub_resource type="Sky" id="Sky_edr0k"]
+[sub_resource type="Sky" id="Sky_miikv"]
 sky_material = SubResource("ProceduralSkyMaterial_yxtyg")
 
 [sub_resource type="Environment" id="Environment_k5onh"]
 background_mode = 2
-sky = SubResource("Sky_edr0k")
+sky = SubResource("Sky_miikv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p85vg"]
 albedo_texture = ExtResource("2_7sl6d")
@@ -19,7 +19,22 @@ roughness = 0.1
 roughness_texture = ExtResource("2_7sl6d")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t63co"]
+albedo_texture = ExtResource("2_7sl6d")
+metallic_specular = 0.0
+roughness = 0.1
+roughness_texture = ExtResource("2_7sl6d")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjq3q"]
+albedo_texture = ExtResource("2_7sl6d")
+metallic_specular = 0.0
+roughness = 0.1
+roughness_texture = ExtResource("2_7sl6d")
+uv1_triplanar = true
+
 [node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k5onh")
@@ -28,7 +43,9 @@ environment = SubResource("Environment_k5onh")
 transform = Transform3D(-0.678961, 0.262875, -0.685499, -0.027831, 0.923814, 0.38183, 0.733646, 0.278326, -0.619918, 0, 6.83834, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_ndiqr")]
+[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER") instance=ExtResource("1_ndiqr")]
+CAMERA_CONTROLLER = NodePath("CameraController/Camera")
+ANIMATION_PLAYER = NodePath("AnimationPlayer")
 
 [node name="Platform" type="Node3D" parent="."]
 
@@ -36,6 +53,12 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 size = Vector3(10, 0.5, 10)
+material = SubResource("StandardMaterial3D_p85vg")
+
+[node name="Floor6" type="CSGBox3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.25, 15)
+use_collision = true
+size = Vector3(20, 0.5, 20)
 material = SubResource("StandardMaterial3D_p85vg")
 
 [node name="Floor3" type="CSGBox3D" parent="Platform"]
@@ -104,8 +127,16 @@ use_collision = true
 size = Vector3(10, 3, 0.5)
 material = SubResource("StandardMaterial3D_p85vg")
 
-[node name="Wall6" type="CSGBox3D" parent="Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, 5)
+[node name="CrouchingPlatforms" type="Node3D" parent="."]
+
+[node name="High" type="CSGBox3D" parent="CrouchingPlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15)
 use_collision = true
-size = Vector3(20, 3, 0.5)
-material = SubResource("StandardMaterial3D_p85vg")
+size = Vector3(5, 0.5, 5)
+material = SubResource("StandardMaterial3D_t63co")
+
+[node name="Low" type="CSGBox3D" parent="CrouchingPlatforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 15)
+use_collision = true
+size = Vector3(5, 0.5, 5)
+material = SubResource("StandardMaterial3D_cjq3q")
