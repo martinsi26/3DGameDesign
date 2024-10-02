@@ -1,7 +1,8 @@
 class_name CrouchingPlayerState extends PlayerMovementState
 
 @export var SPEED: float = 3.0
-@export var ACCELERATION: float = 75
+@export var ACCELERATION: float = 0.1
+@export var DECELERATION: float = 0.25
 @export_range(1, 6, 0.1) var CROUCH_SPEED: float = 4.0
 
 @onready var CROUCH_SHAPECAST: ShapeCast3D = %ShapeCast3D
@@ -21,7 +22,7 @@ func exit() -> void:
 	
 func update(delta):
 	PLAYER.update_gravity(delta)
-	PLAYER.update_input(SPEED, ACCELERATION, delta)
+	PLAYER.update_input(SPEED, ACCELERATION, DECELERATION)
 	PLAYER.update_velocity()
 	
 	if Input.is_action_just_released("crouch"):

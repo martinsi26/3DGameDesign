@@ -1,66 +1,78 @@
-class_name Player extends CharacterBody3D
+class_name Player
 
-@export var MOUSE_SENSITIVITY: float = 1.5
-@export var CAMERA_CONTROLLER: Camera3D
+extends CharacterBody3D
+
+@export var MOUSE_SENSITIVITY : float = 0.75
+@export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
+@export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
+@export var CAMERA_CONTROLLER : Camera3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 
-var mouse_captured: bool = false
+var _mouse_input : bool = false
+var _rotation_input : float
+var _tilt_input : float
+var _mouse_rotation : Vector3
+var _player_rotation : Vector3
+var _camera_rotation : Vector3
+var _current_rotation: float
 
-var move_dir: Vector2 # Input direction for movement
-var look_dir: Vector2
+# Get the gravity from the project settings to be synced with RigidBody nodes.
 
-var move_vel: Vector3 # Walking velocity
-var jump_vel: Vector3
-var grav_vel: Vector3
-
-var current_rotation: float
-
-var gravity = 12.0
-
-func capture_mouse() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	mouse_captured = true
-
-func release_mouse() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	mouse_captured = false
-
-func _rotate_camera(sens_mod: float = 1.0) -> void:
-	current_rotation = look_dir.x
-	CAMERA_CONTROLLER.rotation.y -= look_dir.x * MOUSE_SENSITIVITY * sens_mod
-	CAMERA_CONTROLLER.rotation.x = clamp(CAMERA_CONTROLLER.rotation.x - look_dir.y * MOUSE_SENSITIVITY * sens_mod, -1.5, 1.5)
+var gravity = 12.0 #ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		look_dir = event.relative * 0.001
-		if mouse_captured: _rotate_camera()
-	
+	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	if _mouse_input:
+		_rotation_input = -event.relative.x * MOUSE_SENSITIVITY
+		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
+
 func _input(event):
-	if Input.is_action_just_pressed("exit"): get_tree().quit()
+	if event.is_action_pressed("exit"):
+		get_tree().quit()
+
+func update_camera(delta) -> void:
+	_current_rotation = _rotation_input
+	_mouse_rotation.x += _tilt_input * delta
+	_mouse_rotation.x = clamp(_mouse_rotation.x, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
+	_mouse_rotation.y += _rotation_input * delta
+	
+	_player_rotation = Vector3(0.0,_mouse_rotation.y,0.0)
+	_camera_rotation = Vector3(_mouse_rotation.x,0.0,0.0)
+
+	CAMERA_CONTROLLER.transform.basis = Basis.from_euler(_camera_rotation)
+	global_transform.basis = Basis.from_euler(_player_rotation)
+	
+	CAMERA_CONTROLLER.rotation.z = 0.0
+
+	_rotation_input = 0.0
+	_tilt_input = 0.0
 	
 func _ready():
+	
 	Global.player = self
-	capture_mouse()
+	
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
+	
 	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
 	
-func update_jumping(delta, jumping, jump_height) -> void:
-	if is_on_floor(): 
-		jump_vel = Vector3(0, sqrt(4 * jump_height * gravity), 0)
-	else:
-		jump_vel = jump_vel.move_toward(Vector3.ZERO, gravity * delta)
-		
-func update_gravity(delta) -> void:
-	grav_vel = Vector3.ZERO if is_on_floor() else grav_vel.move_toward(Vector3(0, velocity.y - gravity, 0), gravity * delta)
+	update_camera(delta)
 	
-func update_input(speed: float, acceleration: float, delta: float) -> void:
-	move_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var _forward: Vector3 = CAMERA_CONTROLLER.global_transform.basis * Vector3(move_dir.x, 0, move_dir.y)
-	var walk_dir: Vector3 = Vector3(_forward.x, 0, _forward.z).normalized()
-	move_vel = move_vel.move_toward(walk_dir * speed * move_dir.length(), acceleration * delta)
+func update_gravity(delta) -> void:
+	velocity.y -= gravity * delta
+	
+func update_input(speed: float, acceleration: float, deceleration: float) -> void:
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if direction:
+		velocity.x = lerp(velocity.x,direction.x * speed, acceleration)
+		velocity.z = lerp(velocity.z,direction.z * speed, acceleration)
+	else:
+		velocity.x = move_toward(velocity.x, 0, deceleration)
+		velocity.z = move_toward(velocity.z, 0, deceleration)
 	
 func update_velocity() -> void:
-	velocity = grav_vel + move_vel + jump_vel
 	move_and_slide()
-

@@ -43,10 +43,6 @@ environment = SubResource("Environment_k5onh")
 transform = Transform3D(-0.678961, 0.262875, -0.685499, -0.027831, 0.923814, 0.38183, 0.733646, 0.278326, -0.619918, 0, 6.83834, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER") instance=ExtResource("1_ndiqr")]
-CAMERA_CONTROLLER = NodePath("CameraController/Camera")
-ANIMATION_PLAYER = NodePath("AnimationPlayer")
-
 [node name="Platform" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Platform"]
@@ -140,3 +136,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 15)
 use_collision = true
 size = Vector3(5, 0.5, 5)
 material = SubResource("StandardMaterial3D_cjq3q")
+
+[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER") instance=ExtResource("1_ndiqr")]
+CAMERA_CONTROLLER = NodePath("CameraController/Camera")
+ANIMATION_PLAYER = NodePath("AnimationPlayer")
