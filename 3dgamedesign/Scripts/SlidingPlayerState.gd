@@ -1,7 +1,8 @@
 class_name SlidingPlayerState extends PlayerMovementState
 
 @export var SPEED: float = 0
-@export var ACCELERATION: float = 0
+@export var ACCELERATION: float = 0.1
+@export var DECELERATION: float = 0.25
 @export var TILT_AMOUNT: float = 0.1
 @export_range(1, 6, 0.1) var SLIDE_ANIM_SPEED: float = 4.0
 
@@ -15,11 +16,14 @@ func enter(previous_state) -> void:
 
 func update(delta):
 	PLAYER.update_gravity(delta)
-	#PLAYER.update_input(SPEED, ACCELERATION, delta)
+	#PLAYER.update_input(SPEED, ACCELERATION, DECELERATION)
 	PLAYER.update_velocity()
 	
-	if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
-		transition.emit("JumpingPlayerState")
+	#if Input.is_action_just_pressed("jump") and PLAYER.is_on_floor():
+		#transition.emit("JumpingPlayerState")
+	
+	#if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
+		#transition.emit("FallingPlayerState")
 	
 func set_tilt(player_rotation) -> void:
 	var tilt = Vector3.ZERO
