@@ -2,8 +2,9 @@ class_name Player extends CharacterBody3D
 
 @export var MOUSE_SENSITIVITY: float = 1.5
 @export var CAMERA_CONTROLLER: Camera3D
-@export var SWORD: Marker3D
 @export var ANIMATION_PLAYER : AnimationPlayer
+@export var RAYCAST: RayCast3D
+@export var SWORD: Node3D
 
 var mouse_captured: bool = false
 
@@ -47,9 +48,20 @@ func _physics_process(delta):
 	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
 	
 func update_sword():
+	var space_state = get_world_3d().direct_space_state
+	
 	var mouse_position = get_viewport().get_mouse_position()
 	
+	var ray_length = 2000
+	var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
+	var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
 	
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var intersection = space_state.intersect_ray(query)
+	
+	if not intersection.is_empty():
+		var pos = intersection.position
+		SWORD.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
 	#var target_plane_mouse = Plane(Vector3(0, 1, 0), position.y)
 	#var ray_length = 1000
 	#var mouse_position = get_viewport().get_mouse_position()
@@ -57,8 +69,8 @@ func update_sword():
 	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
 	#var cursor_position_on_plane = target_plane_mouse.intersects_ray(ray_origin, ray_end)
 	#
-	#if cursor_position_on_plane != null:
-		#SWORD.look_at(cursor_position_on_plane, Vector3.UP, 0)
+	#if cursor_position != null:
+		#SWORD.look_at(cursor_position, Vector3.UP, 0)
 	
 func update_jumping(delta, jumping, jump_height) -> void:
 	if is_on_floor(): 

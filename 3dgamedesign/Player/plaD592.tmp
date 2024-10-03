@@ -409,12 +409,11 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_psnx1"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "RAYCAST", "SWORD")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER")]
 script = ExtResource("1_2f8j2")
+MOUSE_SENSITIVITY = null
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
-RAYCAST = NodePath("")
-SWORD = NodePath("CameraController/Camera/Sword")
 
 [node name="CShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
