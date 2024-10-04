@@ -46,6 +46,46 @@ func release_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
 	
+func camera_follow_enemy() -> void:
+	var space_state = get_world_3d().direct_space_state
+	
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	var ray_length = 2000
+	var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
+	var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
+	
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var intersection = space_state.intersect_ray(query)
+	
+	print(intersection.position.x)
+	
+	rotate_object_local(Vector3(0,1,0), -intersection.position.x)
+	
+func check_lock():
+	var possible_targets = get_tree().get_nodes_in_group("enemy")
+	for target in possible_targets:
+		if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
+			possible_targets.erase(target)
+		#if 
+			possible_targets.erase(target)
+	if !possible_targets.is_empty():
+		return possible_targets[0]
+	return null
+	
+	var space_state = get_world_3d().direct_space_state
+	
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	var ray_length = 2000
+	var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
+	var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
+	
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var intersection = space_state.intersect_ray(query)
+	
+	return intersection
+	
 func update_sword():
 	var space_state = get_world_3d().direct_space_state
 	

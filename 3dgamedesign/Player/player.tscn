@@ -374,7 +374,6 @@ fov = 83.1111
 update_mode = 1
 
 [node name="Arm" type="Node3D" parent="CameraController/Camera"]
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraController/Camera/Arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475286, -0.709022, -0.163726)
@@ -382,7 +381,6 @@ mesh = SubResource("CapsuleMesh_db16x")
 
 [node name="Sword" type="Node3D" parent="CameraController/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, -0.25)
-visible = false
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="CameraController/Camera/Sword"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

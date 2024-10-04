@@ -29,6 +29,8 @@ func update(delta):
 		transition.emit("FallingPlayerState")
 		
 	if Input.is_action_just_pressed("lock"):
-		transition.emit("BattlePlayerState")
+		var intersection = PLAYER.check_lock()
+		if intersection.collider == ENEMY:
+			transition.emit("BattlePlayerState")
 	
 	

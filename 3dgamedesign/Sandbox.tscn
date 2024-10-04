@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://WE_test.tscn" id="1_v8a0n"]
 [ext_resource type="Material" uid="uid://chfutg1aiis0d" path="res://materials/Sandbox.tres" id="2_2g0ee"]
 [ext_resource type="Texture2D" uid="uid://b01vv6qc3japu" path="res://Assets/DarkPrototypeTexture.png" id="2_7sl6d"]
-[ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://enemy.tscn" id="2_sdkh1"]
+[ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Enemy/enemy.tscn" id="2_sdkh1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t63co"]
 albedo_texture = ExtResource("2_7sl6d")

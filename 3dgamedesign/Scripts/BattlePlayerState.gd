@@ -9,10 +9,11 @@ func enter(previous_state) -> void:
 	ANIMATION.pause()
 
 func update(delta):
+	PLAYER.camera_follow_enemy()
+	PLAYER.update_sword()
 	PLAYER.update_gravity(delta)
 	PLAYER.update_input(SPEED, ACCELERATION, DECELERATION)
 	PLAYER.update_velocity()
-	PLAYER.update_sword()
 	
 	if Input.is_action_just_pressed("lock"):
 		transition.emit("IdlePlayerState")
