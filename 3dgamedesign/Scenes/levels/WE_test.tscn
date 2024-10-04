@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btv0a42cgxt8g"]
 
-[ext_resource type="Environment" uid="uid://dsay4gdr8k6ur" path="res://environment/WE_test.tres" id="1_cvy6j"]
+[ext_resource type="Environment" uid="uid://dsay4gdr8k6ur" path="res://Assets/environment/WE_test.tres" id="1_cvy6j"]
 
 [node name="WorldEnvironment" type="WorldEnvironment"]
 environment = ExtResource("1_cvy6j")

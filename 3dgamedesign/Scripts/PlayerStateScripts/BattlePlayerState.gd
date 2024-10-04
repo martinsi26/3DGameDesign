@@ -19,5 +19,6 @@ func update(delta):
 		transition.emit("IdlePlayerState")
 
 func exit() -> void:
+	PLAYER.default_sword()
 	PLAYER.capture_mouse()
 

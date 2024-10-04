@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ivvpsi314b34"
-path.bptc="res://.godot/imported/grid.jpg-98e91c7ac35e7c2efc8df0a4f602d545.bptc.ctex"
+uid="uid://b1jvh1ehiaebt"
+path.bptc="res://.godot/imported/industrial_sunset_puresky_4k.hdr-9bb827c32d6219e101db7628fdde8e42.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://textures/grid.jpg"
-dest_files=["res://.godot/imported/grid.jpg-98e91c7ac35e7c2efc8df0a4f602d545.bptc.ctex"]
+source_file="res://Assets/textures/industrial_sunset_puresky_4k.hdr"
+dest_files=["res://.godot/imported/industrial_sunset_puresky_4k.hdr-9bb827c32d6219e101db7628fdde8e42.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

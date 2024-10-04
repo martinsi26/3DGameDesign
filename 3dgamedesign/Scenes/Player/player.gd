@@ -5,6 +5,9 @@ class_name Player extends CharacterBody3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 @export var SWORD: Node3D
 
+var original_sword_position
+var original_sword_rotation
+
 var mouse_captured: bool = false
 
 var current_rotation: float
@@ -20,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func camera_look(movement: Vector2):
 	current_rotation = movement.x
 	camera_rotation += movement
-	camera_rotation.y = clamp(camera_rotation.y, -1.5, 1.2) # clamp 90 degres up and down
+	camera_rotation.y = clamp(camera_rotation.y, -1.25, 0.65) # clamp 90 degres up and down
 	
 	transform.basis = Basis()
 	CAMERA_CONTROLLER.transform.basis = Basis()
@@ -32,6 +35,8 @@ func _input(event):
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
 	
 func _ready():
+	original_sword_position = SWORD.position
+	original_sword_rotation = SWORD.rotation
 	Global.player = self
 	capture_mouse()
 
@@ -47,20 +52,22 @@ func release_mouse() -> void:
 	mouse_captured = false
 	
 func camera_follow_enemy() -> void:
-	var space_state = get_world_3d().direct_space_state
+	pass
 	
-	var mouse_position = get_viewport().get_mouse_position()
-	
-	var ray_length = 2000
-	var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
-	var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
-	
-	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	var intersection = space_state.intersect_ray(query)
-	
-	print(intersection.position.x)
-	
-	rotate_object_local(Vector3(0,1,0), -intersection.position.x)
+	#var space_state = get_world_3d().direct_space_state
+	#
+	#var mouse_position = get_viewport().get_mouse_position()
+	#
+	#var ray_length = 2000
+	#var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
+	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
+	#
+	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	#var intersection = space_state.intersect_ray(query)
+	#
+	#print(intersection.position.x)
+	#
+	#rotate_object_local(Vector3(0,1,0), -intersection.position.x)
 	
 func check_lock():
 	#var possible_targets = get_tree().get_nodes_in_group("enemy")
@@ -85,6 +92,12 @@ func check_lock():
 	var intersection = space_state.intersect_ray(query)
 	
 	return intersection
+	
+func default_sword():
+	print(original_sword_position)
+	print(SWORD.position)
+	SWORD.position = original_sword_position
+	SWORD.rotation = original_sword_rotation
 	
 func update_sword():
 	var space_state = get_world_3d().direct_space_state
