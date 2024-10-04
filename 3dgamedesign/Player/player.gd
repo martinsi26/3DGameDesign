@@ -63,15 +63,15 @@ func camera_follow_enemy() -> void:
 	rotate_object_local(Vector3(0,1,0), -intersection.position.x)
 	
 func check_lock():
-	var possible_targets = get_tree().get_nodes_in_group("enemy")
-	for target in possible_targets:
-		if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
-			possible_targets.erase(target)
-		#if 
-			possible_targets.erase(target)
-	if !possible_targets.is_empty():
-		return possible_targets[0]
-	return null
+	#var possible_targets = get_tree().get_nodes_in_group("enemy")
+	#for target in possible_targets:
+		#if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
+			#possible_targets.erase(target)
+		##if 
+			#possible_targets.erase(target)
+	#if !possible_targets.is_empty():
+		#return possible_targets[0]
+	#return null
 	
 	var space_state = get_world_3d().direct_space_state
 	

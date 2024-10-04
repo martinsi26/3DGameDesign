@@ -9,7 +9,7 @@ func enter(previous_state) -> void:
 	ANIMATION.pause()
 
 func update(delta):
-	PLAYER.camera_follow_enemy()
+	#PLAYER.camera_follow_enemy()
 	PLAYER.update_sword()
 	PLAYER.update_gravity(delta)
 	PLAYER.update_input(SPEED, ACCELERATION, DECELERATION)
