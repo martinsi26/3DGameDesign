@@ -1,6 +1,6 @@
 class_name AttackPlayerState extends PlayerActionState
 
-func enter(previous_state) -> void:
+func enter(_previous_state) -> void:
 	PLAYER.release_mouse()
 
 func update(delta):

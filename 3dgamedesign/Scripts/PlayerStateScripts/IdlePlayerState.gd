@@ -4,7 +4,7 @@ class_name IdlePlayerState extends PlayerMovementState
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
 
-func enter(previous_state) -> void:
+func enter(_previous_state) -> void:
 	if ANIMATION.is_playing() and ANIMATION.current_animation == "jump_end":
 		await ANIMATION.animation_finished
 		ANIMATION.pause()
