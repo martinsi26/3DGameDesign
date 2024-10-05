@@ -51,51 +51,21 @@ func release_mouse() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
 	
-func camera_follow_enemy() -> void:
-	pass
+func camera_follow_enemy(target) -> void:
+	var pos = target.position
+	CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
+	look_at(target.position, Vector3(0, 1, 0))
 	
-	#var space_state = get_world_3d().direct_space_state
-	#
-	#var mouse_position = get_viewport().get_mouse_position()
-	#
-	#var ray_length = 2000
-	#var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
-	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
-	#
-	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	#var intersection = space_state.intersect_ray(query)
-	#
-	#print(intersection.position.x)
-	#
-	#rotate_object_local(Vector3(0,1,0), -intersection.position.x)
-	
-func check_lock():
-	#var possible_targets = get_tree().get_nodes_in_group("enemy")
-	#for target in possible_targets:
-		#if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
-			#possible_targets.erase(target)
-		##if 
-			#possible_targets.erase(target)
-	#if !possible_targets.is_empty():
-		#return possible_targets[0]
-	#return null
-	
-	var space_state = get_world_3d().direct_space_state
-	
-	var mouse_position = get_viewport().get_mouse_position()
-	
-	var ray_length = 2000
-	var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
-	var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
-	
-	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	var intersection = space_state.intersect_ray(query)
-	
-	return intersection
+func find_target():
+	var possible_targets = get_tree().get_nodes_in_group("Enemy")
+	for target in possible_targets:
+		if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
+			possible_targets.erase(target)
+	if !possible_targets.is_empty():
+		return possible_targets[0]
+	return null
 	
 func default_sword():
-	print(original_sword_position)
-	print(SWORD.position)
 	SWORD.position = original_sword_position
 	SWORD.rotation = original_sword_rotation
 	

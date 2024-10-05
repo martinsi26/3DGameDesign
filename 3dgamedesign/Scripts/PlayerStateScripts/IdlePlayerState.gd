@@ -27,10 +27,3 @@ func update(delta):
 		
 	if PLAYER.velocity.y < -3.0 and !PLAYER.is_on_floor():
 		transition.emit("FallingPlayerState")
-		
-	if Input.is_action_just_pressed("lock"):
-		var intersection = PLAYER.check_lock()
-		if intersection.collider == ENEMY:
-			transition.emit("BattlePlayerState")
-	
-	

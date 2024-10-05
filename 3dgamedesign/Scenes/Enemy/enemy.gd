@@ -5,7 +5,6 @@ class_name Enemy extends CharacterBody3D
 #const JUMP_VELOCITY = 4.5
 
 func _ready() -> void:
-	add_to_group("enemy")
 	Global.enemy = self
 
 #func _physics_process(delta: float) -> void:
