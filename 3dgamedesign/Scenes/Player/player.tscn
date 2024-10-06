@@ -398,7 +398,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
+blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
