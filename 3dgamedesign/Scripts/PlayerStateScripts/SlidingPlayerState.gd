@@ -28,8 +28,8 @@ func update(delta):
 func set_tilt(player_rotation) -> void:
 	var tilt = Vector3.ZERO
 	tilt.z = clamp(TILT_AMOUNT * player_rotation, -0.1, 0.1)
-	tilt.z = 0.05
-	tilt.x = 0.05
+	#tilt.z = 0.05
+	#tilt.x = 0.05
 	if tilt.z == 0.0:
 		tilt.z = 0.05
 	ANIMATION.get_animation("sliding").track_set_key_value(3, 1, tilt)

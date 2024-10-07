@@ -23,7 +23,9 @@ func update(delta):
 	set_animation_speed(PLAYER.velocity.length())
 	
 	if Input.is_action_just_released("sprint") or PLAYER.velocity.length() == 0:
-		transition.emit("WalkingPlayerState")
+		await get_tree().create_timer(0.5).timeout
+		if get_parent().CURRENT_MOVEMENT_STATE.name == "SprintingPlayerState":
+			transition.emit("WalkingPlayerState")
 	
 	if Input.is_action_just_pressed("crouch") and PLAYER.velocity.length() > 6:
 		transition.emit("SlidingPlayerState")

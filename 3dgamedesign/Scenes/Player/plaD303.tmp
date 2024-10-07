@@ -459,6 +459,10 @@ script = ExtResource("4_nqmv3")
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Movement"]]
 script = ExtResource("7_4diil")
+SPEED = null
+ACCELERATION = null
+DECELERATION = null
+TOP_ANIM_SPEED = null
 
 [node name="CrouchingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Movement"]]
 script = ExtResource("9_dmq2t")
