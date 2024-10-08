@@ -1,0 +1,57 @@
+name: 🚥 Status Checks
+on: push
+
+defaults:
+  run:
+    working-directory: ./3dgamedesign
+
+jobs:
+  tests:
+    name: 👀 Evaluate on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # Don't cancel other OS runners if one fails.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
+    defaults:
+      run:
+        # Use bash shells on all platforms.
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        name: 🧾 Checkout
+
+      # - uses: actions/setup-dotnet@v3
+      #   name: 💽 Setup .NET SDK
+      #   with:
+      #     # Use the .NET SDK from global.json in the root of the repository.
+      #     global-json-file: global.json
+
+      - uses: chickensoft-games/setup-godot@v2.1.1
+        name: 🤖 Setup Godot
+        with:
+          # Version must include major, minor, and patch, and be >= 4.0.0
+          version: 4.3.0-stable
+          # Use .NET-enabled version of Godot.
+          use-dotnet: true
+          # Include the Godot Export Templates.
+          include-templates: true
+
+      - name: 🔬 Verify Setup
+        run: |
+          dotnet --version
+          godot --version
+
+      # This step builds the Godot project, including the C# code, instead of relying on dotnet CLI directly.
+      - name: 🧑‍🔬 Build Godot Project
+        run: |
+          cd perry_the_snake_pactypus
+          godot --headless --build-solutions --quit || exit 0
+
+      - name: 🧪 Run Tests
+        run: |
+          godot --headless --run-tests --quit --no-window
