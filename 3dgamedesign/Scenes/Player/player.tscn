@@ -1,19 +1,21 @@
-[gd_scene load_steps=29 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=31 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
 [ext_resource type="Theme" uid="uid://mnu83cyhpnin" path="res://Assets/UI/Themes/debug.tres" id="2_iit15"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_jjpn6"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://Assets/materials/player.tres" id="2_yvb2v"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="3_edvmt"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdlePlayerState.gd" id="3_knrom"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/WalkingPlayerState.gd" id="4_nqmv3"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CrouchingPlayerState.gd" id="9_dmq2t"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SlidingPlayerState.gd" id="10_tf67f"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/JumpingPlayerState.gd" id="11_uiv40"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/AttackPlayerState.gd" id="12_3yr3p"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/FallingPlayerState.gd" id="13_1c8fe"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdleCombatPlayerState.gd" id="14_rwima"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/IdlePlayerState.gd" id="3_knrom"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CombatStates/AttackingPlayerState.gd" id="12_3yr3p"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/FallingPlayerState.gd" id="13_1c8fe"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CombatStates/IdleCombatPlayerState.gd" id="14_rwima"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CombatStates/LockingPlayerState.gd" id="15_2vl0i"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CombatStates/BlockingPlayerState.gd" id="16_snv5m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 height = 1.96667
@@ -398,7 +400,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -470,7 +472,7 @@ SPEED = 6.0
 [node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Movement"]]
 script = ExtResource("11_uiv40")
 
-[node name="AttackPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
+[node name="AttackingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
 script = ExtResource("12_3yr3p")
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Movement"]]
@@ -478,3 +480,9 @@ script = ExtResource("13_1c8fe")
 
 [node name="IdleCombatPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
 script = ExtResource("14_rwima")
+
+[node name="LockingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
+script = ExtResource("15_2vl0i")
+
+[node name="BlockingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
+script = ExtResource("16_snv5m")

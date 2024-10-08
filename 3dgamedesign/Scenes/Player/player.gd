@@ -26,6 +26,10 @@ var gravity = 12.0
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and lock_camera:
+		var mouse_event = event.relative * MOUSE_SENSITIVITY
+		update_sword(mouse_event)
+	
 	if event is InputEventMouseMotion and !lock_camera:
 		# after checking the mouse motino event we capture the mouse and update the camer to look
 		var mouse_event = event.relative * MOUSE_SENSITIVITY
@@ -135,6 +139,9 @@ func update_sword(movement):
 		#var pos = intersection.position
 		## make the sword look at the intersection point
 		#SWORD.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
+	
+func update_sword_block():
+	pass
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:
