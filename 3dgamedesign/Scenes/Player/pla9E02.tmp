@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdk6hwb4hi2wc"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_2f8j2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_njwql"]
+
+[sub_resource type="Animation" id="Animation_1lpub"]
+resource_name = "crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CShape:shape:height")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CShape:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0, 0.7, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.7, 0), Vector3(0, 1.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xllyj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CShape:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CShape:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.7, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvbrm"]
+_data = {
+"RESET": SubResource("Animation_xllyj"),
+"crouch": SubResource("Animation_1lpub")
+}
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_2f8j2")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="CShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_3rsb5")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="CShape"]
+mesh = SubResource("CapsuleMesh_njwql")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera" type="Camera3D" parent="CameraController"]
+fov = 80.0
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
+update_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gvbrm")
+}
