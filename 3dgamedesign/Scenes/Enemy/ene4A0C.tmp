@@ -21,8 +21,6 @@ shape = SubResource("CapsuleShape3D_jeeme")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 mesh = SubResource("CapsuleMesh_cmls3")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CollisionShape3D"]
-
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_MOVEMENT_STATE", "CURRENT_COMBAT_STATE")]
 script = ExtResource("3_oxsdy")
 CURRENT_MOVEMENT_STATE = NodePath("WalkingEnemyState")
@@ -33,3 +31,7 @@ script = ExtResource("4_sumra")
 
 [node name="WalkingEnemyState" type="Node" parent="EnemyStateMachine" groups=["Movement"]]
 script = ExtResource("4_2f5lq")
+SPEED = null
+ACCELERATION = null
+DECELERATION = null
+TOP_ANIM_SPEED = null
