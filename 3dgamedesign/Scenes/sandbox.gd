@@ -12,4 +12,4 @@ func _process(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	get_tree().call_group("Enemy", "update_target_location", player.global_transform.origin)
+	get_tree().call_group("Enemy", "_on_velocity_computed", player.global_transform.origin)
