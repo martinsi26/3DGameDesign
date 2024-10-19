@@ -23,6 +23,10 @@ Global="*res://Scripts/global.gd"
 
 window/vsync/vsync_mode=0
 
+[dotnet]
+
+project/assembly_name="3DGameDesign"
+
 [input]
 
 move_left={

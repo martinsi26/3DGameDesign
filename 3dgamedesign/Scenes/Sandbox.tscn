@@ -25,10 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.001367
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD") instance=ExtResource("1_ndiqr")]
-CAMERA_CONTROLLER = NodePath("CameraController/Camera")
-ANIMATION_PLAYER = NodePath("AnimationPlayer")
-SWORD = NodePath("Arm/Sword")
+[node name="Player" parent="." instance=ExtResource("1_ndiqr")]
 
 [node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 8)
