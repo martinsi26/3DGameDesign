@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://caf34tsvhgfbg"
-path="res://.godot/imported/Collisueom.glb-9047c59e72b3843a34a97f439808afe9.scn"
+uid="uid://doh2js34a4elk"
+path="res://.godot/imported/Colliseum.glb-49afbfe64a957c2cf86d72e40d2bc600.scn"
 
 [deps]
 
-source_file="res://Enviroment/Collisueom.glb"
-dest_files=["res://.godot/imported/Collisueom.glb-9047c59e72b3843a34a97f439808afe9.scn"]
+source_file="res://Enviroment/Colliseum.glb"
+dest_files=["res://.godot/imported/Colliseum.glb-49afbfe64a957c2cf86d72e40d2bc600.scn"]
 
 [params]
 

@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://ikej17mmjbem"]
+
+[ext_resource type="PackedScene" uid="uid://doh2js34a4elk" path="res://Enviroment/Colliseum.glb" id="1_ht657"]
+[ext_resource type="Material" uid="uid://cecphylfjdvtc" path="res://Assets/ColAssets/floor.tres" id="2_v8jsm"]
+[ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="2_vfc0s"]
+[ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="2_y5s35"]
+[ext_resource type="Material" uid="uid://c8u5feqt6aalu" path="res://Assets/ColAssets/innerwall.tres" id="4_aio6d"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cith0"]
+radius = 10.7024
+
+[node name="Colliseum" instance=ExtResource("1_ht657")]
+
+[node name="Arena_draft_lwo" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.0475607, 2.86102e-06, -0.00377226)
+surface_material_override/3 = ExtResource("2_v8jsm")
+surface_material_override/4 = ExtResource("2_y5s35")
+surface_material_override/5 = ExtResource("2_y5s35")
+surface_material_override/6 = ExtResource("4_aio6d")
+surface_material_override/7 = ExtResource("2_y5s35")
+surface_material_override/8 = ExtResource("2_y5s35")
+surface_material_override/9 = ExtResource("2_vfc0s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00747967, 0.0120096, 0.00897408)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676403, 0)
+shape = SubResource("CylinderShape3D_cith0")
