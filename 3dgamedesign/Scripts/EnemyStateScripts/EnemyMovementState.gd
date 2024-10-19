@@ -7,7 +7,7 @@ var ANIMATION: AnimationPlayer
 func _ready() -> void:
 	await owner.ready
 	ENEMY = owner as Enemy
-	ANIMATION = ENEMY.ANIMATION_PLAYER
+	#ANIMATION = ENEMY.ANIMATION_PLAYER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

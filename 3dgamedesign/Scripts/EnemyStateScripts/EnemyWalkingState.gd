@@ -5,7 +5,7 @@ class_name EnemyWalkingState extends EnemyMovementState
 @export var DECELERATION: float = 0.25
 @export var TOP_ANIM_SPEED: float = 2.2
 
-@export var TARGET: Node3D  # The target the enemy will move towards (e.g., Player)
+@export var PLAYER: Player 
 
 func enter(_previous_state) -> void:
 	pass
@@ -36,8 +36,8 @@ func set_animation_speed(speed: float) -> void:
 
 # Move the enemy towards the target (player or patrol point)
 func move_towards_target(delta: float) -> void:
-	if TARGET:
-		var direction = (TARGET.global_position - ENEMY.global_position).normalized()
+	if PLAYER:
+		var direction = (PLAYER.global_position - ENEMY.global_position).normalized()
 		ENEMY.velocity.x = lerp(ENEMY.velocity.x, direction.x * SPEED, ACCELERATION)
 		ENEMY.velocity.z = lerp(ENEMY.velocity.z, direction.z * SPEED, ACCELERATION)
 	else:

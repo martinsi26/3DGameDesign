@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=7 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://Assets/materials/player.tres" id="1_vhies"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="3_oxsdy"]
+[ext_resource type="Script" path="res://Scripts/EnemyStateScripts/EnemyWalkingState.gd" id="4_2f5lq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
 
@@ -21,3 +22,6 @@ mesh = SubResource("CapsuleMesh_cmls3")
 
 [node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("3_oxsdy")
+
+[node name="EnemyWalkingState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("4_2f5lq")
