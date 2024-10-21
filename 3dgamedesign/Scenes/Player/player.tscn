@@ -4,6 +4,8 @@
 [ext_resource type="ArrayMesh" uid="uid://dnewyxyutuiqn" path="res://person.tres" id="2_3v1os"]
 [ext_resource type="Theme" uid="uid://mnu83cyhpnin" path="res://Assets/UI/Themes/debug.tres" id="2_iit15"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_jjpn6"]
+[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://Assets/materials/player.tres" id="2_yvb2v"]
+[ext_resource type="ArrayMesh" uid="uid://b3esrm1b3jkmt" path="res://Assets/Designs/sword1.obj" id="3_b6bdi"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="3_edvmt"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdlePlayerState.gd" id="3_knrom"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/WalkingPlayerState.gd" id="4_nqmv3"]
@@ -21,9 +23,6 @@ height = 1.96667
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_db16x"]
 radius = 0.125
 height = 0.25
-
-[sub_resource type="BoxMesh" id="BoxMesh_a4ssa"]
-size = Vector3(0.1, 0.1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqp6o"]
 size = Vector3(0.1, 0.1, 2)
@@ -374,8 +373,8 @@ mesh = SubResource("CapsuleMesh_db16x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, -0.25)
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="Arm/Sword"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_a4ssa")
+transform = Transform3D(-0.0965926, 0, -0.0258819, 0, 0.1, 0, 0.0258819, 0, -0.0965926, -0.355511, -0.0883387, -0.601785)
+mesh = ExtResource("3_b6bdi")
 skeleton = NodePath("")
 
 [node name="Hitbox" type="Area3D" parent="Arm/Sword/PlaceholderMesh"]
