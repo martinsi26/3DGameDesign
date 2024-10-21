@@ -359,7 +359,7 @@ mesh = ExtResource("2_1d5fi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.349659, 0.907631, -0.475902)
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="Sword"]
-transform = Transform3D(-0.0965926, 0, -0.0258819, 0, 0.1, 0, 0.0258819, 0, -0.0965926, -0.3, 0.05, -0.2)
+transform = Transform3D(0.014222, -0.187939, 0.0669093, -0.19563, -8.55124e-09, 0.0415823, -0.0390746, -0.0684041, -0.183832, 0.939412, -0.0775723, -1.3779)
 mesh = ExtResource("3_b6bdi")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_chicu")
