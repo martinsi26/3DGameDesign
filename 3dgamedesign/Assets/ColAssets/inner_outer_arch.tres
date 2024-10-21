@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dt4yy6kela2jx"]
+
+[ext_resource type="Texture2D" uid="uid://bq2le2fuoqrq" path="res://Assets/ColAssets/istockphoto-1419117748-612x612.jpg" id="1_8j4p0"]
+
+[resource]
+albedo_texture = ExtResource("1_8j4p0")
+roughness_texture = ExtResource("1_8j4p0")
+uv1_triplanar = true
