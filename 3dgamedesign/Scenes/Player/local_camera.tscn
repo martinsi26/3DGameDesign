@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://lvu8nioyetly"]
+
+[ext_resource type="Script" path="res://Scenes/Player/local_camera.gd" id="1_spw7b"]
+
+[node name="LocalCamera" type="Node"]
+script = ExtResource("1_spw7b")
+
+[node name="LockedCamera" type="Node" parent="."]
+
+[node name="FreeCamera" type="Node" parent="."]
+
+[node name="CameraMount" type="Node3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraMount"]
+
+[node name="CameraNest" type="Node3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraNest"]
+
+[node name="FocusPoint" type="Node3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="FocusPoint"]
+
+[node name="CameraController" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="CameraController"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraController/Camera"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
+update_mode = 1

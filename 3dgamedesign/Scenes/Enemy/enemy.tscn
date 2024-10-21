@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7xbusdsm4w70"]
+
+[ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
+[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://Assets/materials/player.tres" id="1_vhies"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cmls3"]
+material = ExtResource("1_vhies")
+
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_e0sxd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_jeeme")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_cmls3")
