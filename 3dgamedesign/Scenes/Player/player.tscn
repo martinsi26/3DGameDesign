@@ -7,8 +7,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b3esrm1b3jkmt" path="res://Assets/Designs/sword1.obj" id="3_b6bdi"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="3_edvmt"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdlePlayerState.gd" id="3_knrom"]
-[ext_resource type="Material" uid="uid://cecphylfjdvtc" path="res://Assets/ColAssets/floor.tres" id="4_28le8"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/WalkingPlayerState.gd" id="4_nqmv3"]
+[ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SprintingPlayerState.gd" id="7_4diil"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CrouchingPlayerState.gd" id="9_dmq2t"]
@@ -368,8 +368,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.7, -0.25)
 transform = Transform3D(-0.0965926, 0, -0.0258819, 0, 0.1, 0, 0.0258819, 0, -0.0965926, -0.3, 0.05, -0.2)
 mesh = ExtResource("3_b6bdi")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("4_28le8")
-surface_material_override/1 = ExtResource("5_chicu")
+surface_material_override/0 = ExtResource("5_chicu")
+surface_material_override/1 = ExtResource("5_6chjd")
 
 [node name="Hitbox" type="Area3D" parent="Arm/Sword/PlaceholderMesh"]
 
