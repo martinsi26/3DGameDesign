@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cpi7bs8j0lb35"]
+
+[ext_resource type="Texture2D" uid="uid://c5elvyjucj1tb" path="res://Assets/ColAssets/ancient_beige_full_slab.jpg" id="1_ljy7r"]
+
+[resource]
+albedo_texture = ExtResource("1_ljy7r")
+metallic = 1.0
+metallic_specular = 0.0
+roughness_texture = ExtResource("1_ljy7r")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
