@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ls4fq4tyeqp"]
+
+[ext_resource type="PackedScene" uid="uid://cbyak85x3cqd8" path="res://Assets/UI/low_poly_little_boy.glb" id="1_nv83m"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_nv83m")]
