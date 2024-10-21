@@ -1,19 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=7 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
-[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://Assets/materials/player.tres" id="1_vhies"]
+[ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
+[ext_resource type="ArrayMesh" uid="uid://bl7d7jtq56vjr" path="res://Assets/BlenderObjs/axe.tres" id="3_6yggr"]
+[ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="4_8e0ri"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_cmls3"]
-material = ExtResource("1_vhies")
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
+size = Vector3(0.3, 0.5, 0.5)
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
+transform = Transform3D(1.19786, 0, 0, 0, 1.19786, 0, 0, 0, 1.19786, 0, 0, 0)
 script = ExtResource("1_e0sxd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(-5.23623e-08, 0, 1.19791, 0, 1.19791, 0, -1.19791, 0, -5.23623e-08, 0.00174665, 0.893333, 0.00319552)
 shape = SubResource("CapsuleShape3D_jeeme")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("CapsuleMesh_cmls3")
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.900587, 0)
+mesh = ExtResource("2_0nj7c")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.81169e-08, 0, 1.10079, 0, 1.10079, 0, -1.10079, 0, -4.81169e-08, 0.6, 1.6, 1.1)
+shape = SubResource("BoxShape3D_gsyop")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D2"]
+transform = Transform3D(0.0479531, -1.19011, 0.133783, -0.75872, -0.133783, -0.918156, 0.926611, -0.0479533, -0.75872, 0, 0, 0)
+mesh = ExtResource("3_6yggr")
+skeleton = NodePath("../../CollisionShape3D")
+surface_material_override/0 = ExtResource("4_8e0ri")
