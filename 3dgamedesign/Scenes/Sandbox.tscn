@@ -10,14 +10,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.001367
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD") instance=ExtResource("1_ndiqr")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.07137, 9.53674e-07, 8.52144)
-CAMERA_CONTROLLER = NodePath("CameraController/Camera")
-ANIMATION_PLAYER = NodePath("AnimationPlayer")
-SWORD = NodePath("Arm/Sword")
-
 [node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 8)
 
 [node name="Colliseum" parent="." instance=ExtResource("4_6l2dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8379, -1.46528, 5.62704)
+
+[node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER") instance=ExtResource("1_ndiqr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 4)
+MOUSE_SENSITIVITY = 0.002
+CAMERA_CONTROLLER = NodePath("CameraController/Camera")
+ANIMATION_PLAYER = NodePath("AnimationPlayer")
+TILT_LOWER_LIMIT = -1.0472
+TILT_UPPER_LIMIT = 0.523599
+TILT_LEFT_LIMIT = -1.26536
+TILT_RIGHT_LIMIT = 0.959931

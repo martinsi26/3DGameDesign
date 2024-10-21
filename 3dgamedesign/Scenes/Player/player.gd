@@ -34,7 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func camera_look(movement: Vector2):
 	current_rotation = movement.x
 	camera_rotation += movement
-	camera_rotation.y = clamp(camera_rotation.y, -1.25, 0.65) # clamp 90 degres up and down
+	camera_rotation.y = clamp(camera_rotation.y, -1.25, 1.0)
 	
 	transform.basis = Basis()
 	CAMERA_CONTROLLER.transform.basis = Basis()
