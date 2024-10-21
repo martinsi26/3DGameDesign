@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://2r2xorepwlip"]
+[gd_scene load_steps=5 format=3 uid="uid://2r2xorepwlip"]
 
-[ext_resource type="Script" path="res://Scenes/sandbox.gd" id="1_edlpa"]
 [ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Scenes/Player/player.tscn" id="1_ndiqr"]
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://Scenes/levels/WE_test.tscn" id="1_v8a0n"]
 [ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Scenes/Enemy/enemy.tscn" id="2_sdkh1"]
@@ -8,11 +7,8 @@
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
-script = ExtResource("1_edlpa")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
-
-[node name="Player" parent="." instance=ExtResource("1_ndiqr")]
 
 [node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 8)
