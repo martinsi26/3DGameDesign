@@ -49,7 +49,7 @@ jobs:
       # This step builds the Godot project, including the C# code, instead of relying on dotnet CLI directly.
       - name: 🧑‍🔬 Build Godot Project
         run: |
-          cd perry_the_snake_pactypus
+          cd 3dgamedesign
           godot --headless --build-solutions --quit || exit 0
 
       - name: 🧪 Run Tests
