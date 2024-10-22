@@ -33,6 +33,7 @@ var regen_rate = 10.0
 var is_regenerating = false
 
 
+
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and !lock_camera:
@@ -58,7 +59,7 @@ func camera_look(movement: Vector2):
 func _input(event):
 	# we want to exit the game when player has pressed escape for debugging purposes
 	if Input.is_action_just_pressed("exit"): get_tree().quit()
-	if Input.is_action_just_pressed("take_dmg"): apply_damage(10) #NOTE: used to test whether damage works
+	if Input.is_action_just_pressed("take_dmg"): receive_damage(10) #NOTE: used to test whether damage works
 	
 	
 	
@@ -191,16 +192,24 @@ func update_dmg_hud():
 	$CameraController/Camera/ColorRect.color.a = hud_alpha
 	#print($CameraController/Camera/ColorRect.color.a)
 
-func apply_damage(amount):
+func receive_damage(amount):
 	current_health = max(0, float(current_health - amount)) 
 	print("current health:", current_health)
 	update_dmg_hud()
 	
 	regen_delay_timer = 3.0
 	is_regenerating = false
+	
+	if current_health == 0:
+		game_over()
 
 func regen_health(delta):
 	if regen_delay_timer <= 0 and current_health < max_health:
 		current_health = min(current_health + regen_rate * delta, max_health)
 		print("regen health: ", current_health)
 		update_dmg_hud()
+
+func game_over(): 
+	release_mouse()
+	get_tree().change_scene_to_file("res://Scenes/MiscScenes/GameOver.tscn")
+	
