@@ -98,9 +98,7 @@ func update_sword(movement):
 	sword_rotation += movement
 	
 	sword_rotation.y = clampf(sword_rotation.y, -0.45, 0.5)
-	print("y: ", sword_rotation.y)
 	sword_rotation.x = clampf(sword_rotation.x, -1.60, 0.25)
-	print("x: ", sword_rotation.x)
 	
 	
 	SWORD.transform.basis = Basis()
