@@ -5,12 +5,6 @@ class_name Player extends CharacterBody3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 @export var SWORD: Node3D
 
-@export var TILT_LOWER_LIMIT := deg_to_rad(-10.0)
-@export var TILT_UPPER_LIMIT := deg_to_rad(10.0)
-
-@export var TILT_LEFT_LIMIT := deg_to_rad(-10.0)
-@export var TILT_RIGHT_LIMIT := deg_to_rad(10.0)
-
 var original_sword_position
 var original_sword_rotation
 
@@ -103,8 +97,10 @@ func update_sword(movement):
 	
 	sword_rotation += movement
 	
-	sword_rotation.y = clampf(sword_rotation.y, TILT_LOWER_LIMIT, TILT_UPPER_LIMIT)
-	sword_rotation.x = clampf(sword_rotation.x, TILT_LEFT_LIMIT, TILT_RIGHT_LIMIT)
+	sword_rotation.y = clampf(sword_rotation.y, -0.45, 0.5)
+	print("y: ", sword_rotation.y)
+	sword_rotation.x = clampf(sword_rotation.x, -1.60, 0.25)
+	print("x: ", sword_rotation.x)
 	
 	
 	SWORD.transform.basis = Basis()
