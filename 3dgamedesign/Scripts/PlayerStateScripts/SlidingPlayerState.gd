@@ -14,6 +14,9 @@ func enter(previous_state) -> void:
 	ANIMATION.speed_scale = 1.0
 	ANIMATION.play("sliding", -1.0, SLIDE_ANIM_SPEED)
 
+#func exit():
+	#ANIMATION.play("RESET")
+
 func update(delta):
 	PLAYER.update_gravity(delta)
 	#PLAYER.update_input(SPEED, ACCELERATION, DECELERATION)
