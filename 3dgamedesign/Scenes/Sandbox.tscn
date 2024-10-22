@@ -1,17 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://2r2xorepwlip"]
+[gd_scene load_steps=6 format=3 uid="uid://2r2xorepwlip"]
 
 [ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Scenes/Player/player.tscn" id="1_ndiqr"]
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://Scenes/levels/WE_test.tscn" id="1_v8a0n"]
 [ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Scenes/Enemy/enemy.tscn" id="2_sdkh1"]
 [ext_resource type="PackedScene" uid="uid://ikej17mmjbem" path="res://Enviroment/col0sseum_edit.tscn" id="4_6l2dy"]
 
+[sub_resource type="GDScript" id="GDScript_1uooq"]
+script/source = "extends Node3D
+
+@onready var player = $Player
+@onready var enemies = get_tree().get_nodes_in_group(\"Enemy\")
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _physics_process(delta: float) -> void:
+	for enemy in enemies:
+		enemy.set_movement_target(player.global_transform.origin)
+"
+
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
+script = SubResource("GDScript_1uooq")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
 [node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 8)
+transform = Transform3D(-0.369747, 0, 0.929133, 0, 1, 0, -0.929133, 0, -0.369747, -11, 1.79714, 8)
 
 [node name="Colliseum" parent="." instance=ExtResource("4_6l2dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8379, -1.46528, 5.62704)
