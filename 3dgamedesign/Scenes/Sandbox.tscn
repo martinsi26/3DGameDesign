@@ -31,7 +31,7 @@ script = SubResource("GDScript_1uooq")
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
 [node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
-transform = Transform3D(-0.369747, 0, 0.929133, 0, 1, 0, -0.929133, 0, -0.369747, -11, 1.79714, 8)
+transform = Transform3D(-0.369747, 0, 0.929133, 0, 1, 0, -0.929133, 0, -0.369747, -9.39319, 0.229469, 8)
 
 [node name="Colliseum" parent="." instance=ExtResource("4_6l2dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8379, -1.46528, 5.62704)
