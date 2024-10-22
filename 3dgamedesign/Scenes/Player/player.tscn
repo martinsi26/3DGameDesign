@@ -372,6 +372,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.302499)
 fov = 83.1111
 
+[node name="ColorRect" type="ColorRect" parent="CameraController/Camera"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0)
+
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
 update_mode = 1
 
@@ -379,7 +387,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -459,3 +467,5 @@ script = ExtResource("13_1c8fe")
 
 [node name="IdleCombatPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
 script = ExtResource("14_rwima")
+
+[node name="HealthRegen" type="Timer" parent="."]
