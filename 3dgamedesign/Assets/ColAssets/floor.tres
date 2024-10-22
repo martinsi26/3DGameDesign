@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cecphylfjdvtc"]
+
+[ext_resource type="Texture2D" uid="uid://b73ybb3exfqa0" path="res://Assets/ColAssets/Screen Shot 2024-10-18 at 7.11.23 PM.png" id="1_mvw7p"]
+
+[resource]
+albedo_texture = ExtResource("1_mvw7p")
+metallic_specular = 0.0
+roughness_texture = ExtResource("1_mvw7p")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
