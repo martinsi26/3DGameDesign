@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://do8hm2sasiw7b"]
+[gd_scene load_steps=8 format=3 uid="uid://do8hm2sasiw7b"]
 
+[ext_resource type="Script" path="res://Scenes/Enemy/Boar.gd" id="1_j6rep"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_state_machine.gd" id="1_j844m"]
+[ext_resource type="PackedScene" uid="uid://br05dq1yh0vgl" path="res://Assets/Mobs/Boar.glb" id="2_fbblt"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/AttackEnemyState.gd" id="2_w37hu"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/WalkingEnemyState.gd" id="3_id3uu"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/IdleEnemyState.gd" id="4_qimtc"]
@@ -10,6 +12,10 @@ radius = 1.5
 height = 4.0
 
 [node name="Boar" type="Node3D"]
+script = ExtResource("1_j6rep")
+
+[node name="Boar" parent="." instance=ExtResource("2_fbblt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
@@ -19,6 +25,7 @@ CURRENT_STATE = NodePath("WalkingBoarState")
 
 [node name="AttackBoarState" type="Node" parent="BoarStateMachine"]
 script = ExtResource("2_w37hu")
+SPEED = 0.5
 DECELERATION = 0.15
 TOP_ANIM_SPEED = 1.2
 
