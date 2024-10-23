@@ -18,8 +18,6 @@ script = ExtResource("1_j6rep")
 [node name="Boar" parent="." instance=ExtResource("2_fbblt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.103)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-
 [node name="BoarStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("1_j844m")
 CURRENT_STATE = NodePath("WalkingBoarState")
@@ -48,3 +46,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912442, 0)
 shape = SubResource("CapsuleShape3D_5goex")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[editable path="Boar"]
