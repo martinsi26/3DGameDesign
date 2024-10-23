@@ -1,12 +1,10 @@
-class_name Boar extends CharacterBody3D
+class_name Boar extends Enemy
 
-@onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
+@onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# move the enemy to point towards the player
+func enemy_follow_player(player) -> void:
+	self.look_at(player.global_position)
+	self.rotate_y(-30)
+	self.orthonormalize()
+	#self.look_at(Vector3(player.global_position.x, 0, player.global_position.z), Vector3(0, 1, 0), true)

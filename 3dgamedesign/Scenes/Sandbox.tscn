@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://2r2xorepwlip"]
+[gd_scene load_steps=7 format=3 uid="uid://2r2xorepwlip"]
 
+[ext_resource type="PackedScene" uid="uid://do8hm2sasiw7b" path="res://Scenes/Enemy/Boar.tscn" id="1_al2u0"]
 [ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Scenes/Player/player.tscn" id="1_ndiqr"]
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://Scenes/levels/WE_test.tscn" id="1_v8a0n"]
 [ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Scenes/Enemy/enemy.tscn" id="2_sdkh1"]
@@ -27,6 +28,8 @@ func _physics_process(delta: float) -> void:
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
 script = SubResource("GDScript_1uooq")
+
+[node name="Boar" parent="." instance=ExtResource("1_al2u0")]
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
