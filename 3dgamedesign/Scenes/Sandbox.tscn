@@ -30,6 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.001367
 script = SubResource("GDScript_1uooq")
 
 [node name="Boar" parent="." instance=ExtResource("1_al2u0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56196, 0, 0)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
