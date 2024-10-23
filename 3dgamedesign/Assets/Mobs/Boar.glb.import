@@ -37,7 +37,9 @@ _subresources={
 "rest_pose/external_animation_library": null
 },
 "PATH:Armature/Skeleton3D/Cube_002": {
-"generate/physics": true
+"generate/physics": true,
+"physics/physics_material_override": Object(PhysicsMaterial,"resource_local_to_scene":false,"resource_name":"","friction":1.0,"rough":false,"bounce":0.0,"absorbent":false,"script":null)
+
 }
 }
 }

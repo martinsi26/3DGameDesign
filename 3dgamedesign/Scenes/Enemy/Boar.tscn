@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://do8hm2sasiw7b"]
+[gd_scene load_steps=9 format=3 uid="uid://do8hm2sasiw7b"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/Boar.gd" id="1_j6rep"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_state_machine.gd" id="1_j844m"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/AttackEnemyState.gd" id="2_w37hu"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/WalkingEnemyState.gd" id="3_id3uu"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/IdleEnemyState.gd" id="4_qimtc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1egue"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5goex"]
 radius = 1.5
@@ -17,6 +19,48 @@ script = ExtResource("1_j6rep")
 
 [node name="Boar" parent="." instance=ExtResource("2_fbblt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.103)
+collision_layer = 4
+
+[node name="Skeleton3D" parent="Boar/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.000134916, -0.00544725, -0.0247674, 0.999678)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(0.438675, 0.551858, -0.488262, 0.51441)
+bones/2/rotation = Quaternion(0.0785426, 0.00615219, 0.0638334, 0.994846)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(-0.369913, -2.53996e-07, 0.0509021, 0.927671)
+bones/4/rotation = Quaternion(0.628439, 0.403836, -0.562839, 0.353826)
+bones/5/rotation = Quaternion(-0.0463994, -7.55197e-08, -0.0056381, 0.998907)
+bones/6/rotation = Quaternion(-0.363941, 4.18427e-07, -0.0442237, 0.930372)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.0039415, -5.59412e-08, -0.361662, 0.932301)
+bones/8/rotation = Quaternion(-0.000254607, 2.80174e-07, -0.0233619, 0.999727)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(0.438675, 0.551858, -0.488261, 0.51441)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(0.0751972, 0.00439569, 0.0832628, 0.993677)
+bones/11/rotation = Quaternion(-0.353843, -0.0133615, -0.0202107, 0.934991)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.628439, 0.403836, -0.562839, 0.353826)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.0463997, 2.48032e-07, -0.0056381, 0.998907)
+bones/14/rotation = Quaternion(-0.363941, 1.34137e-07, -0.0442238, 0.930372)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/scale = Vector3(1, 1, 1)
+bones/17/rotation = Quaternion(0.0475726, 0.694921, 0.019078, 0.717257)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(0.727624, 0.0303727, -0.684512, -0.0329245)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(0.0169582, 0.727634, -0.0159778, 0.685569)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/scale = Vector3(1, 1, 1)
+bones/22/rotation = Quaternion(0.727624, 0.0303728, -0.684512, -0.0329245)
+bones/22/scale = Vector3(1, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boar"]
+transform = Transform3D(4.8, 0, 0, 0, 2.5, 0, 0, 0, 0.9, 4.2, 1, -0.08)
+shape = SubResource("BoxShape3D_1egue")
 
 [node name="BoarStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("1_j844m")
@@ -46,5 +90,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912442, 0)
 shape = SubResource("CapsuleShape3D_5goex")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.8, 0, 0, 0, 2.5, 0, 0, 0, 0.9, 4.2, 1, -0.08)
+shape = SubResource("BoxShape3D_1egue")
 
 [editable path="Boar"]
