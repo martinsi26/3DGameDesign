@@ -32,8 +32,6 @@ var regen_delay_timer = 3.0
 var regen_rate = 10.0
 var is_regenerating = false
 
-
-
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and !lock_camera:
