@@ -16,7 +16,7 @@ collision_layer = 8
 script = ExtResource("1_j6rep")
 
 [node name="Boar" parent="." instance=ExtResource("2_fbblt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0173723, 0, -0.102741)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -0.103)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
