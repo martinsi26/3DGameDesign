@@ -23,7 +23,7 @@ var gravity = 12.0
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		# after checking the mouse motino event we capture the mouse and update the camer to look
+		# after checking the mouse motion event we capture the mouse and update the camer to look
 		var mouse_event = event.relative * MOUSE_SENSITIVITY
 		if lock_camera:
 			update_sword(mouse_event)
@@ -37,7 +37,6 @@ func camera_look(movement: Vector2):
 	
 	transform.basis = Basis()
 	CAMERA_CONTROLLER.transform.basis = Basis()
-	
 	# first rotate the characters body so it can simulate turning when the mouse moves left/right
 	rotate_object_local(Vector3(0,1,0), -camera_rotation.x)
 	
@@ -80,6 +79,8 @@ func camera_follow_enemy(target) -> void:
 	var pos = target.position
 	CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
 	look_at(target.position, Vector3(0, 1, 0))
+	
+	camera_rotation.x = (-rotation.y)
 	
 # find an available enemy within the players frustum camera view (in camera view)
 func find_target():
