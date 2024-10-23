@@ -14,16 +14,21 @@ var current_rotation: float
 var camera_rotation: Vector2
 var sword_rotation: Vector2
 
+var target = null
 var lock_camera = false
+var sword_position
 
 var gravity = 12.0
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and !lock_camera:
+	if event is InputEventMouseMotion:
 		# after checking the mouse motino event we capture the mouse and update the camer to look
 		var mouse_event = event.relative * MOUSE_SENSITIVITY
-		camera_look(mouse_event)
+		if lock_camera:
+			update_sword(mouse_event)
+		else:
+			camera_look(mouse_event)
 
 func camera_look(movement: Vector2):
 	current_rotation = movement.x
@@ -53,7 +58,10 @@ func _ready():
 	# capture the mouse
 	capture_mouse()
 
-func _physics_process(delta):
+func _process(delta: float) -> void:
+	if lock_camera:
+		camera_follow_enemy(target)
+	
 	# this shows the players velocity in the debug panel
 	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
 
@@ -80,6 +88,7 @@ func find_target():
 		if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
 			possible_targets.erase(target)
 	if !possible_targets.is_empty():
+		target = possible_targets[0]
 		return possible_targets[0]
 	return null
 
@@ -100,14 +109,12 @@ func update_sword(movement):
 	sword_rotation.y = clampf(sword_rotation.y, -0.45, 0.5)
 	sword_rotation.x = clampf(sword_rotation.x, -1.60, 0.25)
 	
-	
 	SWORD.transform.basis = Basis()
 	
 	SWORD.rotate_object_local(Vector3(0,1,0), -sword_rotation.x)
 	SWORD.rotate_object_local(Vector3(1,0,0), -sword_rotation.y)
 	
-	
-	
+	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
 	
 	# get the current space (3D world)
 	#var space_state = get_world_3d().direct_space_state
