@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
 [ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
@@ -14,9 +14,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
 size = Vector3(0.3, 0.5, 0.5)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_llok8"]
-radius = 1.5
-height = 4.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_re50c"]
+radius = 1.99
 
 [node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 4
@@ -28,7 +30,7 @@ transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
 shape = SubResource("CapsuleShape3D_jeeme")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 2.96059e-15, 0, 1, 0, -2.96059e-15, 0, 1, 0, -1.2, 0)
+transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.18134, 0)
 mesh = ExtResource("2_0nj7c")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -57,12 +59,20 @@ script = ExtResource("6_b4c5l")
 script = ExtResource("8_2t2xe")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912442, 0)
-shape = SubResource("CapsuleShape3D_llok8")
+shape = SubResource("SphereShape3D_sk6bu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_re50c")
 
 [connection signal="body_entered" from="Area3D" to="EnemyStateMachine/AttackEnemyState" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Area3D" to="EnemyStateMachine/WalkingEnemyState" method="_on_area_3d_body_entered"]
