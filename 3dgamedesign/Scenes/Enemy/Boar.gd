@@ -4,7 +4,7 @@ class_name Boar extends Enemy
 
 # move the enemy to point towards the player
 func enemy_follow_player(player) -> void:
-	self.look_at(player.global_position)
-	self.rotate_y(-30)
+	#self.look_at(player.global_position)
+	self.look_at(Vector3(player.global_position.x, 0, player.global_position.z), Vector3(0, 1, 0), true)
+	self.rotate_y(30)
 	self.orthonormalize()
-	#self.look_at(Vector3(player.global_position.x, 0, player.global_position.z), Vector3(0, 1, 0), true)
