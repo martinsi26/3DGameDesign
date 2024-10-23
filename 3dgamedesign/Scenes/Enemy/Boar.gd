@@ -1,5 +1,6 @@
-extends Node3D
+class_name Boar extends CharacterBody3D
 
+@onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
