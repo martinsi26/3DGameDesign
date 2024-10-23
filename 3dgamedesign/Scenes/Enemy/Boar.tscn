@@ -92,7 +92,7 @@ shape = SubResource("CapsuleShape3D_5goex")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(4.8, 0, 0, 0, 2.5, 0, 0, 0, 0.9, 4.2, 1, -0.08)
+transform = Transform3D(4.8, 0, 0, 0, 2.5, 0, 0, 0, 0.9, 0, 1, 0)
 shape = SubResource("BoxShape3D_1egue")
 
 [editable path="Boar"]
