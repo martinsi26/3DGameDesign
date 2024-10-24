@@ -10,15 +10,15 @@
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/CrouchingPlayerState.gd" id="9_dmq2t"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SlidingPlayerState.gd" id="10_tf67f"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/JumpingPlayerState.gd" id="11_uiv40"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/FallingPlayerState.gd" id="13_1c8fe"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdleCombatPlayerState.gd" id="14_rwima"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/LockingPlayerState.gd" id="18_avaio"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SlashingPlayerState.gd" id="19_8y11q"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/BlockingPlayerState.gd" id="20_5htgw"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/FallingPlayerState.gd" id="13_1c8fe"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/IdleCombatPlayerState.gd" id="14_rwima"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/SlashingPlayerState.gd" id="19_8y11q"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/BlockingPlayerState.gd" id="20_5htgw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -386,7 +386,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
