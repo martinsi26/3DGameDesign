@@ -1,4 +1,3 @@
-
 [gd_scene load_steps=30 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
@@ -17,12 +16,9 @@
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/JumpingPlayerState.gd" id="11_uiv40"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/FallingPlayerState.gd" id="13_1c8fe"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdleCombatPlayerState.gd" id="14_rwima"]
-
-[ext_resource type="PackedScene" uid="uid://bi87hjmlvk7t2" path="res://Scenes/MiscScenes/PauseMenu.tscn" id="18_ysnl4"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/LockingPlayerState.gd" id="18_avaio"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SlashingPlayerState.gd" id="19_8y11q"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/BlockingPlayerState.gd" id="20_5htgw"]
-
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -349,11 +345,15 @@ _data = {
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD")]
 collision_layer = 2
-collision_mask = 29
+collision_mask = 13
 script = ExtResource("1_2f8j2")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 SWORD = NodePath("Sword")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -383,14 +383,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.302499)
 fov = 83.1111
 
-[node name="ColorRect" type="ColorRect" parent="CameraController/Camera"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 0, 0)
-
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
 update_mode = 1
 
@@ -398,9 +390,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-
-blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
-
+blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -413,10 +403,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = 8.0
-offset_right = 100.0
-offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -482,11 +468,6 @@ script = ExtResource("13_1c8fe")
 [node name="IdleCombatPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
 script = ExtResource("14_rwima")
 
-
-[node name="HealthRegen" type="Timer" parent="."]
-
-[node name="PauseMenu" parent="." instance=ExtResource("18_ysnl4")]
-
 [node name="LockingPlayerState" type="Node" parent="PlayerStateMachine" groups=["Combat"]]
 script = ExtResource("18_avaio")
 
@@ -498,14 +479,5 @@ LINE = NodePath("../../Line2D")
 script = ExtResource("20_5htgw")
 
 [node name="Line2D" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
 
 [connection signal="timeout" from="Timer" to="PlayerStateMachine/SlashingPlayerState" method="_on_timer_timeout"]
-

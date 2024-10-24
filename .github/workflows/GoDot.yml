@@ -54,4 +54,6 @@ jobs:
 
       - name: 🧪 Run Tests
         run: |
+          # cd 3dgamedesign
           godot --headless --run-tests --quit --no-window
+          # dotnet build
