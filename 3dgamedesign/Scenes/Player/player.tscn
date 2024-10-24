@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=31 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -343,6 +343,9 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_psnx1"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kbxx1"]
+radius = 0.001
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD")]
 collision_layer = 2
 collision_mask = 29
@@ -484,8 +487,16 @@ default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
+[node name="OpacityTimer" type="Timer" parent="."]
+wait_time = 0.1
 
-[connection signal="timeout" from="Timer" to="PlayerStateMachine/SlashingPlayerState" method="_on_timer_timeout"]
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_kbxx1")
+
+[connection signal="timeout" from="OpacityTimer" to="PlayerStateMachine/SlashingPlayerState" method="_on_opacity_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="PlayerStateMachine/SlashingPlayerState" method="_on_area_3d_body_entered"]

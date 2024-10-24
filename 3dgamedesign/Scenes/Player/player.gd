@@ -17,6 +17,7 @@ var sword_rotation: Vector2
 var target = null
 var lock_camera = false
 var sword_position
+var sword_position_3D
 
 var gravity = 12.0
 
@@ -116,27 +117,7 @@ func update_sword(movement):
 	SWORD.rotate_object_local(Vector3(1,0,0), -sword_rotation.y)
 	
 	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
-	
-	# get the current space (3D world)
-	#var space_state = get_world_3d().direct_space_state
-	#
-	## find the mouse position
-	#var mouse_position = get_viewport().get_mouse_position()
-	#
-	#var ray_length = 2000
-	## cast a ray out of the camera to the mouse
-	#var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
-	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
-	#
-	## create the ray from the ray origin and ray end
-	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	## find the intersection of the 3 dimensional world of the ray and mouse
-	#var intersection = space_state.intersect_ray(query)
-	#
-	#if not intersection.is_empty():
-		#var pos = intersection.position
-		## make the sword look at the intersection point
-		#SWORD.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
+	sword_position_3D = $Sword/PlaceholderMesh/SwordTip.global_position
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:
