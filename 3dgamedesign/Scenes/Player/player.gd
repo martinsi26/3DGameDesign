@@ -20,6 +20,8 @@ var target = null
 var lock_camera = false
 var sword_position
 var sword_position_3D
+var blocking: bool = false
+var sword_position: Vector2
 
 var gravity = 12.0
 
@@ -30,8 +32,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		# after checking the mouse motion event we capture the mouse and update the camer to look
 		var mouse_event = event.relative * MOUSE_SENSITIVITY
-		if lock_camera:
+		if !blocking && lock_camera:
 			update_sword(mouse_event)
+		elif blocking && lock_camera:
+			update_sword_blocking(event.relative)
 		else:
 			camera_look(mouse_event)
 
@@ -102,6 +106,7 @@ func find_target():
 func default_sword():
 	SWORD.position = original_sword_position
 	SWORD.rotation = original_sword_rotation
+	sword_rotation = Vector2.ZERO
 
 # update the sword to point at the mouse position
 func update_sword(movement):
@@ -122,6 +127,15 @@ func update_sword(movement):
 	
 	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
 	sword_position_3D = $Sword/PlaceholderMesh/SwordTip.global_position
+	
+# update the sword to rotate along one plane
+func update_sword_blocking(movement):
+	var angle = remap(SWORD.rotation.x, -0.4, 1.2, PI, 1.5 * PI)
+	var normal = Vector2.RIGHT.rotated(angle)
+	
+	SWORD.rotation.x += normal.cross(movement) * MOUSE_SENSITIVITY
+	SWORD.rotation.x = clampf(SWORD.rotation.x, -0.4, 1.2)
+	
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:
