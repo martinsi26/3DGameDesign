@@ -15,18 +15,26 @@ var camera_rotation: Vector2
 var sword_rotation: Vector2
 
 var target = null
-var lock_camera = false
-var sword_position
+var lock_camera: bool = false
+var blocking: bool = false
+var sword_position: Vector2
 
 var gravity = 12.0
+
+var bottom_right: Vector2 = DisplayServer.window_get_size()
+
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		# after checking the mouse motino event we capture the mouse and update the camer to look
 		var mouse_event = event.relative * MOUSE_SENSITIVITY
-		if lock_camera:
+		if !blocking && lock_camera:
 			update_sword(mouse_event)
+		elif blocking && lock_camera:
+			#print(bottom_right, " ", event.position)
+			print(event.position.angle_to_point(bottom_right))
+			update_sword_blocking(event.relative)
 		else:
 			camera_look(mouse_event)
 
@@ -116,26 +124,14 @@ func update_sword(movement):
 	
 	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
 	
-	# get the current space (3D world)
-	#var space_state = get_world_3d().direct_space_state
-	#
-	## find the mouse position
-	#var mouse_position = get_viewport().get_mouse_position()
-	#
-	#var ray_length = 2000
-	## cast a ray out of the camera to the mouse
-	#var ray_origin = $CameraController/Camera.project_ray_origin(mouse_position)
-	#var ray_end = ray_origin + $CameraController/Camera.project_ray_normal(mouse_position) * ray_length
-	#
-	## create the ray from the ray origin and ray end
-	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	## find the intersection of the 3 dimensional world of the ray and mouse
-	#var intersection = space_state.intersect_ray(query)
-	#
-	#if not intersection.is_empty():
-		#var pos = intersection.position
-		## make the sword look at the intersection point
-		#SWORD.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
+func update_sword_blocking(movement):
+	#sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
+	#var new_angle = (sword_position + movement).angle_to_point(bottom_right)
+	#SWORD.rotation.x = remap(-new_angle, 0, PI / 2, -0.4, 1.2)
+	
+	SWORD.rotation.x += movement.x * MOUSE_SENSITIVITY
+	SWORD.rotation.x = clampf(SWORD.rotation.x, -0.4, 1.2)
+	
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:
