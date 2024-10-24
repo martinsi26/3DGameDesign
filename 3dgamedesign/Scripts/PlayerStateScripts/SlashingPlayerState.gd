@@ -8,12 +8,10 @@ var end_position: Vector3
 
 var scale_factor = 0.01  # 1 meter = 100 pixels
 
-var made_collision = false
+signal sword_swing(start)
 
 func enter(_previous_state) -> void:
-	made_collision = false
 	start_position = PLAYER.sword_position_3D
-	print("first position ", start_position)
 	draw_point(PLAYER.sword_position)
 	LINE.modulate.a = 1  # Set to fully opaque only if it's already at 0
 
@@ -25,10 +23,10 @@ func update(delta):
 	
 	if Input.is_action_just_released("slash"):
 		if !timer_start:
-			$"../../Area3D".monitoring = true
+			$"../../SwordHitbox".monitoring = true
 			end_position = PLAYER.sword_position_3D
-			print("second position ", end_position)
 			draw_point(PLAYER.sword_position)
+			emit_signal("sword_swing", true)
 			$"../../OpacityTimer".start()
 			timer_start = true
 			
@@ -46,17 +44,14 @@ func update(delta):
 			basis.x = right
 			basis.z = basis.y.cross(basis.x).normalized()
 			
-			var collision_shape = $"../../Area3D/CollisionShape3D"
+			var collision_shape = $"../../SwordHitbox/CollisionShape3D"
 			collision_shape.global_transform.origin = center
 			collision_shape.shape.height = length
 			
 			collision_shape.global_transform.basis = basis
-			
-			# Debugging: Print the basis to check orientation
-			print("Basis X: ", basis.x, " Y: ", basis.y, " Z: ", basis.z)
 
 func exit():
-	$"../../Area3D".monitoring = false
+	$"../../SwordHitbox".monitoring = false
 	$"../../OpacityTimer".stop()
 	LINE.clear_points()
 	
@@ -70,12 +65,5 @@ func _on_opacity_timer_timeout() -> void:
 		LINE.modulate.a = 0  # Clamp to prevent negative alpha
 		$"../../OpacityTimer".stop()  # Stop the timer if opacity is zero
 		timer_start = false
+		emit_signal("sword_swing", false)
 		transition.emit("LockingPlayerState", true)
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("Enemy") and !made_collision:
-		print("collision")
-		$"../../Area3D".monitoring = false
-		made_collision = true
-		
-		

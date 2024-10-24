@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bnhluublf188o"]
+
+[node name="Indicator" type="Control"]
+visible = false
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = 61.0
+offset_right = -81.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Location" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+size_flags_horizontal = 0
+
+[node name="Attack_Indicator" type="Node2D" parent="Location"]
+
+[node name="Line2D" type="Line2D" parent="Location/Attack_Indicator"]
+points = PackedVector2Array(-50, 0, 0, -31, 50, 0)
+default_color = Color(0.894118, 0, 0, 1)

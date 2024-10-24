@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=14 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
 [ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
@@ -13,6 +13,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
 size = Vector3(0.3, 0.5, 0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ms6rx"]
+height = 2.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
 radius = 2.0
@@ -30,7 +33,7 @@ transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
 shape = SubResource("CapsuleShape3D_jeeme")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.18134, 0)
+transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.03319, 0)
 mesh = ExtResource("2_0nj7c")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -58,22 +61,40 @@ script = ExtResource("6_b4c5l")
 [node name="IdleEnemyState" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("8_2t2xe")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="DamageHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
+shape = SubResource("CapsuleShape3D_ms6rx")
+
+[node name="WalkingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkingHitbox"]
 shape = SubResource("SphereShape3D_sk6bu")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="PlayerBlockingHitbox" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 16
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBlockingHitbox"]
 shape = SubResource("SphereShape3D_re50c")
 
-[connection signal="body_entered" from="Area3D" to="EnemyStateMachine/AttackEnemyState" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Area3D" to="EnemyStateMachine/WalkingEnemyState" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="EnemyStateMachine/AttackEnemyState" method="_on_area_3d_body_exited"]
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="IndicatorTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]
+[connection signal="body_entered" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_entered"]
+[connection signal="body_exited" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="IndicatorTimer" to="EnemyStateMachine/AttackEnemyState" method="_on_indicator_timer_timeout"]

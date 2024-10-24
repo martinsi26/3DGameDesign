@@ -1,9 +1,11 @@
 class_name Player extends CharacterBody3D
 
+@export var PLAYER_HEALTH: float = 100
 @export var MOUSE_SENSITIVITY: float = 0.002
 @export var CAMERA_CONTROLLER: Camera3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 @export var SWORD: Node3D
+@export var SWORD_HITBOX: Area3D
 
 var original_sword_position
 var original_sword_rotation
@@ -20,6 +22,8 @@ var sword_position
 var sword_position_3D
 
 var gravity = 12.0
+
+var sword_swing = false
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -143,3 +147,9 @@ func update_input(speed: float, acceleration: float, deceleration: float) -> voi
 # call the move_and_slide function so the velocity is used and the player moves
 func update_velocity() -> void:
 	move_and_slide()
+
+func _on_slashing_player_state_sword_swing(start) -> void:
+	if start:
+		sword_swing = true
+	else:
+		sword_swing = false

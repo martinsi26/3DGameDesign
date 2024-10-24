@@ -22,10 +22,16 @@ func update(delta: float) -> void:
 	var movement_target = PLAYER.global_position
 	ENEMY.set_movement_target(movement_target)
 	ENEMY.check_movement(movement_target, SPEED)
+	
+	if !ENEMY.on_cooldown and ENEMY.in_range:
+		transition.emit("AttackEnemyState")
+	
+	if ENEMY.on_cooldown and ENEMY.in_range:
+		SPEED = 0
+	
+	if ENEMY.on_cooldown and !ENEMY.in_range:
+		SPEED = 3
 
 func set_animation_speed(speed: float) -> void:
 	var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)
 	#ANIMATION.speed_scale = lerp(0.0, TOP_ANIM_SPEED, alpha)
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	transition.emit("AttackEnemyState")
