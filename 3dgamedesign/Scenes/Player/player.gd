@@ -21,8 +21,6 @@ var sword_position: Vector2
 
 var gravity = 12.0
 
-var bottom_right: Vector2 = DisplayServer.window_get_size()
-
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -32,8 +30,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if !blocking && lock_camera:
 			update_sword(mouse_event)
 		elif blocking && lock_camera:
-			#print(bottom_right, " ", event.position)
-			print(event.position.angle_to_point(bottom_right))
 			update_sword_blocking(event.relative)
 		else:
 			camera_look(mouse_event)
@@ -104,6 +100,7 @@ func find_target():
 func default_sword():
 	SWORD.position = original_sword_position
 	SWORD.rotation = original_sword_rotation
+	sword_rotation = Vector2.ZERO
 
 # update the sword to point at the mouse position
 func update_sword(movement):
@@ -124,12 +121,12 @@ func update_sword(movement):
 	
 	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
 	
+# update the sword to rotate along one plane
 func update_sword_blocking(movement):
-	#sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
-	#var new_angle = (sword_position + movement).angle_to_point(bottom_right)
-	#SWORD.rotation.x = remap(-new_angle, 0, PI / 2, -0.4, 1.2)
+	var angle = remap(SWORD.rotation.x, -0.4, 1.2, PI, 1.5 * PI)
+	var normal = Vector2.RIGHT.rotated(angle)
 	
-	SWORD.rotation.x += movement.x * MOUSE_SENSITIVITY
+	SWORD.rotation.x += normal.cross(movement) * MOUSE_SENSITIVITY
 	SWORD.rotation.x = clampf(SWORD.rotation.x, -0.4, 1.2)
 	
 	
