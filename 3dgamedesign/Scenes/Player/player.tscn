@@ -472,4 +472,3 @@ script = ExtResource("14_rwima")
 [node name="HealthRegen" type="Timer" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("18_ysnl4")]
-anchors_preset = 15
