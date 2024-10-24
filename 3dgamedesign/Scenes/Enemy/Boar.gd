@@ -1,7 +1,6 @@
 class_name Boar extends Enemy
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var state_machine = $AnimationTree["parameters/playback"]
 
 # move the enemy to point towards the player
 func enemy_follow_player(player) -> void:

@@ -1,11 +1,14 @@
 class_name IdleBoarState extends EnemyState
 
+@onready var state = $"../../AnimationTree"["parameters/playback"]
 
 @export var SPEED: float = 0
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
 
 func update(delta):
+	state.set("idle", true)
+	
 	#ENEMY.enemy_follow_player(PLAYER)
 	#ENEMY.update_gravity(delta)
 	#ENEMY.update_velocity()

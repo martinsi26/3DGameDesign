@@ -1,5 +1,7 @@
 class_name AttackBoarState extends EnemyState
 
+@onready var state = $"../../AnimationTree"["parameters/playback"]
+
 @export var SPEED: float = 0.0  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
@@ -21,6 +23,7 @@ func update(delta: float) -> void:
 	
 	if attack_finished and player_outside_range:
 		transition.emit("IdleBoarState")
+		state.set("idle", true)
 	elif attack_finished and !player_outside_range:
 		attack_finished = false
 		attack()

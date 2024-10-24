@@ -1,5 +1,7 @@
 class_name ChargeBoarState extends EnemyState
 
+@onready var state = $"../../AnimationTree"["parameters/playback"]
+
 @export var SPEED: float = 3.0  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
@@ -28,4 +30,5 @@ func set_animation_speed(speed: float) -> void:
 	#ANIMATION.speed_scale = lerp(0.0, TOP_ANIM_SPEED, alpha)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
+	state.set("attack", true)
 	transition.emit("AttackBoarState")
