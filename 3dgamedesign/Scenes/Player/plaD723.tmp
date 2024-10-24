@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=32 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_jjpn6"]
 [ext_resource type="ArrayMesh" uid="uid://b3esrm1b3jkmt" path="res://Assets/Designs/sword1.obj" id="3_b6bdi"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="3_edvmt"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/IdlePlayerState.gd" id="3_knrom"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdlePlayerState.gd" id="3_knrom"]
+[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/WalkingPlayerState.gd" id="4_nqmv3"]
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SprintingPlayerState.gd" id="7_4diil"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/LockingPlayerState.gd" id="18_avaio"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/SlashingPlayerState.gd" id="19_8y11q"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/BlockingPlayerState.gd" id="20_5htgw"]
+[ext_resource type="Shader" path="res://Assets/shaders/glow.gdshader" id="20_82j7f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -343,10 +344,18 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_psnx1"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r67oo"]
+shader = ExtResource("20_82j7f")
+shader_parameter/glow_color = Color(1, 0.5, 0, 1)
+shader_parameter/glow_power = 2.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 1.0
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD")]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_2f8j2")
+MOUSE_SENSITIVITY = null
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 SWORD = NodePath("Sword")
@@ -360,7 +369,7 @@ transform = Transform3D(-0.85, 1.28346e-07, 5.6102e-15, 0, -3.71547e-08, 0.85, 1
 mesh = ExtResource("2_1d5fi")
 
 [node name="Sword" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.908, -0.048)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.349659, 0.907631, -0.475902)
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="Sword"]
 transform = Transform3D(0.014222, -0.187939, 0.0669093, -0.19563, -8.55124e-09, 0.0415823, -0.0390746, -0.0684041, -0.183832, 0.939412, -0.0775723, -1.3779)
@@ -386,7 +395,7 @@ update_mode = 1
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"jump_start", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
+blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -479,8 +488,8 @@ LINE = NodePath("../../Line2D")
 script = ExtResource("20_5htgw")
 
 [node name="Line2D" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
+material = SubResource("ShaderMaterial_r67oo")
+width = 8.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
