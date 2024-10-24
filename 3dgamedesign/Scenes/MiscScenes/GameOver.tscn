@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/MiscScripts/GameOver.gd" id="1_d7p1k"]
 [ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_rkeq7"]
 
-[node name="Control" type="Control"]
+[node name="GameOverMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

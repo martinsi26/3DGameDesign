@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=29 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/AttackPlayerState.gd" id="12_3yr3p"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/FallingPlayerState.gd" id="13_1c8fe"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/IdleCombatPlayerState.gd" id="14_rwima"]
+[ext_resource type="PackedScene" uid="uid://bi87hjmlvk7t2" path="res://Scenes/MiscScenes/PauseMenu.tscn" id="18_ysnl4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -373,7 +374,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.302499)
 fov = 83.1111
 
 [node name="ColorRect" type="ColorRect" parent="CameraController/Camera"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -469,3 +470,6 @@ script = ExtResource("13_1c8fe")
 script = ExtResource("14_rwima")
 
 [node name="HealthRegen" type="Timer" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("18_ysnl4")]
+anchors_preset = 15

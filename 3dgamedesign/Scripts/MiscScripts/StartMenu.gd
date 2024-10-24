@@ -20,4 +20,10 @@ func _on_quit_pressed() -> void:
 
 
 func _on_how_to_play_pressed() -> void:
-	pass # Replace with function body.
+	$MarginContainer.visible = false
+	$HowToPlay.visible = true
+
+
+func _on_how_to_play_exit_options_menu() -> void:
+	$MarginContainer.visible = true
+	$HowToPlay.visible = false

@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_85qdh"]
 [ext_resource type="Texture2D" uid="uid://de2vc4hpvm4oo" path="res://Assets/MiscImgs/WinnerScreenImg.jpg" id="2_vsi7i"]
 
-[node name="Control" type="Control"]
+[node name="WinnerMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

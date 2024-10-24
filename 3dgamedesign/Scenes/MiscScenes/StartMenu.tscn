@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0ijeqb5wejx0"]
+[gd_scene load_steps=5 format=3 uid="uid://b0ijeqb5wejx0"]
 
 [ext_resource type="Script" path="res://Scripts/MiscScripts/StartMenu.gd" id="1_ad86c"]
 [ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_a0l3t"]
 [ext_resource type="Texture2D" uid="uid://fjumt2f4phy5" path="res://Assets/MiscImgs/StartScreenImg.jpg" id="2_vhvc1"]
+[ext_resource type="PackedScene" uid="uid://csg6arca4ugmf" path="res://Scenes/MiscScenes/HowToPlay.tscn" id="4_qnk3t"]
 
-[node name="Control" type="Control"]
+[node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +19,6 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = 40.0
 texture = ExtResource("2_vhvc1")
 expand_mode = 5
 
@@ -32,7 +32,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_bottom = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -65,6 +65,7 @@ theme_override_font_sizes/font_size = 40
 text = "Play"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 50
@@ -89,6 +90,11 @@ theme_override_fonts/font = ExtResource("2_a0l3t")
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
+[node name="HowToPlay" parent="." instance=ExtResource("4_qnk3t")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Quit" to="." method="_on_quit_pressed"]
+[connection signal="exit_options_menu" from="HowToPlay" to="." method="_on_how_to_play_exit_options_menu"]
