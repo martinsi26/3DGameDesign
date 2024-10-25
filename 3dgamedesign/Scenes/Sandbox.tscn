@@ -6,23 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://ikej17mmjbem" path="res://Enviroment/col0sseum_edit.tscn" id="4_6l2dy"]
 
 [sub_resource type="GDScript" id="GDScript_1uooq"]
-script/source = "extends Node3D
-
-@onready var player = $Player
-@onready var enemies = get_tree().get_nodes_in_group(\"Enemy\")
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
-	for enemy in enemies:
-		enemy.set_movement_target(player.global_transform.origin)
-"
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
@@ -42,3 +25,6 @@ CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 SWORD = NodePath("Sword")
 SWORD_HITBOX = NodePath("SwordHitbox")
+
+[node name="Enemy2" parent="." instance=ExtResource("2_sdkh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.27595, 43.4432, 0)

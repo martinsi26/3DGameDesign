@@ -31,6 +31,9 @@ func update(delta: float) -> void:
 	
 	if ENEMY.on_cooldown and !ENEMY.in_range:
 		SPEED = 3
+		
+	if ENEMY.is_dead:
+		transition.emit("IdleEnemyState")
 
 func set_animation_speed(speed: float) -> void:
 	var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)

@@ -2,6 +2,7 @@ class_name Enemy extends CharacterBody3D
 
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var hitbox: Area3D = get_node("DamageHitbox")
+
 var PLAYER
 var check_collision
 var manual_check
@@ -10,7 +11,10 @@ var in_range = false
 var on_cooldown = false
 
 var gravity: float = 12.0
-var health: float = 100
+
+var max_health: float = 100
+var current_health: float = 100
+var is_dead = false
 
 func _ready() -> void:
 	Global.enemy = self
@@ -55,6 +59,31 @@ func _process(delta: float) -> void:
 			manual_check = false
 		elif PLAYER.sword_swing and !manual_check:
 			check_collision = true
+			
+func receive_damage(amount):
+	current_health = max(0, float(current_health - amount)) 
+	print("current health enemy:", current_health)
+	
+	if current_health == 0:
+		death()
+		
+func death():
+	is_dead = true
+	remove_from_group("Enemy")
+	var new_target = PLAYER.find_target()
+	if(new_target != null):
+		PLAYER.target = new_target
+	else:
+		PLAYER.lock_camera = false
+		PLAYER.default_sword()
+		
+	# play death animation
+	# timer is to allow the death animation to finish before queue_free()
+	# this is a placeholder and once animation is set queue_free() will
+	# move to the "finished_animation()" function that is called once
+	# the animation is finished
+	await get_tree().create_timer(2).timeout
+	queue_free()
 
 func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 	print(PLAYER.sword_swing)
@@ -62,6 +91,7 @@ func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 	print(check_collision)
 	if area == PLAYER.SWORD_HITBOX and check_collision:
 		print("hit enemy")
+		receive_damage(25)
 		check_collision = false
 		manual_check = true
 

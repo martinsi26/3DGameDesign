@@ -13,8 +13,8 @@ func update(delta):
 	#ENEMY.set_movement_target(movement_target)
 	#ENEMY.check_movement(movement_target)
 	
-	if PLAYER != null and !ENEMY.in_range:
+	if PLAYER != null and !ENEMY.in_range and !ENEMY.is_dead:
 		transition.emit("WalkingEnemyState")		
 	
-	if ENEMY.in_range and !ENEMY.on_cooldown:
+	if ENEMY.in_range and !ENEMY.on_cooldown and !ENEMY.is_dead:
 		transition.emit("AttackEnemyState")

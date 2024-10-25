@@ -11,7 +11,7 @@
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="PackedScene" uid="uid://cvchjlwhtuf2q" path="res://Scenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="PackedScene" uid="uid://ipwxf1dgh1sj" path="res://Scenes/Indicator.tscn" id="8_6o307"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
@@ -501,10 +501,6 @@ default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="SwordHitbox" type="Area3D" parent="."]
 collision_layer = 32
 collision_mask = 4
@@ -521,5 +517,4 @@ wait_time = 0.1
 [node name="HealthRegen" type="Timer" parent="."]
 
 [connection signal="sword_swing" from="PlayerStateMachine/SlashingPlayerState" to="." method="_on_slashing_player_state_sword_swing"]
-[connection signal="timeout" from="Timer" to="PlayerStateMachine/SlashingPlayerState" method="_on_timer_timeout"]
 [connection signal="timeout" from="OpacityTimer" to="PlayerStateMachine/SlashingPlayerState" method="_on_opacity_timer_timeout"]

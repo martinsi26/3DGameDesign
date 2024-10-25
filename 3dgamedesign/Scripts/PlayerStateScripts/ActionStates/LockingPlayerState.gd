@@ -6,7 +6,7 @@ func update(delta):
 		PLAYER.default_sword()
 		transition.emit("IdleCombatPlayerState", true)
 	
-	if Input.is_action_pressed("slash"):
+	if Input.is_action_pressed("slash") and !PLAYER.sword_swing:
 		transition.emit("SlashingPlayerState", true)
 		
 	if Input.is_action_pressed("block"):

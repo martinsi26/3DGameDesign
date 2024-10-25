@@ -23,6 +23,9 @@ func update(delta: float) -> void:
 		
 	if ENEMY.on_cooldown and !ENEMY.in_range:
 		transition.emit("WalkingEnemyState")
+		
+	if ENEMY.is_dead:
+		transition.emit("IdleEnemyState")
 	
 # this is the function to play the attack animation and figure out which attack is being used
 func attack():
