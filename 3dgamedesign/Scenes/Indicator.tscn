@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ipwxf1dgh1sj"]
+[gd_scene format=3 uid="uid://c6wvueo5ktnxy"]
 
 [node name="Indicator" type="Control"]
 visible = false
