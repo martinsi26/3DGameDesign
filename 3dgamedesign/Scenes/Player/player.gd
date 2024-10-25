@@ -21,6 +21,12 @@ var sword_position: Vector2
 
 var gravity = 12.0
 
+var max_health = 100
+var current_health = 100
+
+var regen_delay_timer = 3.0
+var regen_rate = 10.0
+var is_regenerating = false
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -50,9 +56,12 @@ func camera_look(movement: Vector2):
 # This function handles other mouse imputs
 func _input(event):
 	# we want to exit the game when player has pressed escape for debugging purposes
-	if Input.is_action_just_pressed("exit"): get_tree().quit()
+	if Input.is_action_just_pressed("exit"): pause_toggle()
+
+	if Input.is_action_just_pressed("take_dmg"): receive_damage(10) #NOTE: used to test whether damage works
 	
 func _ready():
+	$PauseMenu.hide()
 	# save the original sword position and rotation for later use
 	original_sword_position = SWORD.position
 	original_sword_rotation = SWORD.rotation
@@ -60,6 +69,8 @@ func _ready():
 	Global.player = self
 	# capture the mouse
 	capture_mouse()
+	
+	set_process(true)
 
 func _process(delta: float) -> void:
 	if lock_camera:
@@ -67,6 +78,14 @@ func _process(delta: float) -> void:
 	
 	# this shows the players velocity in the debug panel
 	Global.debug.add_property("Velocity","%.2f" % velocity.length(), 2)
+	
+	if regen_delay_timer > 0:
+		regen_delay_timer -= delta
+	else:
+		is_regenerating = true
+
+	if is_regenerating:
+		regen_health(delta)
 
 # captures the mouse so it's not on screen
 func capture_mouse() -> void:
@@ -155,3 +174,43 @@ func update_input(speed: float, acceleration: float, deceleration: float) -> voi
 # call the move_and_slide function so the velocity is used and the player moves
 func update_velocity() -> void:
 	move_and_slide()
+
+func update_dmg_hud():
+	var health_pct = float(current_health) / float(max_health)
+	var hud_alpha = 1 - health_pct
+	#print(current_health)
+	$CameraController/Camera/ColorRect.color.a = hud_alpha
+	#print($CameraController/Camera/ColorRect.color.a)
+
+func receive_damage(amount):
+	current_health = max(0, float(current_health - amount)) 
+	print("current health:", current_health)
+	update_dmg_hud()
+	
+	regen_delay_timer = 3.0
+	is_regenerating = false
+	
+	if current_health == 0:
+		game_over()
+
+func regen_health(delta):
+	if regen_delay_timer <= 0 and current_health < max_health:
+		current_health = min(current_health + regen_rate * delta, max_health)
+		print("regen health: ", current_health)
+		update_dmg_hud()
+
+func game_over(): 
+	release_mouse()
+	get_tree().change_scene_to_file("res://Scenes/MiscScenes/GameOver.tscn")
+	
+
+func pause_toggle():
+	if get_tree().paused:
+		get_tree().paused = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		$PauseMenu.hide()
+	else:
+		get_tree().paused = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		print("Game Paused:", get_tree().paused)
+		$PauseMenu.show()
