@@ -22,6 +22,9 @@ var sword_position_3D
 var blocking: bool = false
 var sword_position: Vector2
 
+const min_block_angle: float = PI + 0.5
+const max_block_angle: float = 2 * PI - 0.5
+
 var gravity = 12.0
 
 var sword_swing = false
@@ -32,6 +35,7 @@ var current_health = 100
 var regen_delay_timer = 10.0
 var regen_rate = 10.0
 var is_regenerating = false
+
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -125,6 +129,8 @@ func find_target():
 func default_sword():
 	SWORD.position = original_sword_position
 	SWORD.rotation = original_sword_rotation
+	SWORD.get_node("PlaceholderMesh").position = Vector3(0.93, -0.07, -1.37)
+	SWORD.get_node("PlaceholderMesh").rotation = Vector3(-0.21, 2.8, -1.57)
 	sword_rotation = Vector2.ZERO
 
 # update the sword to point at the mouse position
@@ -149,12 +155,24 @@ func update_sword(movement):
 	
 # update the sword to rotate along one plane
 func update_sword_blocking(movement):
-	var angle = remap(SWORD.rotation.x, -0.4, 1.2, PI, 1.5 * PI)
-	var normal = Vector2.RIGHT.rotated(angle)
+	var normal = Vector2.RIGHT.rotated(-SWORD.rotation.x)
 	
 	SWORD.rotation.x += normal.cross(movement) * MOUSE_SENSITIVITY
-	SWORD.rotation.x = clampf(SWORD.rotation.x, -0.4, 1.2)
+	SWORD.rotation.x = clampf(SWORD.rotation.x, min_block_angle, max_block_angle)
+
+# returns 0, 1 or 2 based on which third of the screen the sword is angled at
+func get_block_rotation() -> int:
+	var sword_angle = -SWORD.rotation.x + 3 * PI # angle is inverted
 	
+	var first_third  = lerp(min_block_angle, max_block_angle, 1.0/3.0)
+	var second_third = lerp(min_block_angle, max_block_angle, 2.0/3.0)
+
+	if (sword_angle >= min_block_angle and sword_angle < first_third):
+		return 0
+	elif (sword_angle >= first_third and sword_angle <= second_third):
+		return 1
+	else:
+		return 2
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:

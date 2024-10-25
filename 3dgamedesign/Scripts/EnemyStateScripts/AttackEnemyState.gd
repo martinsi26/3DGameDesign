@@ -55,7 +55,9 @@ func attack():
 func _on_indicator_timer_timeout() -> void:
 	PLAYER.get_node("Indicator").visible = false
 	
-	var block_location = 3
+	var block_location: int = PLAYER.get_block_rotation()
+	print(block_location, " ", attack_direction)
+	
 	if block_location != attack_direction:
 		PLAYER.receive_damage(25)
 	else:

@@ -11,7 +11,7 @@
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="PackedScene" uid="uid://ipwxf1dgh1sj" path="res://Scenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="PackedScene" uid="uid://c6wvueo5ktnxy" path="res://Scenes/Indicator.tscn" id="8_6o307"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
@@ -349,6 +349,7 @@ _data = {
 radius = 0.001
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD", "SWORD_HITBOX")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00387335, 0, 0.000237226)
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_2f8j2")
@@ -366,10 +367,10 @@ transform = Transform3D(-0.85, 1.28346e-07, 5.6102e-15, 0, -3.71547e-08, 0.85, 1
 mesh = ExtResource("2_1d5fi")
 
 [node name="Sword" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.349659, 0.907631, -0.475902)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.9, -0.48)
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="Sword"]
-transform = Transform3D(0.014222, -0.187939, 0.0669093, -0.19563, -8.55124e-09, 0.0415823, -0.0390746, -0.0684041, -0.183832, 0.939412, -0.0775723, -1.3779)
+transform = Transform3D(0.0142221, -0.187939, 0.0669092, -0.19563, -8.55125e-09, 0.0415823, -0.0390748, -0.0684041, -0.183832, 0.93, -0.07, -1.37)
 mesh = ExtResource("3_b6bdi")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_chicu")
@@ -400,7 +401,7 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
