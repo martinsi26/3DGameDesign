@@ -14,8 +14,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
 size = Vector3(0.3, 0.5, 0.5)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ms6rx"]
-height = 2.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
+size = Vector3(1, 2.44153, 7.51114)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
 radius = 2.0
@@ -67,7 +67,8 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
-shape = SubResource("CapsuleShape3D_ms6rx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -1.05678)
+shape = SubResource("BoxShape3D_3d1rm")
 
 [node name="WalkingHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

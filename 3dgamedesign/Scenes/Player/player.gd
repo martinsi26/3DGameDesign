@@ -18,7 +18,6 @@ var sword_rotation: Vector2
 
 var target = null
 var lock_camera = false
-var sword_position
 var sword_position_3D
 var blocking: bool = false
 var sword_position: Vector2

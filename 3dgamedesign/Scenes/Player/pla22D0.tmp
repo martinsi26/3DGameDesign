@@ -347,15 +347,12 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7i4mj"]
 radius = 0.001
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD", "SWORD_HITBOX")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD_HITBOX")]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_2f8j2")
-PLAYER_HEALTH = null
-MOUSE_SENSITIVITY = null
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
-SWORD = NodePath("Sword")
 SWORD_HITBOX = NodePath("SwordHitbox")
 
 [node name="Body" type="CollisionShape3D" parent="."]
@@ -501,7 +498,6 @@ one_shot = true
 [node name="SwordHitbox" type="Area3D" parent="."]
 collision_layer = 32
 collision_mask = 4
-monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SwordHitbox"]
 shape = SubResource("CapsuleShape3D_7i4mj")
