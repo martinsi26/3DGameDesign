@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://0c161lukyhrg"
-path="res://.godot/imported/Minotaur_Male_Lores.glb-b07df522d0edda3a89ee78336ffd62dc.scn"
+uid="uid://dl1ds2vq6jqnx"
+path="res://.godot/imported/MinotaurFinalFinal.glb-9184b005c3f5e7c69e5129bffe4be00e.scn"
 
 [deps]
 
-source_file="res://Assets/BlenderObjs/Minotaur_Male_Lores.glb"
-dest_files=["res://.godot/imported/Minotaur_Male_Lores.glb-b07df522d0edda3a89ee78336ffd62dc.scn"]
+source_file="res://Assets/BlenderObjs/MinotaurFinalFinal.glb"
+dest_files=["res://.godot/imported/MinotaurFinalFinal.glb-9184b005c3f5e7c69e5129bffe4be00e.scn"]
 
 [params]
 

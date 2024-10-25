@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
-[ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
+[ext_resource type="ArrayMesh" uid="uid://hsoag6hgetlq" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
 [ext_resource type="Theme" uid="uid://mnu83cyhpnin" path="res://Assets/UI/Themes/debug.tres" id="2_iit15"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_jjpn6"]
 [ext_resource type="ArrayMesh" uid="uid://b3esrm1b3jkmt" path="res://Assets/Designs/sword1.obj" id="3_b6bdi"]
@@ -11,7 +11,7 @@
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="PackedScene" uid="uid://ipwxf1dgh1sj" path="res://Scenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="PackedScene" path="res://Scenes/Indicator.tscn" id="8_6o307"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
@@ -400,7 +400,7 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
