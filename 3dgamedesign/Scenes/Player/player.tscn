@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/SlashingPlayerState.gd" id="19_8y11q"]
 [ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/BlockingPlayerState.gd" id="20_5htgw"]
+[ext_resource type="PackedScene" uid="uid://bi87hjmlvk7t2" path="res://Scenes/MiscScenes/PauseMenu.tscn" id="20_toig0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -389,6 +390,14 @@ fov = 83.1111
 [node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera"]
 update_mode = 1
 
+[node name="ColorRect" type="ColorRect" parent="CameraController/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
@@ -508,6 +517,10 @@ shape = SubResource("CapsuleShape3D_7i4mj")
 
 [node name="OpacityTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="PauseMenu" parent="." instance=ExtResource("20_toig0")]
+
+[node name="HealthRegen" type="Timer" parent="."]
 
 [connection signal="sword_swing" from="PlayerStateMachine/SlashingPlayerState" to="." method="_on_slashing_player_state_sword_swing"]
 [connection signal="timeout" from="Timer" to="PlayerStateMachine/SlashingPlayerState" method="_on_timer_timeout"]
