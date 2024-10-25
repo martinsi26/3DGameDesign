@@ -29,7 +29,7 @@ var sword_swing = false
 var max_health = 100
 var current_health = 100
 
-var regen_delay_timer = 3.0
+var regen_delay_timer = 10.0
 var regen_rate = 10.0
 var is_regenerating = false
 
@@ -190,6 +190,8 @@ func _on_slashing_player_state_sword_swing(start) -> void:
 func update_dmg_hud():
 	var health_pct = float(current_health) / float(max_health)
 	var hud_alpha = 1 - health_pct
+	hud_alpha = hud_alpha - 0.15
+	print(hud_alpha)
 	#print(current_health)
 	$CameraController/Camera/ColorRect.color.a = hud_alpha
 	#print($CameraController/Camera/ColorRect.color.a)
@@ -199,7 +201,7 @@ func receive_damage(amount):
 	print("current health:", current_health)
 	update_dmg_hud()
 	
-	regen_delay_timer = 3.0
+	regen_delay_timer = 10.0
 	is_regenerating = false
 	
 	if current_health == 0:

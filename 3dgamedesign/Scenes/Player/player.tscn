@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=33 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -352,8 +352,6 @@ radius = 0.001
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_2f8j2")
-PLAYER_HEALTH = null
-MOUSE_SENSITIVITY = null
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 SWORD = NodePath("Sword")
@@ -396,7 +394,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0, 0)
+color = Color(0.890196, 0.301961, 0.27451, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

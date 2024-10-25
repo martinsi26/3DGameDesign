@@ -49,11 +49,10 @@ func update(delta):
 			collision_shape.shape.height = length
 			
 			collision_shape.global_transform.basis = basis
+			transition.emit("LockingPlayerState", true)
 
 func exit():
-	$"../../SwordHitbox".monitoring = false
-	$"../../OpacityTimer".stop()
-	LINE.clear_points()
+	pass
 	
 func draw_point(position):
 	LINE.add_point(position)
@@ -66,4 +65,6 @@ func _on_opacity_timer_timeout() -> void:
 		$"../../OpacityTimer".stop()  # Stop the timer if opacity is zero
 		timer_start = false
 		emit_signal("sword_swing", false)
-		transition.emit("LockingPlayerState", true)
+		LINE.clear_points()
+		$"../../SwordHitbox".monitoring = false
+		$"../../OpacityTimer".stop()
