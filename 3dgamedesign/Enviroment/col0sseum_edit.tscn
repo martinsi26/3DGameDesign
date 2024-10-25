@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://c8u5feqt6aalu" path="res://Assets/ColAssets/innerwall.tres" id="4_aio6d"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cith0"]
+height = 1.44872
 radius = 10.7024
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eltrg"]

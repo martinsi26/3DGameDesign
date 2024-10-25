@@ -1,9 +1,11 @@
 class_name Player extends CharacterBody3D
 
+@export var PLAYER_HEALTH: float = 100
 @export var MOUSE_SENSITIVITY: float = 0.002
 @export var CAMERA_CONTROLLER: Camera3D
 @export var ANIMATION_PLAYER : AnimationPlayer
 @export var SWORD: Node3D
+@export var SWORD_HITBOX: Area3D
 
 var original_sword_position
 var original_sword_rotation
@@ -15,11 +17,14 @@ var camera_rotation: Vector2
 var sword_rotation: Vector2
 
 var target = null
-var lock_camera: bool = false
+var lock_camera = false
+var sword_position_3D
 var blocking: bool = false
 var sword_position: Vector2
 
 var gravity = 12.0
+
+var sword_swing = false
 
 var max_health = 100
 var current_health = 100
@@ -140,6 +145,7 @@ func update_sword(movement):
 	SWORD.rotate_object_local(Vector3(1,0,0), -sword_rotation.y)
 	
 	sword_position = $CameraController/Camera.unproject_position($Sword/PlaceholderMesh/SwordTip.global_position)
+	sword_position_3D = $Sword/PlaceholderMesh/SwordTip.global_position
 	
 # update the sword to rotate along one plane
 func update_sword_blocking(movement):
@@ -174,6 +180,12 @@ func update_input(speed: float, acceleration: float, deceleration: float) -> voi
 # call the move_and_slide function so the velocity is used and the player moves
 func update_velocity() -> void:
 	move_and_slide()
+
+func _on_slashing_player_state_sword_swing(start) -> void:
+	if start:
+		sword_swing = true
+	else:
+		sword_swing = false
 
 func update_dmg_hud():
 	var health_pct = float(current_health) / float(max_health)

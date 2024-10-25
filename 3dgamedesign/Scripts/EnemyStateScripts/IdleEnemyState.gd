@@ -3,6 +3,7 @@ class_name IdleEnemyState extends EnemyState
 @export var SPEED: float = 0
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
+var walk = false
 
 func update(delta):
 	#ENEMY.enemy_follow_player(PLAYER)
@@ -12,5 +13,8 @@ func update(delta):
 	#ENEMY.set_movement_target(movement_target)
 	#ENEMY.check_movement(movement_target)
 	
-	if PLAYER != null:
-		transition.emit("WalkingEnemyState")
+	if PLAYER != null and !ENEMY.in_range:
+		transition.emit("WalkingEnemyState")		
+	
+	if ENEMY.in_range and !ENEMY.on_cooldown:
+		transition.emit("AttackEnemyState")
