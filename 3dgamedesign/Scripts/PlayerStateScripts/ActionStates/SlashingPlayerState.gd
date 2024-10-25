@@ -22,7 +22,7 @@ func update(delta):
 		transition.emit("IdleCombatPlayerState", true)
 	
 	if Input.is_action_just_released("slash"):
-		if !timer_start:
+		if !timer_start and !PLAYER.sword_swing:
 			$"../../SwordHitbox".monitoring = true
 			end_position = PLAYER.sword_position_3D
 			draw_point(PLAYER.sword_position)
