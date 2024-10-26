@@ -11,3 +11,6 @@ func update(delta):
 		
 	if Input.is_action_pressed("block"):
 		transition.emit("BlockingPlayerState", true)
+		
+	if !PLAYER.lock_camera:
+		transition.emit("IdleCombatPlayerState", true)
