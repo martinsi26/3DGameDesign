@@ -12,14 +12,14 @@
 size = Vector3(1, 0.391052, 2.38855)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ewwl"]
-size = Vector3(1, 0.391, 2.389)
+size = Vector3(1, 1.008, 2.389)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_enh4e"]
-size = Vector3(0.490295, 0.356476, 0.532816)
+size = Vector3(0.990494, 0.356476, 0.202845)
 
 [node name="Boar" type="CharacterBody3D" groups=["Boar", "Enemy"]]
 collision_layer = 4
-collision_mask = 167
+collision_mask = 163
 script = ExtResource("1_fhu7v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -54,6 +54,7 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3085, 0)
 shape = SubResource("BoxShape3D_6ewwl")
 
 [node name="ChargeHitbox" type="Area3D" parent="."]
@@ -61,7 +62,7 @@ collision_layer = 8
 collision_mask = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0205994, 0.309219, 1.2364)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.309219, 1.45416)
 shape = SubResource("BoxShape3D_enh4e")
 
 [node name="ChargeCooldownTimer" type="Timer" parent="."]

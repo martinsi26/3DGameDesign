@@ -63,7 +63,6 @@ func _process(delta: float) -> void:
 			
 func receive_damage(amount):
 	current_health = max(0, float(current_health - amount)) 
-	print("current minotaur enemy:", current_health)
 	
 	if current_health == 0:
 		is_dead = true

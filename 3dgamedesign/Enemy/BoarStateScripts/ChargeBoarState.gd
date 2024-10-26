@@ -21,10 +21,13 @@ func update(delta: float) -> void:
 		return
 	
 	if BOAR.hit_player:
+		print("got hit")
+		BOAR.hit_player = false
 		PLAYER.receive_damage(25)
 		transition.emit("CooldownBoarState")
 	
-	if BOAR.hit_wall or BOAR.hit_player:
+	if BOAR.hit_wall:
+		BOAR.hit_wall = false
 		transition.emit("CooldownBoarState")
 		
 	if BOAR.is_dead:

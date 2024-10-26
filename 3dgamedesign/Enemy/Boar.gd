@@ -66,7 +66,6 @@ func _process(delta: float) -> void:
 			
 func receive_damage(amount):
 	current_health = max(0, float(current_health - amount)) 
-	print("current boar enemy:", current_health)
 	
 	if current_health == 0:
 		is_dead = true
@@ -79,11 +78,10 @@ func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 		manual_check = true
 
 func _on_charge_hitbox_body_entered(body: Node3D) -> void:
-	print("collision")
 	print("this is the body ", body)
 	if body.is_in_group("Walls"):
 		hit_wall = true
-	elif body.is_in_group("Enemy"):
-		hit_enemy = true
+	#elif body.is_in_group("Boar"):
+		#hit_enemy = true
 	elif body == PLAYER:
 		hit_player = true
