@@ -1,17 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://2r2xorepwlip"]
+[gd_scene load_steps=6 format=3 uid="uid://2r2xorepwlip"]
 
-[ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Scenes/Player/player.tscn" id="1_ndiqr"]
+[ext_resource type="PackedScene" uid="uid://cdk6hwb4hi2wc" path="res://Player/player.tscn" id="1_ndiqr"]
 [ext_resource type="PackedScene" uid="uid://btv0a42cgxt8g" path="res://Scenes/levels/WE_test.tscn" id="1_v8a0n"]
-[ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Scenes/Enemy/enemy.tscn" id="2_sdkh1"]
-[ext_resource type="PackedScene" uid="uid://ikej17mmjbem" path="res://Enviroment/col0sseum_edit.tscn" id="4_6l2dy"]
+[ext_resource type="PackedScene" uid="uid://c7xbusdsm4w70" path="res://Enemy/Minotaur.tscn" id="2_sdkh1"]
+[ext_resource type="PackedScene" uid="uid://ikej17mmjbem" path="res://Scenes/Enviroment/Colosseum.tscn" id="4_6l2dy"]
+[ext_resource type="PackedScene" uid="uid://fx8rdv6hb4q0" path="res://Enemy/Boar.tscn" id="5_q3wbj"]
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175253, 0.0541172, 0.00136757)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
-
-[node name="Enemy" parent="." instance=ExtResource("2_sdkh1")]
-transform = Transform3D(-0.369747, 0, 0.929133, 0, 1, 0, -0.929133, 0, -0.369747, -9.39319, 0.229469, 8)
 
 [node name="Colliseum" parent="." instance=ExtResource("4_6l2dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8379, -1.46528, 5.62704)
@@ -22,3 +20,9 @@ CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
 SWORD = NodePath("Sword")
 SWORD_HITBOX = NodePath("SwordHitbox")
+
+[node name="Minotaur" parent="." instance=ExtResource("2_sdkh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58338, 0, 0)
+
+[node name="Boar" parent="." instance=ExtResource("5_q3wbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.47179, 0, 10.6935)

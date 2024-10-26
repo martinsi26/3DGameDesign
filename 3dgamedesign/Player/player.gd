@@ -109,7 +109,10 @@ func release_mouse() -> void:
 # move the camera to point towards the locked on enemy
 func camera_follow_enemy(target) -> void:
 	var pos = target.position
-	CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
+	if target.is_in_group("Minotaur"):
+		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
+	elif target.is_in_group("Boar"):
+		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1, pos.z), Vector3(0, 1, 0))
 	look_at(target.position, Vector3(0, 1, 0))
 	
 	camera_rotation.x = (-rotation.y)

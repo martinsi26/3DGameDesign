@@ -1,4 +1,4 @@
-class_name AttackEnemyState extends EnemyState
+class_name AttackMinotaurState extends MinotaurState
 
 @export var SPEED: float = 0.0  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
@@ -11,21 +11,16 @@ func enter(_previous_state) -> void:
 	attack()
 
 func update(delta: float) -> void:
-	ENEMY.enemy_follow_player(PLAYER)
-	#ENEMY.update_gravity(delta)
-	#ENEMY.update_velocity()
-	#var movement_target = PLAYER.global_position
-	#ENEMY.set_movement_target(movement_target)
-	#ENEMY.check_movement(movement_target)
+	MINOTAUR.enemy_follow_player(PLAYER)
 	
-	if ENEMY.in_range and !ENEMY.on_cooldown:
+	if MINOTAUR.in_range and !MINOTAUR.on_cooldown:
 		attack()
 		
-	if ENEMY.on_cooldown and !ENEMY.in_range:
-		transition.emit("WalkingEnemyState")
+	if MINOTAUR.on_cooldown and !MINOTAUR.in_range:
+		transition.emit("WalkingMinotaurState")
 		
-	if ENEMY.is_dead:
-		transition.emit("IdleEnemyState")
+	if MINOTAUR.is_dead:
+		transition.emit("DeathMinotaurState")
 	
 # this is the function to play the attack animation and figure out which attack is being used
 func attack():
@@ -50,7 +45,7 @@ func attack():
 		pass
 	
 	$"../../IndicatorTimer".start()
-	ENEMY.on_cooldown = true
+	MINOTAUR.on_cooldown = true
 
 func _on_indicator_timer_timeout() -> void:
 	PLAYER.get_node("Indicator").visible = false
