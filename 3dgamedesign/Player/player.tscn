@@ -1,25 +1,25 @@
 [gd_scene load_steps=33 format=3 uid="uid://cdk6hwb4hi2wc"]
 
-[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_2f8j2"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
 [ext_resource type="Theme" uid="uid://mnu83cyhpnin" path="res://Assets/UI/Themes/debug.tres" id="2_iit15"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="2_jjpn6"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStateMachine.gd" id="2_jjpn6"]
 [ext_resource type="ArrayMesh" uid="uid://b3esrm1b3jkmt" path="res://Assets/Designs/sword1.obj" id="3_b6bdi"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="3_edvmt"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/IdlePlayerState.gd" id="3_knrom"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/IdlePlayerState.gd" id="3_knrom"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="PackedScene" uid="uid://c6wvueo5ktnxy" path="res://Scenes/Indicator.tscn" id="8_6o307"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/MovementStates/FallingPlayerState.gd" id="13_1c8fe"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/IdleCombatPlayerState.gd" id="14_rwima"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/SlashingPlayerState.gd" id="19_8y11q"]
-[ext_resource type="Script" path="res://Scripts/PlayerStateScripts/ActionStates/BlockingPlayerState.gd" id="20_5htgw"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
+[ext_resource type="PackedScene" uid="uid://c6wvueo5ktnxy" path="res://Scenes/MiscScenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/FallingPlayerState.gd" id="13_1c8fe"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/IdleCombatPlayerState.gd" id="14_rwima"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/SlashingPlayerState.gd" id="19_8y11q"]
+[ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/BlockingPlayerState.gd" id="20_5htgw"]
 [ext_resource type="PackedScene" uid="uid://bi87hjmlvk7t2" path="res://Scenes/MiscScenes/PauseMenu.tscn" id="20_toig0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
@@ -351,7 +351,7 @@ radius = 0.001
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD", "SWORD_HITBOX")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00387335, 0, 0.000237226)
 collision_layer = 2
-collision_mask = 29
+collision_mask = 157
 script = ExtResource("1_2f8j2")
 CAMERA_CONTROLLER = NodePath("CameraController/Camera")
 ANIMATION_PLAYER = NodePath("AnimationPlayer")
@@ -401,7 +401,7 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
+blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -504,7 +504,7 @@ end_cap_mode = 2
 
 [node name="SwordHitbox" type="Area3D" parent="."]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 64
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SwordHitbox"]

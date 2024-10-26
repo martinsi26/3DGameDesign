@@ -1,18 +1,88 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7xbusdsm4w70"]
 
-[ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
+[ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
 [ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
 [ext_resource type="ArrayMesh" uid="uid://bl7d7jtq56vjr" path="res://Assets/BlenderObjs/axe.tres" id="3_6yggr"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="4_8e0ri"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_state_machine.gd" id="5_dmhko"]
-[ext_resource type="Script" path="res://Scripts/EnemyStateScripts/AttackEnemyState.gd" id="5_lomdf"]
-[ext_resource type="Script" path="res://Scripts/EnemyStateScripts/WalkingEnemyState.gd" id="6_b4c5l"]
-[ext_resource type="Script" path="res://Scripts/EnemyStateScripts/IdleEnemyState.gd" id="8_2t2xe"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingEnemyState.gd" id="6_b4c5l"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/IdleEnemyState.gd" id="8_2t2xe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
 size = Vector3(0.3, 0.5, 0.5)
+
+[sub_resource type="GDScript" id="GDScript_xtmg5"]
+script/source = "class_name AttackEnemyState extends EnemyState
+
+@export var SPEED: float = 0.0  # Speed of the enemy
+@export var ACCELERATION: float = 0.1
+@export var DECELERATION: float = 0.25
+@export var TOP_ANIM_SPEED: float = 2.2
+
+var attack_direction
+
+func enter(_previous_state) -> void:
+	attack()
+
+func update(delta: float) -> void:
+	ENEMY.enemy_follow_player(PLAYER)
+	#ENEMY.update_gravity(delta)
+	#ENEMY.update_velocity()
+	#var movement_target = PLAYER.global_position
+	#ENEMY.set_movement_target(movement_target)
+	#ENEMY.check_movement(movement_target)
+	
+	if ENEMY.in_range and !ENEMY.on_cooldown:
+		attack()
+		
+	if ENEMY.on_cooldown and !ENEMY.in_range:
+		transition.emit(\"WalkingEnemyState\")
+		
+	if ENEMY.is_dead:
+		transition.emit(\"IdleEnemyState\")
+	
+# this is the function to play the attack animation and figure out which attack is being used
+func attack():
+	PLAYER.get_node(\"Indicator\").visible = true
+	
+	attack_direction = randi_range(0, 2)
+	var location_node = PLAYER.get_node(\"Indicator\").get_node(\"Location\")
+	if attack_direction == 0:
+		# left attack
+		location_node.set_anchors_preset(Control.PRESET_CENTER_LEFT, true)
+		location_node.get_node(\"Attack_Indicator\").set_rotation_degrees(-90)
+		pass
+	elif attack_direction == 1:
+		# top attack
+		location_node.set_anchors_preset(Control.PRESET_CENTER_TOP, true)
+		location_node.get_node(\"Attack_Indicator\").set_rotation_degrees(0)
+		pass
+	elif attack_direction == 2:
+		# right attack
+		location_node.set_anchors_preset(Control.PRESET_CENTER_RIGHT, true)
+		location_node.get_node(\"Attack_Indicator\").set_rotation_degrees(90)
+		pass
+	
+	$\"../../IndicatorTimer\".start()
+	ENEMY.on_cooldown = true
+
+func _on_indicator_timer_timeout() -> void:
+	PLAYER.get_node(\"Indicator\").visible = false
+	
+	var block_location: int = PLAYER.get_block_rotation()
+	print(block_location, \" \", attack_direction)
+	
+	if block_location != attack_direction:
+		PLAYER.receive_damage(25)
+	else:
+		#play blocked sound
+		pass
+	
+	$\"../../CooldownTimer\".start()
+	
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
 size = Vector3(1, 2.44153, 7.51114)
@@ -53,7 +123,7 @@ script = ExtResource("5_dmhko")
 CURRENT_STATE = NodePath("WalkingEnemyState")
 
 [node name="AttackEnemyState" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("5_lomdf")
+script = SubResource("GDScript_xtmg5")
 
 [node name="WalkingEnemyState" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("6_b4c5l")

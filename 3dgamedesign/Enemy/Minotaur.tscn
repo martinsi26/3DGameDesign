@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://c7xbusdsm4w70"]
+
+[ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
+[ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
+[ext_resource type="ArrayMesh" uid="uid://bl7d7jtq56vjr" path="res://Assets/BlenderObjs/axe.tres" id="3_6yggr"]
+[ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="4_8e0ri"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/MinotaurStateMachine.gd" id="5_ak1ho"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingMinotaurState.gd" id="6_b4c5l"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/AttackMinotaurState.gd" id="6_pkwj3"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/IdleMinotaurState.gd" id="8_2t2xe"]
+[ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/DeathMinotaurState.gd" id="9_j2fka"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
+size = Vector3(0.3, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
+size = Vector3(1, 2.44153, 7.51114)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_re50c"]
+radius = 1.99
+
+[node name="Minotaur" type="CharacterBody3D" groups=["Enemy", "Minotaur"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103685, 0)
+collision_layer = 4
+collision_mask = 39
+script = ExtResource("1_e0sxd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_jeeme")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.03319, 0)
+mesh = ExtResource("2_0nj7c")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.10079, 0, 0, 0, 1.10079, 0, 0, 0, 1.10079, -0.94435, 1.38742, 0.607539)
+shape = SubResource("BoxShape3D_gsyop")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D2"]
+transform = Transform3D(0.047953, -1.19011, 0.133783, -0.75872, -0.133783, -0.918156, 0.926611, -0.0479536, -0.75872, 0, 0, 0)
+mesh = ExtResource("3_6yggr")
+skeleton = NodePath("../../CollisionShape3D")
+surface_material_override/0 = ExtResource("4_8e0ri")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="MinotaurStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("5_ak1ho")
+CURRENT_STATE = NodePath("IdleMinotaurState")
+
+[node name="AttackMinotaurState" type="Node" parent="MinotaurStateMachine"]
+script = ExtResource("6_pkwj3")
+
+[node name="WalkingMinotaurState" type="Node" parent="MinotaurStateMachine"]
+script = ExtResource("6_b4c5l")
+
+[node name="IdleMinotaurState" type="Node" parent="MinotaurStateMachine"]
+script = ExtResource("8_2t2xe")
+
+[node name="DeathMinotaurState" type="Node" parent="MinotaurStateMachine"]
+script = ExtResource("9_j2fka")
+
+[node name="DamageHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -1.05678)
+shape = SubResource("BoxShape3D_3d1rm")
+
+[node name="WalkingHitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WalkingHitbox"]
+shape = SubResource("SphereShape3D_sk6bu")
+
+[node name="PlayerBlockingHitbox" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBlockingHitbox"]
+shape = SubResource("SphereShape3D_re50c")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="IndicatorTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]
+[connection signal="body_entered" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_entered"]
+[connection signal="body_exited" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="IndicatorTimer" to="MinotaurStateMachine/AttackMinotaurState" method="_on_indicator_timer_timeout"]

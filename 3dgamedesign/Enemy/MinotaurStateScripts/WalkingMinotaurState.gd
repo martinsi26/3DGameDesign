@@ -1,4 +1,4 @@
-class_name WalkingEnemyState extends EnemyState
+class_name WalkingMinotaurState extends MinotaurState
 
 @export var SPEED: float = 3.0  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
@@ -13,27 +13,27 @@ func exit() -> void:
 	pass
 
 func update(delta: float) -> void:
-	ENEMY.enemy_follow_player(PLAYER)
-	ENEMY.update_gravity(delta)
-	ENEMY.update_velocity()
-	if !ENEMY.is_on_floor():
+	MINOTAUR.enemy_follow_player(PLAYER)
+	MINOTAUR.update_gravity(delta)
+	MINOTAUR.update_velocity()
+	if !MINOTAUR.is_on_floor():
 		return
 
 	var movement_target = PLAYER.global_position
-	ENEMY.set_movement_target(movement_target)
-	ENEMY.check_movement(movement_target, SPEED)
+	MINOTAUR.set_movement_target(movement_target)
+	MINOTAUR.apply_movement(movement_target, SPEED)
 	
-	if !ENEMY.on_cooldown and ENEMY.in_range:
-		transition.emit("AttackEnemyState")
+	if !MINOTAUR.on_cooldown and MINOTAUR.in_range:
+		transition.emit("AttackMinotaurState")
 	
-	if ENEMY.on_cooldown and ENEMY.in_range:
+	if MINOTAUR.on_cooldown and MINOTAUR.in_range:
 		SPEED = 0
 	
-	if ENEMY.on_cooldown and !ENEMY.in_range:
+	if MINOTAUR.on_cooldown and !MINOTAUR.in_range:
 		SPEED = 3
 		
-	if ENEMY.is_dead:
-		transition.emit("IdleEnemyState")
+	if MINOTAUR.is_dead:
+		transition.emit("DeathMinotaurState")
 
 func set_animation_speed(speed: float) -> void:
 	var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)

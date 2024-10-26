@@ -109,7 +109,10 @@ func release_mouse() -> void:
 # move the camera to point towards the locked on enemy
 func camera_follow_enemy(target) -> void:
 	var pos = target.position
-	CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
+	if target.is_in_group("Minotaur"):
+		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
+	elif target.is_in_group("Boar"):
+		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
 	look_at(target.position, Vector3(0, 1, 0))
 	
 	camera_rotation.x = (-rotation.y)
@@ -166,13 +169,16 @@ func get_block_rotation() -> int:
 	
 	var first_third  = lerp(min_block_angle, max_block_angle, 1.0/3.0)
 	var second_third = lerp(min_block_angle, max_block_angle, 2.0/3.0)
+	var third_third = lerp(min_block_angle, max_block_angle, 3.0/3.0)
 
 	if (sword_angle >= min_block_angle and sword_angle < first_third):
 		return 0
 	elif (sword_angle >= first_third and sword_angle <= second_third):
 		return 1
-	else:
+	elif (sword_angle >= second_third and sword_angle <= third_third):
 		return 2
+	else:
+		return 3
 	
 # update the gravity so the player falls
 func update_gravity(delta) -> void:
@@ -209,14 +215,12 @@ func update_dmg_hud():
 	var health_pct = float(current_health) / float(max_health)
 	var hud_alpha = 1 - health_pct
 	hud_alpha = hud_alpha - 0.15
-	print(hud_alpha)
 	#print(current_health)
 	$CameraController/Camera/ColorRect.color.a = hud_alpha
 	#print($CameraController/Camera/ColorRect.color.a)
 
 func receive_damage(amount):
 	current_health = max(0, float(current_health - amount)) 
-	print("current health:", current_health)
 	update_dmg_hud()
 	
 	regen_delay_timer = 10.0
@@ -228,7 +232,6 @@ func receive_damage(amount):
 func regen_health(delta):
 	if regen_delay_timer <= 0 and current_health < max_health:
 		current_health = min(current_health + regen_rate * delta, max_health)
-		print("regen health: ", current_health)
 		update_dmg_hud()
 
 func game_over(): 

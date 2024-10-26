@@ -1,4 +1,4 @@
-class_name StateMachine extends Node
+class_name PlayerStateMachine extends Node
 
 @export var CURRENT_MOVEMENT_STATE: State
 @export var CURRENT_COMBAT_STATE: State

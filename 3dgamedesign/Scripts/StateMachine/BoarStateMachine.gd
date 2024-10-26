@@ -1,4 +1,4 @@
-class_name EnemyStateMachine extends Node
+class_name BoarStateMachine extends Node
 
 @export var CURRENT_STATE: State
 var states: Dictionary = {}
@@ -17,7 +17,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	CURRENT_STATE.update(delta)
 		
-	Global.debug.add_property("Current Enemy State", CURRENT_STATE.name, 4)
+	Global.debug.add_property("Current Boar State", CURRENT_STATE.name, 5)
 	
 func _physics_process(delta: float) -> void:
 	CURRENT_STATE.physics_update(delta)
