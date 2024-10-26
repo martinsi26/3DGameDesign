@@ -1,18 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=11 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy.gd" id="1_e0sxd"]
-[ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
-[ext_resource type="ArrayMesh" uid="uid://bl7d7jtq56vjr" path="res://Assets/BlenderObjs/axe.tres" id="3_6yggr"]
-[ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="4_8e0ri"]
+[ext_resource type="PackedScene" uid="uid://bk6unpkxlxmvu" path="res://Assets/BlenderObjs/Minotaur.tscn" id="2_nsy2e"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/enemy_state_machine.gd" id="5_dmhko"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/AttackEnemyState.gd" id="5_lomdf"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/WalkingEnemyState.gd" id="6_b4c5l"]
 [ext_resource type="Script" path="res://Scripts/EnemyStateScripts/IdleEnemyState.gd" id="8_2t2xe"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
-size = Vector3(0.3, 0.5, 0.5)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06o1b"]
+radius = 0.457992
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
 size = Vector3(1, 2.44153, 7.51114)
@@ -28,23 +24,12 @@ collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_e0sxd")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
-shape = SubResource("CapsuleShape3D_jeeme")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.03319, 0)
-mesh = ExtResource("2_0nj7c")
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.10079, 0, 0, 0, 1.10079, 0, 0, 0, 1.10079, -0.94435, 1.38742, 0.607539)
-shape = SubResource("BoxShape3D_gsyop")
+transform = Transform3D(1.46758, 0, 0, 0, 1.51504, 0, 0, 0, 1.61496, 0, 1.5, 0.2)
+shape = SubResource("CapsuleShape3D_06o1b")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D2"]
-transform = Transform3D(0.047953, -1.19011, 0.133783, -0.75872, -0.133783, -0.918156, 0.926611, -0.0479536, -0.75872, 0, 0, 0)
-mesh = ExtResource("3_6yggr")
-skeleton = NodePath("../../CollisionShape3D")
-surface_material_override/0 = ExtResource("4_8e0ri")
+[node name="ENEMY" parent="CollisionShape3D2" instance=ExtResource("2_nsy2e")]
+transform = Transform3D(0.998821, 0, 0, 0, 0.998821, 0, 0, 0, 0.998821, 0, -1.01, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

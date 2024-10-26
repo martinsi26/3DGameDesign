@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://bk6unpkxlxmvu"]
+[gd_scene load_steps=32 format=4 uid="uid://bk6unpkxlxmvu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oaby8"]
 resource_name = "lambert1.001"
@@ -137,6 +137,15 @@ bind/12/pose = Transform3D(-0.320676, 0.601437, 1.4825, 0.414788, -1.42903, 0.66
 bind/13/name = &"LeftShin.002"
 bind/13/bone = -1
 bind/13/pose = Transform3D(0.0210881, 1.47731, 0.692447, -0.779753, 0.617422, -1.2935, -1.43314, -0.314193, 0.713963, -0.0207561, 0.2093, 0.515675)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q3125"]
+radius = 0.457992
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i1n8s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ccwds"]
+radius = 0.679132
+height = 2.1259
 
 [sub_resource type="Animation" id="Animation_qrxvb"]
 resource_name = "Armature|mixamo_com|Layer0"
@@ -2749,7 +2758,7 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="Armature_002" type="Node3D" parent="."]
-transform = Transform3D(0.612867, 0, 0, 0, 0.612867, 0, 0, 0, 0.612867, 0.00339958, 0.924087, -0.0929623)
+transform = Transform3D(0.612867, 0, 0, 0, 0.612867, 0, 0, 0, 0.612867, 0.003, 0.97, -0.093)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Armature_002"]
 bones/0/name = "Bone"
@@ -2854,6 +2863,28 @@ bones/13/scale = Vector3(1, 1, 1)
 [node name="Body_Lores_GEO_001" type="MeshInstance3D" parent="Armature_002/Skeleton3D"]
 mesh = SubResource("ArrayMesh_lgqwn")
 skin = SubResource("Skin_e4q4a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_002/Skeleton3D/Body_Lores_GEO_001"]
+transform = Transform3D(1.46758, 0, 0, 0, 1.51504, 0, 0, 0, 1.61496, 0, 0, 0.2)
+shape = SubResource("CapsuleShape3D_q3125")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_002/Skeleton3D"]
+transform = Transform3D(0.991127, 0.105779, 0.0804762, -0.0532947, 0.870967, -0.488441, -0.121759, 0.479819, 0.868877, -0.340589, 0.2498, 1.35827)
+bone_name = "RightArm.001"
+bone_idx = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_002/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(0.444822, 1.49012e-08, 4.47035e-08, -2.23517e-08, -3.44589e-08, -1.48479, 0, 0.194197, -7.45058e-08, -1.19209e-07, 0.6, 0)
+shape = SubResource("CapsuleShape3D_i1n8s")
+
+[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature_002/Skeleton3D"]
+transform = Transform3D(0.999993, -0.00311934, -0.0021004, 0.00179456, 0.886663, -0.462413, 0.00330477, 0.462406, 0.886662, 1.11377e-09, 2.00914e-08, 7.83309e-09)
+bone_name = "Bone"
+bone_idx = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_002/Skeleton3D/BoneAttachment3D2"]
+transform = Transform3D(0.771683, 0, 0, 0, 1.4789, 0, 0, 0, 0.759128, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ccwds")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
