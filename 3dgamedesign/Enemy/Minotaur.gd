@@ -5,15 +5,15 @@ class_name Minotaur extends CharacterBody3D
 
 var PLAYER
 var check_collision
-var manual_check
+var is_swinging
 
 var in_range = false
 var on_cooldown = false
 
 var gravity: float = 12.0
 
-var max_health: float = 100
-var current_health: float = 100
+var max_health: float = 300
+var current_health: float = 300
 var is_dead = false
 
 func _ready() -> void:
@@ -52,14 +52,6 @@ func update_velocity() -> void:
 func update_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta  # Apply gravity to the Y velocity
-		
-func _process(delta: float) -> void:
-	if PLAYER != null:
-		if !PLAYER.sword_swing:
-			check_collision = false
-			manual_check = false
-		elif PLAYER.sword_swing and !manual_check:
-			check_collision = true
 			
 func receive_damage(amount):
 	current_health = max(0, float(current_health - amount)) 
@@ -68,11 +60,9 @@ func receive_damage(amount):
 		is_dead = true
 
 func _on_damage_hitbox_area_entered(area: Area3D) -> void:
-	if area == PLAYER.SWORD_HITBOX and check_collision:
+	if area == PLAYER.SWORD_HITBOX and PLAYER.sword_swing:
 		print("hit minotaur")
 		receive_damage(25)
-		check_collision = false
-		manual_check = true
 
 func _on_walking_hitbox_body_entered(body: Node3D) -> void:
 	in_range = true

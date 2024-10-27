@@ -33,8 +33,14 @@ func position_to_next_wave():
 			type = "minotaur"
 			mob_spawn = 1.0
 		elif current_wave == 4:
-			print("end game")
-			#make end game screen
+			type = "minotaur"
+			mob_spawn = 1.0
+			prepare_spawn(type, mob_spawn)
+			type = "boar"
+			mob_spawn = 2.0
+		elif current_wave == 5:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().change_scene_to_file("res://Scenes/MiscScenes/WinnerScreen.tscn")
 			
 		prepare_spawn(type, mob_spawn)
 		
