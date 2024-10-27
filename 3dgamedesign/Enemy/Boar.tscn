@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344617, 0.119642)
 shape = SubResource("BoxShape3D_12u5d")
 
 [node name="Template" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1.15, 0, 0, 0, -5.02681e-08, -1.15, 0, 1.15, -5.02681e-08, 0, 0, -1.05515)
+transform = Transform3D(1.15, 0, 0, 0, -5.02681e-08, -1.15, 0, 1.15, -5.02681e-08, 0, 0.321824, -1.05515)
 mesh = ExtResource("2_7nsbl")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -62,7 +62,7 @@ collision_layer = 8
 collision_mask = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.309219, 1.45416)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.630658, 1.45416)
 shape = SubResource("BoxShape3D_enh4e")
 
 [node name="ChargeCooldownTimer" type="Timer" parent="."]

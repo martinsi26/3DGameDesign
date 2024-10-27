@@ -116,7 +116,7 @@ func camera_follow_enemy(target) -> void:
 	if target.is_in_group("Minotaur"):
 		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1.5, pos.z), Vector3(0, 1, 0))
 	elif target.is_in_group("Boar"):
-		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y, pos.z), Vector3(0, 1, 0))
+		CAMERA_CONTROLLER.look_at(Vector3(pos.x, pos.y + 1, pos.z), Vector3(0, 1, 0))
 	look_at(target.position, Vector3(0, 1, 0))
 	
 	camera_rotation.x = (-rotation.y)
