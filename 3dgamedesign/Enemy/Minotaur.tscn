@@ -16,7 +16,7 @@
 size = Vector3(0.3, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
-size = Vector3(1, 2.44153, 7.51114)
+size = Vector3(1, 2.44153, 3.22231)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
 radius = 2.0
@@ -27,7 +27,7 @@ radius = 1.99
 [node name="Minotaur" type="CharacterBody3D" groups=["Enemy", "Minotaur"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103685, 0)
 collision_layer = 4
-collision_mask = 39
+collision_mask = 35
 script = ExtResource("1_e0sxd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -72,7 +72,7 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -1.05678)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -1.03654)
 shape = SubResource("BoxShape3D_3d1rm")
 
 [node name="WalkingHitbox" type="Area3D" parent="."]

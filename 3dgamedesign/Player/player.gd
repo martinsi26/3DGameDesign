@@ -36,6 +36,10 @@ var regen_delay_timer = 10.0
 var regen_rate = 10.0
 var is_regenerating = false
 
+var viewed_targets = []
+var possible_targets = []
+var targets = []
+
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -119,14 +123,24 @@ func camera_follow_enemy(target) -> void:
 	
 # find an available enemy within the players frustum camera view (in camera view)
 func find_target():
-	var possible_targets = get_tree().get_nodes_in_group("Enemy")
-	for target in possible_targets:
-		if !CAMERA_CONTROLLER.is_position_in_frustum(target.global_position):
-			possible_targets.erase(target)
-	if !possible_targets.is_empty():
-		target = possible_targets[0]
-		return possible_targets[0]
-	return null
+	possible_targets = get_tree().get_nodes_in_group("Enemy")
+	print("possible targets ", possible_targets)
+	targets = possible_targets.filter(func(i): 
+		return CAMERA_CONTROLLER.is_position_in_frustum(i.global_position))
+	var temp = targets
+	targets = targets.filter(func(i):
+		return viewed_targets.find(i) == -1)
+	if targets.is_empty():
+		targets = temp
+		viewed_targets = []
+		
+	if !targets.is_empty():
+		targets.sort_custom(func(a, b):
+			return a.global_position.distance_to($LockOnMarker.global_position) < b.global_position.distance_to($LockOnMarker.global_position))
+		target = targets[0]
+		viewed_targets.append(targets[0])
+		return true
+	return false
 
 # reset the sword to the default positions
 func default_sword():
@@ -205,11 +219,8 @@ func update_input(speed: float, acceleration: float, deceleration: float) -> voi
 func update_velocity() -> void:
 	move_and_slide()
 
-func _on_slashing_player_state_sword_swing(start) -> void:
-	if start:
-		sword_swing = true
-	else:
-		sword_swing = false
+func _on_slashing_player_state_sword_swing(is_start_of_swing) -> void:
+	sword_swing = is_start_of_swing
 
 func update_dmg_hud():
 	var health_pct = float(current_health) / float(max_health)

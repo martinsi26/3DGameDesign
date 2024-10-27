@@ -16,11 +16,6 @@ func enter(_previous_state) -> void:
 	LINE.modulate.a = 1  # Set to fully opaque only if it's already at 0
 
 func update(delta):
-	if Input.is_action_just_pressed("lock"):
-		PLAYER.lock_camera = false
-		PLAYER.default_sword()
-		transition.emit("IdleCombatPlayerState", true)
-	
 	if Input.is_action_just_released("slash"):
 		if !timer_start and !PLAYER.sword_swing:
 			$"../../SwordHitbox".monitoring = true

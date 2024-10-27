@@ -497,6 +497,7 @@ LINE = NodePath("../../Line2D")
 script = ExtResource("20_5htgw")
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 width = 2.0
 default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
 begin_cap_mode = 2
@@ -516,6 +517,10 @@ wait_time = 0.1
 [node name="PauseMenu" parent="." instance=ExtResource("20_toig0")]
 
 [node name="HealthRegen" type="Timer" parent="."]
+
+[node name="LockOnMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.64047, -1.03399)
+visible = false
 
 [connection signal="sword_swing" from="PlayerStateMachine/SlashingPlayerState" to="." method="_on_slashing_player_state_sword_swing"]
 [connection signal="timeout" from="OpacityTimer" to="PlayerStateMachine/SlashingPlayerState" method="_on_opacity_timer_timeout"]
