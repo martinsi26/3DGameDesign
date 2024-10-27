@@ -10,7 +10,7 @@ var wave_spawn_ended
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_wave = 2
+	current_wave = 0
 	starting_nodes = get_child_count()
 	current_nodes = get_child_count()
 	position_to_next_wave()
@@ -85,7 +85,6 @@ func prepare_spawn(type, mob_spawn):
 		wave_spawn_ended = true
 			
 	else: # minotaur spawn
-		print("spawn minotaur")
 		var minotaur = minotaur_scene.instantiate()
 		minotaur.global_position = $MinotaurSpawnPoint.global_position
 		add_child(minotaur)

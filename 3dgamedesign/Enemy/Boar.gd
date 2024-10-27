@@ -64,14 +64,11 @@ func receive_damage(amount):
 
 func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 	if area == PLAYER.SWORD_HITBOX and PLAYER.sword_swing:
-		print("hit boar")
+		#print("hit boar")
 		receive_damage(25)
 
 func _on_charge_hitbox_body_entered(body: Node3D) -> void:
-	print("this is the body ", body)
 	if body.is_in_group("Walls"):
 		hit_wall = true
-	#elif body.is_in_group("Boar"):
-		#hit_enemy = true
 	elif body == PLAYER:
 		hit_player = true
