@@ -454,7 +454,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Indicator" parent="." instance=ExtResource("8_6o307")]
-visible = true
 mouse_filter = 1
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_MOVEMENT_STATE", "CURRENT_COMBAT_STATE")]
@@ -498,7 +497,6 @@ LINE = NodePath("../../Line2D")
 script = ExtResource("20_5htgw")
 
 [node name="Line2D" type="Line2D" parent="."]
-visible = false
 width = 2.0
 default_color = Color(0.0295066, 0.0295066, 0.0295066, 1)
 begin_cap_mode = 2
