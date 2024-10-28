@@ -62,7 +62,10 @@ func receive_damage(amount):
 func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 	if area == PLAYER.SWORD_HITBOX and PLAYER.sword_swing:
 		print("hit minotaur")
-		receive_damage(25)
+		if PLAYER.nux_mode_enabled:
+			receive_damage(1000)
+		else:
+			receive_damage(25)
 
 func _on_walking_hitbox_body_entered(body: Node3D) -> void:
 	in_range = true

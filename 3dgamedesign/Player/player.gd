@@ -40,6 +40,7 @@ var viewed_targets = []
 var possible_targets = []
 var targets = []
 
+var nux_mode_enabled = false
 
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
@@ -71,8 +72,6 @@ func _input(event):
 	# we want to exit the game when player has pressed escape for debugging purposes
 	if Input.is_action_just_pressed("exit"): pause_toggle()
 
-	if Input.is_action_just_pressed("take_dmg"): receive_damage(10) #NOTE: used to test whether damage works
-	
 func _ready():
 	$PauseMenu.hide()
 	# save the original sword position and rotation for later use
@@ -239,6 +238,8 @@ func receive_damage(amount):
 	
 	if current_health == 0:
 		game_over()
+	
+	print(current_health)
 
 func regen_health(delta):
 	if regen_delay_timer <= 0 and current_health < max_health:
@@ -260,3 +261,13 @@ func pause_toggle():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		print("Game Paused:", get_tree().paused)
 		$PauseMenu.show()
+
+func toggle_nux_mode():
+	current_health = 999
+	nux_mode_enabled = true
+	print("Nux enabled")
+	
+
+
+func _on_nux_mode_pressed() -> void:
+	toggle_nux_mode()
