@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=38 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -20,7 +20,10 @@
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/SlashingPlayerState.gd" id="19_8y11q"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/BlockingPlayerState.gd" id="20_5htgw"]
-[ext_resource type="PackedScene" uid="uid://bi87hjmlvk7t2" path="res://Scenes/MiscScenes/PauseMenu.tscn" id="20_toig0"]
+[ext_resource type="Shader" path="res://Assets/shaders/blur.gdshader" id="21_0gl3d"]
+[ext_resource type="Script" path="res://Scripts/MiscScripts/PauseMenu.gd" id="22_2vivy"]
+[ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="23_54ers"]
+[ext_resource type="PackedScene" uid="uid://csg6arca4ugmf" path="res://Scenes/MiscScenes/HowToPlay.tscn" id="24_6k4ml"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3rsb5"]
 
@@ -348,6 +351,16 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7i4mj"]
 radius = 0.001
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80f00"]
+shader = ExtResource("21_0gl3d")
+shader_parameter/blur = null
+shader_parameter/brightness = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aaypy"]
+shader = ExtResource("21_0gl3d")
+shader_parameter/blur = null
+shader_parameter/brightness = 0.0
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD", "SWORD_HITBOX")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00387335, 0, 0.000237226)
 collision_layer = 2
@@ -401,7 +414,7 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
@@ -513,7 +526,108 @@ shape = SubResource("CapsuleShape3D_7i4mj")
 [node name="OpacityTimer" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="PauseMenu" parent="." instance=ExtResource("20_toig0")]
+[node name="PauseMenu" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_80f00")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+color = Color(1, 1, 1, 0)
+script = ExtResource("22_2vivy")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
+material = SubResource("ShaderMaterial_aaypy")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("23_54ers")
+theme_override_font_sizes/font_size = 100
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Continue" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+process_mode = 2
+layout_direction = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_54ers")
+theme_override_font_sizes/font_size = 40
+text = "Continue"
+
+[node name="MarginContainer4" type="MarginContainer" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="NuxMode" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4"]
+process_mode = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_54ers")
+theme_override_font_sizes/font_size = 40
+text = "Nux Mode"
+
+[node name="MarginContainer2" type="MarginContainer" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HowToPlay" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+process_mode = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_54ers")
+theme_override_font_sizes/font_size = 40
+text = "How To Play"
+
+[node name="MarginContainer3" type="MarginContainer" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Quit" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+process_mode = 2
+layout_direction = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("23_54ers")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="HowToPlay" parent="PauseMenu" instance=ExtResource("24_6k4ml")]
+visible = false
+layout_mode = 1
 
 [node name="HealthRegen" type="Timer" parent="."]
 
@@ -523,3 +637,8 @@ visible = false
 
 [connection signal="sword_swing" from="PlayerStateMachine/SlashingPlayerState" to="." method="_on_slashing_player_state_sword_swing"]
 [connection signal="timeout" from="OpacityTimer" to="PlayerStateMachine/SlashingPlayerState" method="_on_opacity_timer_timeout"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Continue" to="PauseMenu" method="_on_continue_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4/NuxMode" to="." method="_on_nux_mode_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HowToPlay" to="PauseMenu" method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Quit" to="PauseMenu" method="_on_quit_pressed"]
+[connection signal="exit_options_menu" from="PauseMenu/HowToPlay" to="PauseMenu" method="_on_how_to_play_exit_options_menu"]

@@ -73,8 +73,20 @@ theme_override_fonts/font = ExtResource("2_su3pd")
 theme_override_font_sizes/font_size = 40
 text = "Continue"
 
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="NuxMode" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer4"]
+process_mode = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_su3pd")
+theme_override_font_sizes/font_size = 40
+text = "Nux Mode"
+
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 50

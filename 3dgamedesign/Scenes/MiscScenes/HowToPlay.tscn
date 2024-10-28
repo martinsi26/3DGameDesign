@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://csg6arca4ugmf"]
+[gd_scene load_steps=5 format=3 uid="uid://csg6arca4ugmf"]
 
 [ext_resource type="Script" path="res://Scripts/MiscScripts/HowToPlay.gd" id="1_ikm3c"]
 [ext_resource type="Texture2D" uid="uid://fjumt2f4phy5" path="res://Assets/MiscImgs/StartScreenImg.jpg" id="2_r7cx6"]
 [ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="3_dxxwa"]
+[ext_resource type="Script" path="res://Scenes/MiscScenes/text_label.gd" id="4_dmpc8"]
 
 [node name="HowToPlay" type="Control"]
 layout_mode = 3
@@ -53,21 +54,62 @@ size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+[node name="TextLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_fonts/font = ExtResource("3_dxxwa")
+text = "MOVE FORWARD
+MOVE BACKWARD
+MOVE LEFT
+MOVE RIGHT
+JUMP
+SPRINT
+CROUCH
+SLIDE
+LOCK-MODE, CYCLE ENEMIES
+UNLOCK
+ATTACK IN LOCK-MODE	
+BLOCK IN LOCK-MODE
+PAUSE"
+horizontal_alignment = 1
+uppercase = true
+tab_stops = PackedFloat32Array(50)
+script = ExtResource("4_dmpc8")
 
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="TextLabel 2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_dxxwa")
+text = "W	
+S
+A
+D
+SPACE
+SHIFT
+CNTRL
+SHIFT+CNTRL
+Q
+E
+LEFT-CLICK
+RIGHT-CLICK
+ESC"
+horizontal_alignment = 1
+uppercase = true
+script = ExtResource("4_dmpc8")
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("3_dxxwa")
 theme_override_font_sizes/font_size = 40
-text = "Exit"
+text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exit" to="." method="_on_exit_pressed"]
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
