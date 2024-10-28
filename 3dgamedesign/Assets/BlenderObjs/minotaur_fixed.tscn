@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxfbt7c77fxqb"]
+
+[node name="MinotaurFixed"]
+
+[node name="Skeleton3D" parent="Armature_002" index="0"]
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0.0503979, -4.53967e-08, 0.00604979, 0.998711)
+bones/1/rotation = Quaternion(0.134823, -0.100631, 0.889121, 0.425629)
+bones/2/rotation = Quaternion(0.310759, -0.00847342, -0.0783847, 0.947213)
+bones/3/rotation = Quaternion(0.398368, 0.404863, 0.669764, -0.478335)
+bones/4/rotation = Quaternion(0.0161397, -5.45685e-08, 0.909501, -0.415388)
+bones/5/rotation = Quaternion(0.250141, 0.146312, 0.0671505, 0.954732)
+bones/6/rotation = Quaternion(0.43053, -5.13349e-09, 0.00748623, 0.902545)
+bones/7/position = Vector3(0, 0, 0)
+bones/7/rotation = Quaternion(-0.421806, 0.298986, 0.851294, 0.0893653)
+bones/8/rotation = Quaternion(-0.473386, -0.120579, -0.452689, 0.745948)
+bones/9/rotation = Quaternion(0.410801, 1.24429e-08, 0.481867, 0.773981)
+bones/10/position = Vector3(0, 0, 0)
+bones/10/rotation = Quaternion(0.448163, 0.247563, 0.849847, -0.124988)
+bones/11/rotation = Quaternion(-0.319734, -0.0669622, 0.416606, 0.848366)
+bones/12/rotation = Quaternion(0.140191, -0.0933324, -0.542803, 0.8228)
+bones/13/rotation = Quaternion(0.915471, -0.30105, 0.225798, -0.142466)
