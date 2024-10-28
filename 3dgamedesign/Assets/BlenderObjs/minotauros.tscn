@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://k4vt8lpwua0a"]
-
-[ext_resource type="PackedScene" uid="uid://ce4u73lm08w87" path="res://Assets/BlenderObjs/Minotauros.glb" id="1_11cag"]
-
-[node name="Minotauros" instance=ExtResource("1_11cag")]
