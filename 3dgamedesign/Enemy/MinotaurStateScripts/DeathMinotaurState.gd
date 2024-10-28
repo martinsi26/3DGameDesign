@@ -1,11 +1,17 @@
 class_name DeathMinotaurState extends MinotaurState
 
 func enter(_previous_state):
+	# Play the death animation
+	MINOTAUR.animation_player.play("Defeat")  # Make sure "Defeat" is the name of your animation
+	
+	await MINOTAUR.animation_player.animation_finished
+	
 	MINOTAUR.get_node("PlayerBlockingHitbox").collision_layer = 0
 	MINOTAUR.get_node("PlayerBlockingHitbox").collision_mask = 0
 	MINOTAUR.collision_mask = 0
 	MINOTAUR.collision_layer = 0
 	MINOTAUR.remove_from_group("Enemy")
+	
 	if PLAYER.target == MINOTAUR:
 		if !PLAYER.find_target():
 			PLAYER.lock_camera = false
@@ -14,13 +20,6 @@ func enter(_previous_state):
 		PLAYER.lock_camera = false
 		PLAYER.default_sword()
 		
-	# play death animation
-	# timer is to allow the death animation to finish before queue_free()
-	# this is a placeholder and once animation is set queue_free() will
-	# move to the "finished_animation()" function that is called once
-	# the animation is finished
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.5).timeout
+	
 	MINOTAUR.queue_free()
-
-func update(delta):
-	pass	
