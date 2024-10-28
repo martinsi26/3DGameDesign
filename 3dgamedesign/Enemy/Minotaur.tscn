@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
-[ext_resource type="PackedScene" uid="uid://2bcwdvc3y1rm" path="res://Assets/BlenderObjs/minotaurosasaass.tscn" id="2_j7ptu"]
+[ext_resource type="PackedScene" uid="uid://ckxtubrao5dan" path="res://Assets/BlenderObjs/minotaurosasaasasdass.tscn" id="2_5vxtl"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/MinotaurStateMachine.gd" id="5_ak1ho"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingMinotaurState.gd" id="6_b4c5l"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/AttackMinotaurState.gd" id="6_pkwj3"]
@@ -32,8 +32,8 @@ script = ExtResource("1_e0sxd")
 transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
 shape = SubResource("CapsuleShape3D_jeeme")
 
-[node name="MinotaurFixed" parent="CollisionShape3D" instance=ExtResource("2_j7ptu")]
-transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.96393, 0)
+[node name="Minotaurosasaasasdass" parent="CollisionShape3D" instance=ExtResource("2_5vxtl")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.760268, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
