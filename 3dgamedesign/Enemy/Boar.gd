@@ -2,6 +2,7 @@ class_name Boar extends CharacterBody3D
 
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var hitbox: Area3D = get_node("DamageHitbox")
+@onready var animation_player: AnimationPlayer = get_node("CollisionShape3D/")
 
 var PLAYER
 
@@ -66,7 +67,7 @@ func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 			receive_damage(1000)
 		else:
 			receive_damage(25)
-		#animation_player.play("Damage")
+		animation_player.play("Damage")
 
 func _on_charge_hitbox_body_entered(body: Node3D) -> void:
 	if body == PLAYER and charging:

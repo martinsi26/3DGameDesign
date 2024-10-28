@@ -1,7 +1,7 @@
 class_name CooldownBoarState extends BoarState
 
 func enter(_previous_state) -> void:
-	#BOAR.animation.stop("Charge")
+	BOAR.animation.stop("Charging")
 	$"../../ChargeCooldownTimer".start()
 	$"../../ChargeHitbox".monitoring = false
 	

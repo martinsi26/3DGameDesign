@@ -1,8 +1,8 @@
 class_name DeathBoarState extends BoarState
 
 func enter(_previous_state):
-	#BOAR.animation_player.start("Death")
-	#await BOAR.animation_player.animation_finished
+	BOAR.animation_player.start("Death")
+	await BOAR.animation_player.animation_finished
 	BOAR.collision_mask = 0
 	BOAR.collision_layer = 0
 	BOAR.remove_from_group("Enemy")
