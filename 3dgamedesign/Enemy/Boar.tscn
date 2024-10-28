@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/CooldownBoarState.gd" id="6_7u3gd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_12u5d"]
-size = Vector3(1, 0.391052, 2.38855)
+size = Vector3(1, 1.41667, 2.38855)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvqhs"]
 resource_name = "Material.001"
@@ -131,22 +131,23 @@ bind/23/bone = -1
 bind/23/pose = Transform3D(0.608994, 0, 0, 0, 0, -0.608994, 0, 0.608994, 0, 0, 0, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ewwl"]
-size = Vector3(1, 1.008, 2.389)
+size = Vector3(1, 1.41696, 2.389)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_enh4e"]
-size = Vector3(0.990494, 0.356476, 0.202845)
+size = Vector3(0.990494, 0.35804, 0.202845)
 
 [node name="Boar" type="CharacterBody3D" groups=["Boar", "Enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155127, 0)
 collision_layer = 4
 collision_mask = 163
 script = ExtResource("1_fhu7v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344617, 0.119642)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.857427, 0.119642)
 shape = SubResource("BoxShape3D_12u5d")
 
 [node name="Template" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(9.55343e-16, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, -2.18557e-08, 0, 0, -1.8512)
+transform = Transform3D(9.55343e-16, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, -2.18557e-08, 0, -0.645065, -1.8512)
 mesh = SubResource("ArrayMesh_am5ey")
 skin = SubResource("Skin_3xoux")
 
@@ -174,7 +175,7 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3085, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.512982, 0)
 shape = SubResource("BoxShape3D_6ewwl")
 
 [node name="ChargeHitbox" type="Area3D" parent="."]
@@ -182,7 +183,7 @@ collision_layer = 8
 collision_mask = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.630658, 1.45416)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.671983, 1.45416)
 shape = SubResource("BoxShape3D_enh4e")
 
 [node name="ChargeCooldownTimer" type="Timer" parent="."]
