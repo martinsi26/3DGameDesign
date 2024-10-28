@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
-[ext_resource type="PackedScene" path="res://Assets/BlenderObjs/minotaurosasaasasdass.tscn" id="2_c0ixd"]
+[ext_resource type="PackedScene" uid="uid://yl2orsvxoqss" path="res://Assets/BlenderObjs/minotaurosasaasasdass.tscn" id="2_c0ixd"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/MinotaurStateMachine.gd" id="5_ak1ho"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingMinotaurState.gd" id="6_b4c5l"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/AttackMinotaurState.gd" id="6_pkwj3"]

@@ -1,6 +1,6 @@
 class_name ChargeBoarState extends BoarState
 
-@export var SPEED: float = 6.0  # Speed of the enemy
+@export var SPEED: float = 10.0  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
 @export var TOP_ANIM_SPEED: float = 2.2
