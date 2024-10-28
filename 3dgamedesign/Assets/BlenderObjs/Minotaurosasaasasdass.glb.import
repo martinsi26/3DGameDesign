@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://4124vy4rkhkh"
-path="res://.godot/imported/Minotaurosasaass.glb-61311aada024a8b9e6075406f51d238b.scn"
+uid="uid://kolx4af2qrwo"
+path="res://.godot/imported/Minotaurosasaasasdass.glb-ae8813aaecff0827cd4345eafe00969c.scn"
 
 [deps]
 
-source_file="res://Assets/BlenderObjs/Minotaurosasaass.glb"
-dest_files=["res://.godot/imported/Minotaurosasaass.glb-61311aada024a8b9e6075406f51d238b.scn"]
+source_file="res://Assets/BlenderObjs/Minotaurosasaasasdass.glb"
+dest_files=["res://.godot/imported/Minotaurosasaasasdass.glb-ae8813aaecff0827cd4345eafe00969c.scn"]
 
 [params]
 
