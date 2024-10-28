@@ -8,16 +8,17 @@ class_name AttackMinotaurState extends MinotaurState
 var attack_direction
 
 func enter(_previous_state) -> void:
+	MINOTAUR.animation_player.get_animation("Idle").loop = true
+	MINOTAUR.animation_player.play("Idle")  # Start RUNINPLACE animation
 	attack()
 
 func update(delta: float) -> void:
 	MINOTAUR.enemy_follow_player(PLAYER)
 	
-	if MINOTAUR.in_range and !MINOTAUR.on_cooldown:
-		attack()
-		
-	if MINOTAUR.on_cooldown and !MINOTAUR.in_range:
-		transition.emit("WalkingMinotaurState")
+	if MINOTAUR.on_cooldown and MINOTAUR.animation_player.is_playing() and MINOTAUR.animation_player.current_animation != "Idle":
+		await MINOTAUR.animation_player.animation_finished
+		MINOTAUR.animation_player.get_animation("Idle").loop = true
+		MINOTAUR.animation_player.play("Idle")  # Start RUNINPLACE animation		
 		
 	if MINOTAUR.is_dead:
 		transition.emit("DeathMinotaurState")
@@ -54,7 +55,9 @@ func _on_indicator_timer_timeout() -> void:
 	print(block_location, " ", attack_direction)
 	
 	if block_location != attack_direction:
-		PLAYER.receive_damage(25)  # Player receives damage if not blocking correctly
+		if MINOTAUR.in_outer_range:
+			PLAYER.receive_damage(25)  # Player receives damage if not blocking correctly
+			
 		# Play the normal attack animation based on the attack direction
 		match attack_direction:
 			0:
@@ -73,4 +76,6 @@ func _on_indicator_timer_timeout() -> void:
 			2:
 				MINOTAUR.animation_player.play("LeftSlashBlocked")  # Play blocked left attack animation
 	
+	await MINOTAUR.animation_player.animation_finished
+	transition.emit("WalkingMinotaurState")
 	$"../../CooldownTimer".start()

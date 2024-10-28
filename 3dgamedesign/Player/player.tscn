@@ -401,7 +401,7 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1]
+blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1, &"jump_start", &"walking", 0.5, &"jump_start", &"sprint", 0.5, &"jump_start", &"jump_start", 0.1]
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true

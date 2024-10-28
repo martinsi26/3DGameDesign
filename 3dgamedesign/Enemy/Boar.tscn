@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://fx8rdv6hb4q0"]
+[gd_scene load_steps=10 format=3 uid="uid://fx8rdv6hb4q0"]
 
 [ext_resource type="Script" path="res://Enemy/Boar.gd" id="1_fhu7v"]
-[ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_7nsbl"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/BoarStateMachine.gd" id="2_v7o4j"]
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/ChargeBoarState.gd" id="3_47jjt"]
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/IdleBoarState.gd" id="4_2yi5o"]
@@ -28,7 +27,6 @@ shape = SubResource("BoxShape3D_12u5d")
 
 [node name="Template" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(1.15, 0, 0, 0, -5.02681e-08, -1.15, 0, 1.15, -5.02681e-08, 0, 0, -1.05515)
-mesh = ExtResource("2_7nsbl")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

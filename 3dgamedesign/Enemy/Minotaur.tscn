@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
-[ext_resource type="PackedScene" uid="uid://djirgqruxdk1o" path="res://Assets/BlenderObjs/minotaurosasaass.tscn" id="2_j7ptu"]
+[ext_resource type="PackedScene" uid="uid://2bcwdvc3y1rm" path="res://Assets/BlenderObjs/minotaurosasaass.tscn" id="2_j7ptu"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/MinotaurStateMachine.gd" id="5_ak1ho"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingMinotaurState.gd" id="6_b4c5l"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/AttackMinotaurState.gd" id="6_pkwj3"]
@@ -11,13 +11,16 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
-size = Vector3(1, 2.44153, 3.22231)
+size = Vector3(1, 2.44153, 4.3599)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sk6bu"]
 radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_re50c"]
 radius = 1.99
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_onysb"]
+radius = 2.8535
 
 [node name="Minotaur" type="CharacterBody3D" groups=["Enemy", "Minotaur"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103685, 0)
@@ -30,7 +33,7 @@ transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
 shape = SubResource("CapsuleShape3D_jeeme")
 
 [node name="MinotaurFixed" parent="CollisionShape3D" instance=ExtResource("2_j7ptu")]
-transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -1.1, 0)
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -0.96393, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -56,7 +59,7 @@ collision_layer = 64
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -1.03654)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0355835, -0.191051)
 shape = SubResource("BoxShape3D_3d1rm")
 
 [node name="WalkingHitbox" type="Area3D" parent="."]
@@ -75,6 +78,14 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBlockingHitbox"]
 shape = SubResource("SphereShape3D_re50c")
 
+[node name="OuterRangeHitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OuterRangeHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907877, 0)
+shape = SubResource("SphereShape3D_onysb")
+
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -83,15 +94,10 @@ one_shot = true
 wait_time = 0.75
 one_shot = true
 
-[node name="DamageTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="AnimationTimer" type="Timer" parent="."]
-one_shot = true
-
 [connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]
 [connection signal="body_entered" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_entered"]
 [connection signal="body_exited" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_exited"]
+[connection signal="body_entered" from="OuterRangeHitbox" to="." method="_on_outer_range_hitbox_body_entered"]
+[connection signal="body_exited" from="OuterRangeHitbox" to="." method="_on_outer_range_hitbox_body_exited"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="IndicatorTimer" to="MinotaurStateMachine/AttackMinotaurState" method="_on_indicator_timer_timeout"]

@@ -6,7 +6,8 @@ class_name WalkingMinotaurState extends MinotaurState
 @export var TOP_ANIM_SPEED: float = 2.2
 
 func enter(_previous_state) -> void:
-	# Ensure the animation is set to loop and then play it
+	if MINOTAUR.animation_player.is_playing() and MINOTAUR.animation_player.current_animation == "takingDamage":
+		await MINOTAUR.animation_player.animation_finished
 	MINOTAUR.animation_player.get_animation("RUNINPLACE").loop = true
 	MINOTAUR.animation_player.play("RUNINPLACE")  # Start RUNINPLACE animation
 
@@ -27,14 +28,28 @@ func update(delta: float) -> void:
 	MINOTAUR.set_movement_target(movement_target)
 	MINOTAUR.apply_movement(movement_target, SPEED)
 	
-	if !MINOTAUR.on_cooldown and MINOTAUR.in_range:
+	if MINOTAUR.in_range:
+		MINOTAUR.in_temp_range = true
+	
+	if !MINOTAUR.in_outer_range:
+		MINOTAUR.in_temp_range = false
+	
+	if !MINOTAUR.on_cooldown and MINOTAUR.in_temp_range:
 		transition.emit("AttackMinotaurState")
 	
-	if MINOTAUR.on_cooldown and MINOTAUR.in_range:
-		SPEED = 0  # Stop moving during cooldown
-		
-	if MINOTAUR.on_cooldown and !MINOTAUR.in_range:
+	if !MINOTAUR.in_range and !MINOTAUR.in_temp_range:
+		if MINOTAUR.animation_player.is_playing() and MINOTAUR.animation_player.current_animation == "takingDamage":
+			await MINOTAUR.animation_player.animation_finished
+		MINOTAUR.animation_player.get_animation("RUNINPLACE").loop = true
+		MINOTAUR.animation_player.play("RUNINPLACE")  # Start RUNINPLACE animation
 		SPEED = 3  # Resume moving if out of range
+		
+	if MINOTAUR.on_cooldown and MINOTAUR.in_temp_range:
+		if MINOTAUR.animation_player.is_playing() and MINOTAUR.animation_player.current_animation == "takingDamage":
+			await MINOTAUR.animation_player.animation_finished
+		MINOTAUR.animation_player.get_animation("Idle").loop = true
+		MINOTAUR.animation_player.play("Idle")  # Start RUNINPLACE animation
+		SPEED = 0  # Stop moving during cooldown
 		
 	if MINOTAUR.is_dead:
 		transition.emit("DeathMinotaurState")

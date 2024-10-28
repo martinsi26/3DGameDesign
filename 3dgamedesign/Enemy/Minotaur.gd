@@ -10,6 +10,8 @@ var check_collision
 var is_swinging
 
 var in_range = false
+var in_outer_range = false
+var in_temp_range = false
 var on_cooldown = false
 
 var gravity: float = 12.0
@@ -25,11 +27,6 @@ func _ready() -> void:
 	PLAYER = Global.player
 	
 	navigation_agent.velocity_computed.connect(Callable(self, "_on_velocity_computed"))  # Correctly set Callable
-	animation_player.connect("animation_finished", Callable(self, "_on_animation_finished"))  # Correct signal connection
-
-
-	# Connect the Timer's timeout signal
-	damage_timer.connect("timeout", Callable(self, "_on_damage_timer_timeout"))
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
@@ -69,22 +66,22 @@ func receive_damage(amount):
 		is_dead = true
 
 func _on_damage_hitbox_area_entered(area: Area3D) -> void:
+	if !in_temp_range and PLAYER.sword_swing:
+		print("out of range")
+		return
+			
 	if area == PLAYER.SWORD_HITBOX and PLAYER.sword_swing:
 		print("hit minotaur")
 		receive_damage(25)
 		hit_count += 1  # Increment the hit counter
 		if hit_count <= 11:
-			animation_player.play("takingDamage")  # Play the taking damage animation
-			damage_timer.start()  # Start the timer to end the animation after 1 second
-
-func _on_damage_timer_timeout() -> void:
-	if not is_dead:
-		animation_player.stop()  # Stop the taking damage animation
-		animation_player.play("RUNINPLACE")  # Resume the walking animation
-
-func _on_animation_finished() -> void:
-	# This function can remain empty if you're only using the timer to manage the animation
-	pass
+			if (animation_player.current_animation != "RightSlash" 
+				and animation_player.current_animation != "LeftSlash" 
+				and animation_player.current_animation != "DownSlash" 
+				and animation_player.current_animation != "RightSlashBlocked" 
+				and animation_player.current_animation != "LeftSlashBlocked" 
+				and animation_player.current_animation != "DownBlockedd"):
+				animation_player.play("takingDamage")  # Play the taking damage animation
 
 func _on_walking_hitbox_body_entered(body: Node3D) -> void:
 	in_range = true
@@ -94,3 +91,9 @@ func _on_walking_hitbox_body_exited(body: Node3D) -> void:
 
 func _on_cooldown_timer_timeout() -> void:
 	on_cooldown = false
+
+func _on_outer_range_hitbox_body_entered(body: Node3D) -> void:
+	in_outer_range = true
+
+func _on_outer_range_hitbox_body_exited(body: Node3D) -> void:
+	in_outer_range = false
