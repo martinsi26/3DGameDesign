@@ -1,22 +1,5 @@
-[gd_scene format=3 uid="uid://yl2orsvxoqss"]
+[gd_scene load_steps=2 format=3 uid="uid://62eld3gtpj8u"]
 
-[node name="Minotaurosasaasasdass"]
+[ext_resource type="PackedScene" uid="uid://ckais1cfxnw3b" path="res://Assets/BlenderObjs/Minotaurosasaasasdass.glb" id="1_ubqam"]
 
-[node name="Skeleton3D" parent="Armature_002" index="0"]
-bones/0/position = Vector3(-0.0114666, 0.0113055, 0.225828)
-bones/0/rotation = Quaternion(-0.00774383, 0.0682758, 0.00212585, 0.997634)
-bones/1/rotation = Quaternion(-0.141654, 0.281148, 0.879355, 0.357245)
-bones/2/rotation = Quaternion(0.752473, -0.128101, 0.0508261, 0.644043)
-bones/3/rotation = Quaternion(0.344363, 0.696976, 0.412721, -0.474658)
-bones/4/rotation = Quaternion(-0.22542, -0.432866, 0.860219, -0.147773)
-bones/5/rotation = Quaternion(0.624679, -0.269103, 0.190761, 0.707792)
-bones/6/rotation = Quaternion(0.43053, -3.88687e-09, 0.00748623, 0.902545)
-bones/7/position = Vector3(-0.0225174, -0.0273654, 0.285356)
-bones/7/rotation = Quaternion(0.0084213, 0.0144404, 0.992829, 0.118372)
-bones/8/rotation = Quaternion(-0.508904, 0.0747409, -0.0952636, 0.852265)
-bones/9/rotation = Quaternion(0.424301, 0.14631, 0.357939, 0.818805)
-bones/10/position = Vector3(0.00642613, -0.0137897, 0.22589)
-bones/10/rotation = Quaternion(0.472122, 0.258969, 0.842463, -0.0170705)
-bones/11/rotation = Quaternion(-0.208693, 0.019421, 0.508874, 0.834935)
-bones/12/rotation = Quaternion(-0.0877966, -0.0945517, -0.181012, 0.97498)
-bones/13/rotation = Quaternion(0.493756, -0.573024, 0.166759, -0.632487)
+[node name="Minotaurosasaasasdass" instance=ExtResource("1_ubqam")]
