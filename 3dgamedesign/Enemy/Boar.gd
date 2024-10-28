@@ -67,7 +67,13 @@ func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 			receive_damage(1000)
 		else:
 			receive_damage(25)
-		animation_player.play("Damage")
+		if animation_player.is_playing():
+			if animation_player.current_animation == "Damage":
+				await animation_player.animation_finished
+				animation_player.play("Damage")
+		else:
+			animation_player.play("Damage")
+			
 
 func _on_charge_hitbox_body_entered(body: Node3D) -> void:
 	if body == PLAYER and charging:
