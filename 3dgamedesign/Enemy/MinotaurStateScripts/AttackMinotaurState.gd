@@ -19,9 +19,6 @@ func update(delta: float) -> void:
 		await MINOTAUR.animation_player.animation_finished
 		MINOTAUR.animation_player.get_animation("Idle").loop = true
 		MINOTAUR.animation_player.play("Idle")  # Start RUNINPLACE animation		
-		
-	if MINOTAUR.is_dead:
-		transition.emit("DeathMinotaurState")
 
 # This function initiates the attack
 func attack():

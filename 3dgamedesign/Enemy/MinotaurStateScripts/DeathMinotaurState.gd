@@ -19,5 +19,7 @@ func enter(_previous_state):
 	else:
 		PLAYER.lock_camera = false
 		PLAYER.default_sword()
+		
+	await get_tree().create_timer(1.5).timeout
 	
 	MINOTAUR.queue_free()
