@@ -87,6 +87,9 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="AnimationTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]
 [connection signal="body_entered" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_entered"]
 [connection signal="body_exited" from="WalkingHitbox" to="." method="_on_walking_hitbox_body_exited"]

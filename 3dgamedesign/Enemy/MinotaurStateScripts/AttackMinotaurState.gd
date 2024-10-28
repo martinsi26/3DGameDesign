@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 	if MINOTAUR.is_dead:
 		transition.emit("DeathMinotaurState")
 
-# This function plays the attack animation and determines the attack direction
+# This function initiates the attack
 func attack():
 	PLAYER.get_node("Indicator").visible = true
 	
@@ -34,18 +34,15 @@ func attack():
 		# Left attack
 		location_node.set_anchors_preset(Control.PRESET_CENTER_LEFT, true)
 		location_node.get_node("Attack_Indicator").set_rotation_degrees(-90)
-		MINOTAUR.animation_player.play("RightSlash")  # Play right attack animation
 
 	elif attack_direction == 1:
 		# Top attack
 		location_node.set_anchors_preset(Control.PRESET_CENTER_TOP, true)
 		location_node.get_node("Attack_Indicator").set_rotation_degrees(0)
-		MINOTAUR.animation_player.play("DownSmash")  # Play top attack animation
 	elif attack_direction == 2:
 		# Right attack
 		location_node.set_anchors_preset(Control.PRESET_CENTER_RIGHT, true)
 		location_node.get_node("Attack_Indicator").set_rotation_degrees(90)
-		MINOTAUR.animation_player.play("LeftSlash")  # Play left attack animation
 
 	$"../../IndicatorTimer".start()
 	MINOTAUR.on_cooldown = true
@@ -58,8 +55,22 @@ func _on_indicator_timer_timeout() -> void:
 	
 	if block_location != attack_direction:
 		PLAYER.receive_damage(25)  # Player receives damage if not blocking correctly
+		# Play the normal attack animation based on the attack direction
+		match attack_direction:
+			0:
+				MINOTAUR.animation_player.play("RightSlash")  # Play normal right attack animation
+			1:
+				MINOTAUR.animation_player.play("DownSmash")  # Play normal top attack animation
+			2:
+				MINOTAUR.animation_player.play("LeftSlash")  # Play normal left attack animation
 	else:
-		# Play blocked sound if the block is successful
-		pass
+		# Play the blocked animation based on the attack direction
+		match attack_direction:
+			0:
+				MINOTAUR.animation_player.play("RightSlashBlocked")  # Play blocked right attack animation
+			1:
+				MINOTAUR.animation_player.play("DownBlockedd")  # Play blocked top attack animation
+			2:
+				MINOTAUR.animation_player.play("LeftSlashBlocked")  # Play blocked left attack animation
 	
 	$"../../CooldownTimer".start()
