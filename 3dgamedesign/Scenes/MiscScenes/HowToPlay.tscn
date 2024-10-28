@@ -51,6 +51,15 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "MOVE FORWARD				W
+MOVE BACKWARD			S
+MOVE LEFT						A
+MOVE RIGHT						D"
+fit_content = true
+scroll_active = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
