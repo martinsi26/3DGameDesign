@@ -1,7 +1,9 @@
 class_name DeathBoarState extends BoarState
 
 func enter(_previous_state):
-	BOAR.animation_player.start("Death")
+	if BOAR.animation_player.is_playing() and BOAR.animation_player.current_animation == "Charging":
+		BOAR.animation_player.stop()
+	BOAR.animation_player.play("Death")
 	await BOAR.animation_player.animation_finished
 	BOAR.collision_mask = 0
 	BOAR.collision_layer = 0

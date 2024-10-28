@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://fx8rdv6hb4q0"]
 
 [ext_resource type="Script" path="res://Enemy/Boar.gd" id="1_fhu7v"]
-[ext_resource type="PackedScene" uid="uid://bjs7lko50g8v6" path="res://Assets/BlenderObjs/boaring_12345.tscn" id="2_snxit"]
+[ext_resource type="PackedScene" uid="uid://dj6ps0qmbvxvw" path="res://Assets/BlenderObjs/boaring_12345.tscn" id="2_snxit"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/BoarStateMachine.gd" id="2_v7o4j"]
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/ChargeBoarState.gd" id="3_47jjt"]
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/IdleBoarState.gd" id="4_2yi5o"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Enemy/BoarStateScripts/CooldownBoarState.gd" id="6_7u3gd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_12u5d"]
-size = Vector3(1, 1.41667, 2.38855)
+size = Vector3(1.01074, 1.43512, 2.37631)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ewwl"]
 size = Vector3(1, 1.41696, 2.389)
@@ -24,11 +24,11 @@ collision_mask = 163
 script = ExtResource("1_fhu7v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0935904, 0.780585, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00562225, 0.856441, 0.104691)
 shape = SubResource("BoxShape3D_12u5d")
 
-[node name="boaring12345" parent="CollisionShape3D" instance=ExtResource("2_snxit")]
-transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, -0.67915, -1.67208)
+[node name="Mesh" parent="CollisionShape3D" instance=ExtResource("2_snxit")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0, -0.67915, -2.392)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

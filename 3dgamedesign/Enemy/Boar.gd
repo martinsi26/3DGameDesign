@@ -2,7 +2,7 @@ class_name Boar extends CharacterBody3D
 
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var hitbox: Area3D = get_node("DamageHitbox")
-@onready var animation_player: AnimationPlayer = get_node("CollisionShape3D/")
+@onready var animation_player: AnimationPlayer = get_node("CollisionShape3D/Mesh/AnimationPlayer")
 
 var PLAYER
 

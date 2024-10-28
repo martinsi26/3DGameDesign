@@ -10,8 +10,8 @@ func enter(_previous_state) -> void:
 		transition.emit("DeathBoarState")
 		return
 	BOAR.charging = true
-	BOAR.animation_player.get_animation("Chargeing").loop = true
-	BOAR.animation_player.play("Chargeing")
+	BOAR.animation_player.get_animation("Charging").loop = true
+	BOAR.animation_player.play("Charging")
 	BOAR.point_at_player(PLAYER)
 	var movement_target = PLAYER.global_position
 	BOAR.set_charge_target(movement_target)
