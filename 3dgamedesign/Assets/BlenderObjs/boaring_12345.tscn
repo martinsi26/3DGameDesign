@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjs7lko50g8v6"]
+
+[ext_resource type="PackedScene" uid="uid://dg7kfx04mdx5n" path="res://Assets/BlenderObjs/boaring12345.glb" id="1_6y2tt"]
+
+[node name="boaring12345" instance=ExtResource("1_6y2tt")]
