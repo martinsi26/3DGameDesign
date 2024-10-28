@@ -1,10 +1,7 @@
 class_name IdleBoarState extends BoarState
 
-func update(delta):
+func enter(_previous_state):
 	await get_tree().create_timer(1).timeout
 	
-	if PLAYER != null and !BOAR.is_dead:
-		transition.emit("ChargeBoarState")
+	transition.emit("ChargeBoarState")
 	
-	if BOAR.is_dead:
-		transition.emit("DeathBoarState")

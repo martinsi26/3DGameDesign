@@ -1,6 +1,6 @@
 class_name WalkingMinotaurState extends MinotaurState
 
-@export var SPEED: float = 3.0  # Speed of the enemy
+@export var SPEED: float = 3.5  # Speed of the enemy
 @export var ACCELERATION: float = 0.1
 @export var DECELERATION: float = 0.25
 @export var TOP_ANIM_SPEED: float = 2.2

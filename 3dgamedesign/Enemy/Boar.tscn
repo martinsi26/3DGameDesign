@@ -133,8 +133,8 @@ bind/23/pose = Transform3D(0.608994, 0, 0, 0, 0, -0.608994, 0, 0.608994, 0, 0, 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ewwl"]
 size = Vector3(1, 1.41696, 2.389)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_enh4e"]
-size = Vector3(0.990494, 0.35804, 0.202845)
+[sub_resource type="SphereShape3D" id="SphereShape3D_fgmj5"]
+radius = 0.41331
 
 [node name="Boar" type="CharacterBody3D" groups=["Boar", "Enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.155127, 0)
@@ -183,11 +183,11 @@ collision_layer = 8
 collision_mask = 130
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012436, 0.671983, 1.45416)
-shape = SubResource("BoxShape3D_enh4e")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276483, 0.873674, 1.45497)
+shape = SubResource("SphereShape3D_fgmj5")
 
 [node name="ChargeCooldownTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.0
 one_shot = true
 
 [connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]
