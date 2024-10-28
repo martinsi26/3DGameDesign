@@ -1,9 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=12 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
-[ext_resource type="ArrayMesh" uid="uid://bt0llwl6s21bs" path="res://Assets/BlenderObjs/minobasic.tres" id="2_0nj7c"]
-[ext_resource type="ArrayMesh" uid="uid://bl7d7jtq56vjr" path="res://Assets/BlenderObjs/axe.tres" id="3_6yggr"]
-[ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="4_8e0ri"]
+[ext_resource type="PackedScene" uid="uid://bnloq8hcgxgis" path="res://Assets/BlenderObjs/minotaur_fixed.tscn" id="2_d2s0h"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/MinotaurStateMachine.gd" id="5_ak1ho"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/WalkingMinotaurState.gd" id="6_b4c5l"]
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/AttackMinotaurState.gd" id="6_pkwj3"]
@@ -11,9 +9,6 @@
 [ext_resource type="Script" path="res://Enemy/MinotaurStateScripts/DeathMinotaurState.gd" id="9_j2fka"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jeeme"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gsyop"]
-size = Vector3(0.3, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3d1rm"]
 size = Vector3(1, 2.44153, 3.22231)
@@ -34,19 +29,8 @@ script = ExtResource("1_e0sxd")
 transform = Transform3D(1.19791, 0, 0, 0, 1.19791, 0, 0, 0, 1.19791, 0, 1.2, 0)
 shape = SubResource("CapsuleShape3D_jeeme")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1.15, 0, 3.40468e-15, 0, 1.15, 0, -3.40468e-15, 0, 1.15, 0, -1.03319, 0)
-mesh = ExtResource("2_0nj7c")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.10079, 0, 0, 0, 1.10079, 0, 0, 0, 1.10079, -0.94435, 1.38742, 0.607539)
-shape = SubResource("BoxShape3D_gsyop")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D2"]
-transform = Transform3D(0.047953, -1.19011, 0.133783, -0.75872, -0.133783, -0.918156, 0.926611, -0.0479536, -0.75872, 0, 0, 0)
-mesh = ExtResource("3_6yggr")
-skeleton = NodePath("../../CollisionShape3D")
-surface_material_override/0 = ExtResource("4_8e0ri")
+[node name="MinotaurFixed" parent="CollisionShape3D" instance=ExtResource("2_d2s0h")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, -1.033, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -97,6 +81,10 @@ one_shot = true
 
 [node name="IndicatorTimer" type="Timer" parent="."]
 wait_time = 0.75
+one_shot = true
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="DamageHitbox" to="." method="_on_damage_hitbox_area_entered"]

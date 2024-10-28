@@ -6,16 +6,20 @@ class_name WalkingMinotaurState extends MinotaurState
 @export var TOP_ANIM_SPEED: float = 2.2
 
 func enter(_previous_state) -> void:
-	pass
+	# Ensure the animation is set to loop and then play it
+	MINOTAUR.animation_player.get_animation("RUNINPLACE").loop = true
+	MINOTAUR.animation_player.play("RUNINPLACE")  # Start RUNINPLACE animation
 
 func exit() -> void:
-	#ANIMATION.speed_scale = 1.0
+	# Optionally stop the animation if needed
+	# MINOTAUR.animation_player.stop()
 	pass
 
 func update(delta: float) -> void:
 	MINOTAUR.enemy_follow_player(PLAYER)
 	MINOTAUR.update_gravity(delta)
 	MINOTAUR.update_velocity()
+	
 	if !MINOTAUR.is_on_floor():
 		return
 
@@ -27,14 +31,15 @@ func update(delta: float) -> void:
 		transition.emit("AttackMinotaurState")
 	
 	if MINOTAUR.on_cooldown and MINOTAUR.in_range:
-		SPEED = 0
-	
+		SPEED = 0  # Stop moving during cooldown
+		
 	if MINOTAUR.on_cooldown and !MINOTAUR.in_range:
-		SPEED = 3
+		SPEED = 3  # Resume moving if out of range
 		
 	if MINOTAUR.is_dead:
 		transition.emit("DeathMinotaurState")
 
 func set_animation_speed(speed: float) -> void:
 	var alpha = remap(speed, 0.0, SPEED, 0.0, 1.0)
-	#ANIMATION.speed_scale = lerp(0.0, TOP_ANIM_SPEED, alpha)
+	# Here you can control the animation speed if desired
+	# ANIMATION.speed_scale = lerp(0.0, TOP_ANIM_SPEED, alpha)
