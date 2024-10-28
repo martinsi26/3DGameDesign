@@ -32,4 +32,3 @@ func update(delta: float) -> void:
 		
 	if BOAR.is_dead:
 		transition.emit("DeathBoarState")
-

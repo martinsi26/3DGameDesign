@@ -2,9 +2,11 @@ extends ColorRect
 
 #texture: Found on www.freepik.com
 
+signal nux_mode
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _on_continue_pressed() -> void:
