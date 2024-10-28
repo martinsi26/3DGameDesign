@@ -6,28 +6,22 @@ class_name ChargeBoarState extends BoarState
 @export var TOP_ANIM_SPEED: float = 2.2
 
 func enter(_previous_state) -> void:
+	if BOAR.is_dead:
+		transition.emit("DeathBoarState")
+		return
+	BOAR.charging = true
+	BOAR.animation_player.get_animation("Charging").loop = true
+	BOAR.animation_player.play("Charging")
 	BOAR.point_at_player(PLAYER)
 	var movement_target = PLAYER.global_position
 	BOAR.set_charge_target(movement_target)
 	BOAR.charge_player(movement_target, SPEED)
 
-func exit() -> void:
-	pass
-
 func update(delta: float) -> void:
 	BOAR.update_gravity(delta)
 	BOAR.update_velocity()
-	if !BOAR.is_on_floor():
-		return
-	
-	if BOAR.hit_player:
-		print("got hit")
-		BOAR.hit_player = false
-		PLAYER.receive_damage(25)
-		transition.emit("CooldownBoarState")
-	
-	if BOAR.hit_wall:
-		BOAR.hit_wall = false
+
+	if !BOAR.charging:
 		transition.emit("CooldownBoarState")
 		
 	if BOAR.is_dead:

@@ -15,7 +15,7 @@ minotaur_scene = ExtResource("2_sdkh1")
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_v8a0n")]
 
 [node name="Colosseum" parent="." instance=ExtResource("4_6l2dy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8379, -1.46528, 5.62704)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.8379, -2.22925, 5.62704)
 
 [node name="Player" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER", "ANIMATION_PLAYER", "SWORD", "SWORD_HITBOX") instance=ExtResource("1_ndiqr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.53785, 0, 5.43563)
@@ -25,28 +25,28 @@ SWORD = NodePath("Sword")
 SWORD_HITBOX = NodePath("SwordHitbox")
 
 [node name="BoarSpawnPoint1" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0039, 0.484506, 5.37819)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.805, -0.036, 5.378)
 
 [node name="BoarSpawnPoint2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83895, 0.433605, -3.26382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83895, -0.0362959, -7.9123)
 
 [node name="BoarSpawnPoint3" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.49963, 0.562449, 5.34948)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.005, -0.036, 5.349)
 
 [node name="BoarSpawnPoint4" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92293, 0.761309, 14.5864)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.923, -0.036, 19.513)
 
 [node name="BoarSpawnPoint5" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.98051, 0.322445, -0.0344324)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.432, -0.036, -3.371)
 
 [node name="BoarSpawnPoint6" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.62399, 0.281067, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.638, -0.036, -4.091)
 
 [node name="BoarSpawnPoint7" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79106, 0.833313, 13.3204)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.337, -0.036, 16.818)
 
 [node name="BoarSpawnPoint8" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.83568, 0, 12.8054)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.264, -0.036, 16.254)
 
 [node name="MinotaurSpawnPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9594, 3.7647, 5.61259)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.321, -0.036, 5.613)

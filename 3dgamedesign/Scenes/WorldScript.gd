@@ -39,6 +39,15 @@ func position_to_next_wave():
 			type = "boar"
 			mob_spawn = 2.0
 		elif current_wave == 5:
+			type = "boar"
+			mob_spawn = 8.0
+		elif current_wave == 6:
+			type = "minotaur"
+			mob_spawn = 1.0
+			prepare_spawn(type, mob_spawn)
+			type = "boar"
+			mob_spawn = 4.0
+		elif current_wave == 7:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			get_tree().change_scene_to_file("res://Scenes/MiscScenes/WinnerScreen.tscn")
 			

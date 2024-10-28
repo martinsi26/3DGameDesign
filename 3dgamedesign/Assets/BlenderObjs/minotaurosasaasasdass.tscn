@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://yl2orsvxoqss"]
+[gd_scene load_steps=2 format=3 uid="uid://62eld3gtpj8u"]
 
-[ext_resource type="PackedScene" path="res://Assets/BlenderObjs/Minotaurosasaasasdass.glb" id="1_ubqam"]
+[ext_resource type="PackedScene" uid="uid://ckais1cfxnw3b" path="res://Assets/BlenderObjs/Minotaurosasaasasdass.glb" id="1_ubqam"]
 
 [node name="Minotaurosasaasasdass" instance=ExtResource("1_ubqam")]
 
