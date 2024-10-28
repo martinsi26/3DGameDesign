@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b8iiiatbjj0ja"
-path="res://.godot/imported/MinotaurFixed.glb-bc9ac40311d52f440e2e65e6872201aa.scn"
+uid="uid://ce4u73lm08w87"
+path="res://.godot/imported/Minotauros.glb-fb9b26f5d2e3dc5939573e30b980cd98.scn"
 
 [deps]
 
-source_file="res://Assets/BlenderObjs/MinotaurFixed.glb"
-dest_files=["res://.godot/imported/MinotaurFixed.glb-bc9ac40311d52f440e2e65e6872201aa.scn"]
+source_file="res://Assets/BlenderObjs/Minotauros.glb"
+dest_files=["res://.godot/imported/Minotauros.glb-fb9b26f5d2e3dc5939573e30b980cd98.scn"]
 
 [params]
 
