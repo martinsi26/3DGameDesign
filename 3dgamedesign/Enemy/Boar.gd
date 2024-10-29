@@ -80,4 +80,5 @@ func _on_damage_hitbox_area_entered(area: Area3D) -> void:
 func _on_charge_hitbox_body_entered(body: Node3D) -> void:
 	if body == PLAYER and charging:
 		PLAYER.receive_damage(25)
+		PLAYER.play_random_audio("Grunts")
 	charging = false
