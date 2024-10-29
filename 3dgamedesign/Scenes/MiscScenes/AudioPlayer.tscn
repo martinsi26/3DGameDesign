@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5t0f8l77keey"]
+
+[sub_resource type="GDScript" id="GDScript_8ck85"]
+script/source = "class_name AudioPlayer extends Node
+
+func add_effect(path: String, name: String) -> void:
+	var new_audio_player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	new_audio_player.stream = load(path)
+	new_audio_player.name = name
+	add_child(new_audio_player)
+	
+func play(name: String):
+	get_node(name).play()
+"
+
+[node name="AudioPlayer" type="Node"]
+script = SubResource("GDScript_8ck85")
