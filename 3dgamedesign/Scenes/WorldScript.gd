@@ -10,7 +10,7 @@ var wave_spawn_ended
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_wave = 0
+	current_wave = 2
 	starting_nodes = get_child_count()
 	current_nodes = get_child_count()
 	position_to_next_wave()

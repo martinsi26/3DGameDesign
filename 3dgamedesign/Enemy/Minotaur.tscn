@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7xbusdsm4w70"]
+[gd_scene load_steps=14 format=3 uid="uid://c7xbusdsm4w70"]
 
 [ext_resource type="Script" path="res://Enemy/Minotaur.gd" id="1_e0sxd"]
 [ext_resource type="PackedScene" uid="uid://62eld3gtpj8u" path="res://Assets/BlenderObjs/minotaurosasaasasdass.tscn" id="2_c0ixd"]
@@ -18,6 +18,9 @@ radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_re50c"]
 radius = 1.99
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwcqt"]
+size = Vector3(1.07251, 6.37314, 1.17843)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_onysb"]
 radius = 2.8535
@@ -77,6 +80,10 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBlockingHitbox"]
 shape = SubResource("SphereShape3D_re50c")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerBlockingHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0362549, 2.17554, 0.249477)
+shape = SubResource("BoxShape3D_fwcqt")
 
 [node name="OuterRangeHitbox" type="Area3D" parent="."]
 collision_layer = 8
