@@ -54,6 +54,7 @@ func _on_indicator_timer_timeout() -> void:
 	if block_location != attack_direction:
 		if MINOTAUR.in_outer_range:
 			PLAYER.receive_damage(25)  # Player receives damage if not blocking correctly
+			PLAYER.play_random_audio("Grunts")
 			
 		# Play the normal attack animation based on the attack direction
 		match attack_direction:
@@ -72,6 +73,8 @@ func _on_indicator_timer_timeout() -> void:
 				MINOTAUR.animation_player.play("DownBlockedd")  # Play blocked top attack animation
 			2:
 				MINOTAUR.animation_player.play("LeftSlashBlocked")  # Play blocked left attack animation
+	
+		PLAYER.play_random_audio("Blocks")
 	
 	await MINOTAUR.animation_player.animation_finished
 	transition.emit("WalkingMinotaurState")

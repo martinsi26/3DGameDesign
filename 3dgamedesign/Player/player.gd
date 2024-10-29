@@ -42,6 +42,7 @@ var targets = []
 
 var nux_mode_enabled = false
 
+
 # This function handles user input and input events such as mouse movement
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -184,7 +185,7 @@ func get_block_rotation() -> int:
 	var second_third = lerp(min_block_angle, max_block_angle, 2.0/3.0)
 	var third_third = lerp(min_block_angle, max_block_angle, 3.0/3.0)
 
-	if (sword_angle >= min_block_angle and sword_angle < first_third):
+	if (sword_angle < first_third):
 		return 0
 	elif (sword_angle >= first_third and sword_angle <= second_third):
 		return 1
@@ -267,7 +268,12 @@ func toggle_nux_mode():
 	nux_mode_enabled = true
 	print("Nux enabled")
 	
-
-
 func _on_nux_mode_pressed() -> void:
 	toggle_nux_mode()
+	
+func play_audio(name: String):
+	$AudioStreams.get_node(name).play()
+	
+func play_random_audio(list_name: String):
+	var list = $AudioStreams.get_node(list_name)
+	list.get_children()[randi() % list.get_child_count()].play()

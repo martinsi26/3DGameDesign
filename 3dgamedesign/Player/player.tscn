@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cdk6hwb4hi2wc"]
+[gd_scene load_steps=45 format=3 uid="uid://cdk6hwb4hi2wc"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_2f8j2"]
 [ext_resource type="ArrayMesh" uid="uid://coox7vrmtm5d2" path="res://Assets/Designs/babyboy.tres" id="2_1d5fi"]
@@ -10,11 +10,18 @@
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/WalkingPlayerState.gd" id="4_nqmv3"]
 [ext_resource type="Material" uid="uid://dt4yy6kela2jx" path="res://Assets/ColAssets/inner_outer_arch.tres" id="5_6chjd"]
 [ext_resource type="Material" uid="uid://cpi7bs8j0lb35" path="res://Assets/ColAssets/seat.tres" id="5_chicu"]
+[ext_resource type="AudioStream" uid="uid://dc3rb6eeent84" path="res://Assets/audio/SlashHit1.mp3" id="6_vtc2f"]
+[ext_resource type="AudioStream" uid="uid://bku0wk5wy7h7p" path="res://Assets/audio/SlashMiss.mp3" id="7_1buag"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/SprintingPlayerState.gd" id="7_4diil"]
-[ext_resource type="PackedScene" uid="uid://c6wvueo5ktnxy" path="res://Scenes/MiscScenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="PackedScene" path="res://Scenes/MiscScenes/Indicator.tscn" id="8_6o307"]
+[ext_resource type="AudioStream" uid="uid://po72rggio3f4" path="res://Assets/audio/Block1.mp3" id="8_7be2v"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/CrouchingPlayerState.gd" id="9_dmq2t"]
+[ext_resource type="AudioStream" uid="uid://bl1dhvd2i3c2k" path="res://Assets/audio/Grunt1.mp3" id="9_wbdcs"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/SlidingPlayerState.gd" id="10_tf67f"]
+[ext_resource type="AudioStream" uid="uid://c7qu7romv3tdl" path="res://Assets/audio/Grunt2.mp3" id="10_xd6kc"]
+[ext_resource type="AudioStream" uid="uid://c0ov24q45yyau" path="res://Assets/audio/Block2.mp3" id="11_lvv1s"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/JumpingPlayerState.gd" id="11_uiv40"]
+[ext_resource type="AudioStream" uid="uid://5r8oo7g308px" path="res://Assets/audio/SlashHit2.mp3" id="12_xvjdn"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/MovementStates/FallingPlayerState.gd" id="13_1c8fe"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/IdleCombatPlayerState.gd" id="14_rwima"]
 [ext_resource type="Script" path="res://Player/PlayerStateScripts/ActionStates/LockingPlayerState.gd" id="18_avaio"]
@@ -414,7 +421,36 @@ color = Color(0.890196, 0.301961, 0.27451, 0)
 libraries = {
 "": SubResource("AnimationLibrary_gvbrm")
 }
-blend_times = [&"sprint", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_end", &"jump_start", 0.1]
+blend_times = [&"jump_end", &"jump_start", 0.1, &"jump_end", &"walking", 0.5, &"jump_start", &"jump_start", 0.1, &"jump_start", &"sprint", 0.5, &"jump_start", &"walking", 0.5, &"sprint", &"jump_start", 0.1, &"sprint", &"walking", 0.5]
+
+[node name="AudioStreams" type="Node" parent="."]
+
+[node name="SlashMiss" type="AudioStreamPlayer2D" parent="AudioStreams"]
+stream = ExtResource("7_1buag")
+
+[node name="Grunts" type="Node" parent="AudioStreams"]
+
+[node name="Grunt1" type="AudioStreamPlayer2D" parent="AudioStreams/Grunts"]
+stream = ExtResource("9_wbdcs")
+
+[node name="Grunt2" type="AudioStreamPlayer2D" parent="AudioStreams/Grunts"]
+stream = ExtResource("10_xd6kc")
+
+[node name="Blocks" type="Node" parent="AudioStreams"]
+
+[node name="Block1" type="AudioStreamPlayer2D" parent="AudioStreams/Blocks"]
+stream = ExtResource("8_7be2v")
+
+[node name="Block2" type="AudioStreamPlayer2D" parent="AudioStreams/Blocks"]
+stream = ExtResource("11_lvv1s")
+
+[node name="SlashHits" type="Node" parent="AudioStreams"]
+
+[node name="SlashHit1" type="AudioStreamPlayer2D" parent="AudioStreams/SlashHits"]
+stream = ExtResource("6_vtc2f")
+
+[node name="SlashHit2" type="AudioStreamPlayer2D" parent="AudioStreams/SlashHits"]
+stream = ExtResource("12_xvjdn")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 unique_name_in_owner = true
