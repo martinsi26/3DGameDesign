@@ -44,6 +44,7 @@ func update(delta):
 			collision_shape.shape.height = length
 			
 			collision_shape.global_transform.basis = basis
+			
 			transition.emit("LockingPlayerState", true)
 
 func exit():

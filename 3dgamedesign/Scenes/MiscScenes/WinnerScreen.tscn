@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn6uppkrn5fch"]
+[gd_scene load_steps=5 format=3 uid="uid://dn6uppkrn5fch"]
 
 [ext_resource type="Script" path="res://Scripts/MiscScripts/WinnerMenu.gd" id="1_hjf7x"]
 [ext_resource type="FontFile" uid="uid://b15u71uf2db5y" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_85qdh"]
 [ext_resource type="Texture2D" uid="uid://de2vc4hpvm4oo" path="res://Assets/MiscImgs/WinnerScreenImg.jpg" id="2_vsi7i"]
+[ext_resource type="AudioStream" uid="uid://d3ykmrg6364l0" path="res://Assets/audio/Victory.mp3" id="4_pi4i2"]
 
 [node name="WinnerMenu" type="Control"]
 layout_mode = 3
@@ -76,6 +77,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_85qdh")
 theme_override_font_sizes/font_size = 40
 text = "Quit"
+
+[node name="Victory" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_pi4i2")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Again" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Quit" to="." method="_on_quit_pressed"]

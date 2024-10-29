@@ -56,7 +56,9 @@ func update_gravity(delta: float) -> void:
 		velocity.y -= gravity * delta  # Apply gravity to the Y velocity
 			
 func receive_damage(amount):
-	current_health = max(0, float(current_health - amount)) 
+	current_health = max(0, float(current_health - amount))
+	
+	PLAYER.play_random_audio("SlashHits")
 	
 	if current_health == 0:
 		is_dead = true
